@@ -1035,7 +1035,7 @@ function database_update_info()
 		// No changes from 3.0.13-PL1 to 3.0.14-RC1
 		'3.0.13-PL1'	=> array(),
 
-		/** @todo DROP LOGIN_ATTEMPT_TABLE.attempt_id in 3.0.15-RC1 */
+		/** @todo DROP LOGIN_ATTEMPT_TABLE.attempt_id in 3.0.14-RC1 */
 	);
 }
 
