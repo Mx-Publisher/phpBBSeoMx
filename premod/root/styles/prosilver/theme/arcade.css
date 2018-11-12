@@ -1,0 +1,200 @@
+/**
+*
+* @package arcade
+* @version $Id: arcade.css 1663 2011-09-22 12:09:30Z killbill $
+* @copyright (c) 2010-2011 http://www.phpbbarcade.com
+* @copyright (c) 2011 http://jatek-vilag.com
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+*
+*/
+
+/*
+* Tooltip to display the game description
+*/
+a.tooltip
+{
+	font-weight: bold;
+	position: relative;
+	text-decoration: none;
+}
+
+a.tooltip span
+{
+	position: absolute;
+	font-weight: normal;
+	border: 1px solid black;
+	background-color: #CFE1F6;
+	padding: 10px;
+	color: black;
+	width: 225px;
+	margin-top: 18px;
+	left: -9999em;
+}
+
+a.tooltip:hover
+{
+	visibility: visible;
+	z-index: 100;
+}
+
+a.tooltip:hover span, a.tooltip:focus span
+{
+	left: 60px;
+	text-decoration: none;
+}
+
+a.tooltip span.aheader
+{
+	background-color: #F6F4D0;
+	width: 200px;
+}
+
+/*
+* Ajax ratings star
+*/
+
+.arcade-rate
+{
+	background-repeat:repeat-x;
+	background-position: top left;
+	position: relative;
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+	height:16px;
+	width:80px;
+}
+
+.arcade-rate ul
+{
+	list-style: none;
+}
+
+.arcade-rate li
+{
+	text-indent: -9000px;
+	float:left;
+	left:0;
+}
+
+.arcade-rate li a
+{
+	position: absolute;
+	top:0;
+	padding: 0px;
+	width: 16px;
+	height: 16px;
+	display: block;
+	outline: none;
+	text-indent: -9000px;
+	z-index: 16;
+	cursor: pointer;
+}
+
+.arcade-rate li a:hover
+{
+	background-position: left center;
+	z-index: 2;
+	left: 0;
+	text-decoration: none;
+}
+
+.arcade-rate  a.arcade-rate-1 		{left:   0px;}
+.arcade-rate  a.arcade-rate-1:hover	{width: 16px;}
+.arcade-rate  a.arcade-rate-2		{left:  16px;}
+.arcade-rate  a.arcade-rate-2:hover	{width: 32px;}
+.arcade-rate  a.arcade-rate-3		{left:  32px;}
+.arcade-rate  a.arcade-rate-3:hover	{width: 48px;}
+.arcade-rate  a.arcade-rate-4 		{left:  48px;}
+.arcade-rate  a.arcade-rate-4:hover	{width: 64px;}
+.arcade-rate  a.arcade-rate-5		{left:  64px;}
+.arcade-rate  a.arcade-rate-5:hover	{width: 80px;}
+
+.arcade-rate li.arcade-current-rate
+{
+	background-position: left bottom;
+	position: absolute;
+	text-indent: -9000px;
+	display: block;
+	height: 16px;
+	z-index: 1;
+}
+
+.arcade-rating-num
+{
+	display:inline;
+	width:100px;
+	padding-top:2px;
+	text-align:right;
+}
+
+.arcade_error
+{
+	background-color:#000;
+	padding:5px;
+	color:#ff0000;
+	font-weight:bold;
+}
+
+.arcade_error_file
+{
+	position:absolute;
+	background-color: #000;
+	border: dotted red 2px;
+	color:#fff;
+	padding:10px;
+	left:0;
+	right:0;
+}
+
+.arcade_info
+{
+	color: #FF0000;
+	vertical-align:middle;
+	font-weight:normal;
+}
+
+.arcade_fav
+{
+	width:13px;
+	height:13px;
+	vertical-align:middle;
+	padding:0px;
+	margin:0px;
+}
+
+a .arcade_fav
+{
+	cursor: pointer;
+}
+
+a:hover .arcade_fav
+{
+	width:11px;
+	height:11px;
+	padding:1px;
+	vertical-align:middle;
+	text-decoration:none;
+}
+
+.game_image
+{
+	width:50px;
+	height:50px;
+}
+
+.game_title
+{
+	font-weight:bold;
+	position:relative;
+	text-align:left;
+	margin:auto;
+	height:20px;
+	padding-top:5px;
+}
+
+.game_title_option
+{
+	position:absolute;
+	right:0;
+}

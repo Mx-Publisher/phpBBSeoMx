@@ -1,0 +1,362 @@
+<!-- prosilver related! -->
+<script type="text/javascript" src="{T_SUPER_TEMPLATE_PATH}/portal/src/jquery.hoverIntent.js"></script>
+<script type="text/javascript" charset="utf-8">
+//<![CDATA[
+$(document).ready(function() {
+  
+function addNavigation(){ $(this).addClass("hovering"); }
+function removeNavigation(){ $(this).removeClass("hovering"); }
+
+var config = {
+	interval: 300,
+	sensitivity: 6,
+	over: addNavigation,
+	timeout: 300,
+	out: removeNavigation };
+
+// setup the drop downs
+$("li.navigationmenu").hoverIntent(config)
+
+// IE's known bugs on z-index issues cause web developers to waste many hours trying to fix them.
+function isIE()
+{
+	if(navigator.userAgent.match(/MSIE \d\.\d+/))
+	return true;
+	return false;
+}		
+
+if(isIE())
+{
+	var zIndexNumber = 1000;
+	$("li.navigationmenu").each(function()
+	{
+		$(this).css("zIndex", zIndexNumber);
+		zIndexNumber -= 10;
+	});
+}
+
+});
+//]]>
+</script>
+
+<style type='text/css'>
+div#menucontainer {
+	margin: 5px auto; 
+	float: left; 
+}
+
+ul#menu {
+	margin: 0px;
+	padding: 0px 0px;
+}
+
+ul#menu div {
+	margin-top: 7px;
+	display: none;
+}
+
+ul#menu h2 {
+	display: inline;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+ul#menu h2 a:link {
+	color: #FFF;
+	font-size: 12px;
+	font-weight: bold;
+	text-decoration: none;
+	border-left: 2px solid transparent;
+	border-right: 2px solid transparent;
+}
+
+ul#menu h2 a:hover {
+	color: #D31141;
+	padding: 4px 1px 6px 1px;
+	background: url("{T_THEME_PATH}/images/menu/button_active.gif") top left repeat-x;
+	border-left: 1px solid white;
+	border-right: 1px solid white;
+}
+
+ul#menu h3 {
+	border-bottom: 1px solid #CCCCCC;
+	color: #115098;
+	display: inline;
+	font-size: 12px;
+	font-weight: bold;
+	margin-bottom: 2px;
+	padding-bottom: 1px;
+	text-transform: uppercase;
+}
+
+ul#menu li {
+	display: inline;
+	margin: 0px 0px;
+	position: relative;
+	z-index: 1000;
+}
+
+ul#menu li a {
+	padding: 0px 0px;
+	text-decoration: none;
+}
+
+ul#menu li a:hover {
+	text-decoration: underline;
+}
+
+ul#menu li div a.more {
+	font-weight: bold;
+}
+
+ul#menu li.hovering div {
+	display: block;
+}
+
+ul#menu li.navigationmenu {
+	color: #FFF;
+}
+
+ul#menu li.navigationmenu a:hover {
+	text-decoration: none;
+}
+
+ul#menu li.navigationmenu div {
+	background-color: #ECF1F3;
+	color: #28313F;
+	border: 1px solid #BFC1CF;
+	-webkit-border-radius: 5px; /* Safari, Chrome */
+	-moz-border-radius: 5px;  /* Firefox */
+	border-radius: 5px; /* CSS3 */
+	padding: 10px;
+	position: absolute;
+	top: 15px;
+	left: 0px;
+	width: 400px; /* total width of the naviagtion pop-up */
+	z-index: 1001;
+	clear: both;
+}
+
+ul#menu li.navigationmenu p {
+	margin: 5px 0px 5px 5px;
+	padding: 2px;
+}
+
+ul#menu li.navigationmenu p:hover {
+	background-color: #FFC;
+	border: 1px solid #BFC1CF;
+	color: #28313F;
+	margin: 5px 0px 5px 5px;
+	-webkit-border-radius: 5px; /* Safari, Chrome */
+	-moz-border-radius: 5px;  /* Firefox */
+	border-radius: 5px; /* CSS3 */
+	opacity: 0.85;
+	padding: 1px;
+}
+
+ul#menu li.navigationmenu p a:link {
+	text-decoration: none;
+	font-size: 11px;
+	font-weight: normal;
+}
+
+ul#menu li.navigationmenu p a:hover {
+	text-decoration: underline;
+}
+
+ul#menu li.navigationmenu div a {
+	padding: 0px;
+	text-decoration: underline;
+}
+</style>
+
+<div id="menucontainer" align="{S_CONTENT_FLOW_BEGIN}">
+
+  <ul id="menu">
+    <li class="navigationmenu">
+      <h2><a href="{U_PORTAL}" title="{L_HOME}">{L_HOME}</a></h2>&nbsp;&bull;
+      <div>
+        <h3>{L_PORTAL}</h3>
+        <p> <a href="{U_PORTAL}" title="{L_PORTAL}">{L_PORTAL}</a>, 
+            <a href="{U_INDEX}" title="{L_INDEX}">{L_INDEX}</a>, 
+            <a href="{U_PORTAL_RECENT_TOPICS}" title="{L_RECENT_TOPICS}">{L_RECENT_TOPICS}</a>, 
+            <a href="{U_KB}" title="{L_KB_EXPLAIN}">{L_KB}</a>, 
+            <a href="{U_CALENDAR}" title="{L_CALENDAR}">{L_CALENDAR}</a>, 
+            <a href="{U_GALLERY_MOD}" title="{L_GALLERY_EXPLAIN}">{L_GALLERY}</a>, 
+            <a href="{U_ARCADE}" title="{L_ARCADE_EXPLAIN}">{L_ARCADE}</a>, 
+            <!-- IF S_DISPLAY_MEMBERLIST -->
+            <a href="{U_MEMBERLIST}" title="{L_MEMBERLIST}">{L_MEMBERLIST}</a>,
+            <!-- ENDIF -->
+            <!-- IF S_DISPLAY_SEARCH -->
+            <a href="{U_SEARCH}" title="{L_SEARCH_ADV_EXPLAIN}">{L_SEARCH}</a>,
+            <!-- ENDIF -->
+            <!-- IF S_SHOW_DL_LINK -->
+            <a href="{U_DOWNLOADS}" title="{L_DOWNLOADS}">{L_DOWNLOADS}</a>,
+            <!-- ENDIF -->
+            <!-- IF S_SHOW_MUSIC_CHARTS -->
+ 		    <a href="{U_DM_MUSIC_CHARTS}">{L_DM_MUSIC_CHARTS}</a>,
+            <!-- ENDIF -->
+        </p>
+        <p> <a href="{U_PORTAL_GROUPS}" title="{L_GROUPS}">{L_GROUPS}</a>, 
+            <a href="{U_RADIO}" title="{L_RADIO}" onclick="window.open('{U_RADIO}','','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=550, height=500, left=20, top=20'); return false;">{L_RADIO}</a>, 
+            <a href="{U_PORTAL_MODS}" title="{L_PORTAL_MODS}">{L_PORTAL_MODS}</a>, 
+            <a href="{U_PORTAL_SMILES}" title="{L_SMILES_TITLE}">{L_SMILES_TITLE}</a>, 
+            <a href="{U_PORTAL_RANKS}" title="{L_RANKS}">{L_RANKS}</a>, 
+            <a href="{U_PORTAL_FLAGS}" title="{L_COUNTRY_FLAGS}">{L_COUNTRY_FLAGS}</a>, 
+            <a href="{U_PORTAL_BBCODES}" title="{L_BBCODES_TITLE}">{L_BBCODES_TITLE}</a>, 
+            <a href="{U_PORTAL_REFERERS}" title="{L_REFERER_TITLE}">{L_REFERER_TITLE}</a>, 
+            <a href="{U_PORTAL_ACRONYM}" title="{L_ACRONYMS}">{L_ACRONYMS}</a>, 
+            <a href="{U_CRAWLER_LINKER}" title="{L_CRAWLER_LINKS}">{L_CRAWLER_LINKS}</a>,
+			<!-- IF S_SHOW_VIDEO -->
+            <a href="{U_DMV_VIDEO}" title="{L_DMV_VIDEO}">{L_DMV_VIDEO}</a>,
+            <!-- ENDIF -->
+            <!-- IF S_HACKLIST_ON -->
+            <a href="{U_HACKLIST}" title="{L_HACKLIST}">{L_HACKLIST}</a>,
+            <!-- ENDIF -->
+            <!-- IF S_BUGTRACKER_ON -->
+            <a href="{U_BUG_TRACKER}" title="{L_BUG_TRACKER}">{L_BUG_TRACKER}</a>,
+            <!-- ENDIF -->
+            <a href="{U_PORTAL_PAGES}" title="{L_PAGES_LIST_TITLE}">{L_PAGES_LIST_TITLE}</a>,
+        </p>
+        <h3>{L_CONTACT_BOARD_ADMIN_SHORT}</h3>
+        <p> <a href="{U_FAQ}" title="{L_FAQ}">{L_FAQ}</a>, 
+            <a href="{U_PORTAL_FAQ}" title="{L_PORTAL} {L_FAQ}">{L_PORTAL} {L_FAQ}</a>, 
+            <a href="{U_RULES_FAQ}" title="{L_RULES_PAGE}">{L_RULES_PAGE}</a>,
+            <!-- IF S_CONTACT_ENABLED -->
+            <a href="{U_CONTACT}" title="{L_CONTACT_BOARD_ADMIN_SHORT}">{L_CONTACT_BOARD_ADMIN_SHORT}</a>,
+            <!-- ENDIF -->
+            <a href="{U_IMPRESSUM}" title="{L_IMPRESSUM}">{L_IMPRESSUM}</a>, 
+            <a href="{U_TEAM}" title="{L_THE_TEAM}">{L_THE_TEAM}</a> 
+        </p>
+      </div>
+    </li>
+    
+    <!-- IF S_USER_LOGGED_IN -->
+    <li class="navigationmenu">
+      <h2><a href="{U_PROFILE}" title="{L_PROFILE}" accesskey="u">{L_PROFILE}</a></h2>&nbsp;&bull;
+      <div>
+        <h3>{L_WELCOME}</h3>
+        <p>	      
+        <!-- INCLUDE portal/portal_visitor_welcome.html -->
+        <!-- IF FLAG_IMG -->&nbsp;{FLAG_IMG}<!-- ENDIF -->
+        <br />{CURRENT_TIME}.&nbsp;<br />{LAST_VISIT_DATE}.
+        </p>      
+        <h3>{L_OVERVIEW_INFO}</h3>
+        <p> <a href="{U_FRONTPAGE}" title="{L_FRONTPAGE}">{L_FRONTPAGE}</a>, 
+            <a href="{U_BOOKMARKS}" title="{L_BOOKMARKS}">{L_BOOKMARKS}</a>, 
+            <a href="{U_SUBSCRIBED}" title="{L_SUBSCRIPTION}">{L_SUBSCRIPTION}</a>, 
+            <a href="{U_DRAFTS}" title="{L_DRAFTS}">{L_DRAFTS}</a>, 
+            <a href="{U_ATTACHMENTS}" title="{L_ATTACHMENTS}">{L_ATTACHMENTS}</a> 
+        </p>
+        <h3>{L_PRIVATE_MESSAGES}</h3>
+        <p> <a href="{U_INBOX}" title="{L_INBOX}">{L_INBOX}</a>, 
+            <a href="{U_OUTBOX}" title="{L_OUTBOX}">{L_OUTBOX}</a>, 
+            <a href="{U_COMPOSEPMMESSAGESG}" title="{L_COMPOSEPMMESSAGESG}">{L_COMPOSEPMMESSAGESG}</a>,
+            <a href="{U_SENDMESSAGEBOX}" title="{L_SENDMESSAGEBOX}">{L_SENDMESSAGEBOX}</a>,
+            <a href="{U_UNREADMESSAGES}" title="{L_UNREADMESSAGES}">{L_UNREADMESSAGES}</a>, 
+            <a href="{U_RULEFOLDERSETTING}" title="{L_RULEFOLDERSETTING}">{L_RULEFOLDERSETTING}</a> 
+        </p>
+        <h3>{L_FRIENDS_FOES}</h3>
+        <p> <a href="{U_MANAGEFRIENDS}" title="{L_MANAGEFRIENDS}">{L_MANAGEFRIENDS}</a>, 
+            <a href="{U_MANAGEFOES}" title="{L_MANAGEFOES}">{L_MANAGEFOES}</a>
+        </p>
+        <h3>{L_CHANGING_PREFERENCES}</h3>
+        <p> <a href="{U_GLOBALSETTINGS}" title="{L_GLOBALSETTINGS}">{L_GLOBALSETTINGS}</a>, 
+            <a href="{U_POSTINDEFAULT}" title="{L_POSTINDEFAULT}">{L_POSTINDEFAULT}</a>, 
+            <a href="{U_DISPLAYOPTIONS}" title="{L_DISPLAYOPTIONS}">{L_DISPLAYOPTIONS}</a> 
+        </p>
+        <h3>{L_READ_PROFILE}</h3>
+        <p> <a href="{U_UPROFILE}" title="{L_UPROFILE}">{L_UPROFILE}</a>, 
+            <a href="{U_SIGNATURE}" title="{L_SIGNATURE}">{L_SIGNATURE}</a>, 
+            <a href="{U_AVATAR}" title="{L_AVATAR}">{L_AVATAR}</a>, 
+            <a href="{U_ACCOUNT}" title="{L_ACCOUNT}">{L_ACCOUNT}</a> 
+        </p>
+        <!-- IF U_MCP -->
+        <h3>{L_M_MCP}</h3>
+        <p><a href="{U_MCP}">{L_MCP}</a></p>
+        <!-- ENDIF -->
+        <!-- IF U_ACP -->
+        <h3>{L_M_ACP}</h3>
+        <p><a href="{U_ACP}">{L_ACP}</a></p>
+        <!-- ENDIF -->
+      </div>
+    </li>
+    <!-- ENDIF -->
+    
+    <!-- IF not S_IS_BOT -->
+    <li class="navigationmenu">
+      <h2><a href="{U_LOGIN_LOGOUT}" title="{L_LOGIN_LOGOUT}">{L_LOGIN_LOGOUT}</a></h2>&nbsp;&bull;
+      <div>
+        <h3>{L_LOGIN_LOGOUT}</h3>
+        <!-- IF S_USER_LOGGED_IN -->
+        <p><!-- INCLUDE portal/portal_visitor_welcome.html -->&nbsp;{L_LOGOUT_PORTAL_INFO}</p>
+        <p>{L_LOGOUT_MORE_PORTAL_INFO}</p>
+        <!-- ELSE -->
+        <p><!-- INCLUDE portal/portal_visitor_welcome.html -->&nbsp;{L_LOGOUT_PORTAL_INFO}</p>
+        <p>{L_LOGIN_MORE_PORTAL_INFO}</p>
+        <!-- ENDIF -->       
+      </div>
+    </li>
+    
+    <!-- IF not S_USER_LOGGED_IN -->
+    <li class="navigationmenu">
+      <h2><a href="{U_REGISTER}" title="{L_REGISTER}">{L_REGISTER}</a></h2>&nbsp;&bull;
+      <div>
+        <h3>{L_REGISTER}</h3>
+        <p><!-- INCLUDE portal/portal_visitor_welcome.html -->&nbsp;{L_LOGIN_INFO}</p>
+        <p><a href="{U_TERMS_USE}" title="{L_TERMS_USE}">{L_TERMS_USE}</a> | <a href="{U_PRIVACY}" title="{L_PRIVACY}">{L_PRIVACY}</a> | <a href="./faq.php?mode=rules" title="{L_RULES_PAGE}">{L_RULES_PAGE}</a></p>
+      </div>
+    </li>
+    <!-- ENDIF -->
+    <!-- ENDIF -->
+  
+    <li class="navigationmenu">
+      <h2><a href="#"><!-- IF S_USER_LOGGED_IN --> [ {LAST_VISIT_DATE} ] <!-- ELSE --> [ {CURRENT_TIME} ]<!-- ENDIF --></a></h2>
+      <div>
+        <!-- IF $PORTALXL == 'portal' or $PORTALXL == 'portal_pages' or $PORTALXL == 'index_forum' or SCRIPT_NAME eq 'viewforum' or SCRIPT_NAME eq 'viewtopic' -->
+        <h3>{L_PORTAL_WIDGET_STATES}</h3>
+        <p> <a href="#" onclick="$('.widget-menu').show();">{L_PORTAL_OPEN_MENUS}</a>, 
+            <a  href="#" onclick="$('.widget-menu').hide();">{L_PORTAL_CLOSE_MENUS}</a>
+        </p>
+        <p> <!-- IF $PORTALXL == 'portal' or $PORTALXL == 'portal_pages' -->
+            <a href="#" onclick="$.fn.ShowEasyWidgets();">{L_PORTAL_OPEN_COLUMNS}</a>,
+            <a href="#" onclick="$.fn.HideEasyWidgets();">{L_PORTAL_CLOSE_COLUMNS}</a>
+            <!-- ENDIF -->
+        </p>
+        <p> <a href="#" onclick="$.fn.ShowEasyWidgets(); return false">{L_PORTAL_RESET_BLOCKS}</a> </p>
+        <!-- ENDIF -->
+        <!-- IF U_RESTORE_PERMISSIONS -->
+        <h3>{L_RESTORE_PERMISSIONS}</h3>
+        <p><a href="{U_RESTORE_PERMISSIONS}">{L_RESTORE_PERMISSIONS}</a></p>
+        <!-- ENDIF -->
+        <!-- IF U_MCP -->
+        <h3>{L_M_MCP}</h3>
+        <p><a href="{U_MCP}">{L_MCP}</a></p>
+        <!-- ENDIF -->
+        <!-- IF U_ACP -->
+        <h3>{L_M_ACP}</h3>
+        <p><a href="{U_ACP}">{L_ACP}</a></p>
+        <!-- ENDIF -->
+      </div>
+    </li>
+
+    <!-- IF S_USER_LOGGED_IN and S_DISPLAY_DONATION_LIST -->
+    <li class="navigationmenu">
+      &bull; <h2><a href="{U_DONATE}" title="{L_DONATE_EXPLAIN}">{L_DONATE}</a></h2>
+      <!-- IF S_USER_LOGGED_IN and not S_IS_BOT and S_DISPLAY_DONATION_LIST -->
+      <div>
+        <h3>{L_DONATE}</h3>
+        <p><a href="{U_DONORS}" title="{L_MORE_DONORS}">{L_MORE_DONORS}</a></p>
+      </div>
+      <!-- ENDIF -->
+    </li>
+    <!-- ENDIF -->
+    
+    <!-- [+] include single extra links between here -->
+
+
+    <!-- [-] include single extra links between here -->
+    
+  </ul>
+  
+</div>

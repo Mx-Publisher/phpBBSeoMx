@@ -1,0 +1,157 @@
+<!-- shout_body.html $version {SHOUT_VERSION} //-->
+
+<!-- IF S_DISPLAY_SHOUTBOX -->
+<script type="text/javascript" src="{T_SUPER_TEMPLATE_PATH}/editor.js"></script>
+<script type="text/javascript" src="{U_SHOUT_STATIC}"></script>
+<script type="text/javascript" src="{U_SHOUT}"></script>
+<!-- IF U_CHARS -->
+<script type="text/javascript" src="{U_CHARS}"></script>
+<!-- ENDIF -->
+<!-- ENDIF -->
+
+<div class="widget-place" id="widget-place-shout-centre">
+    <div class="widget collapsable removable closeconfirm" id="block-shout-centre">
+
+  <div class="<!-- IF S_ROW_COUNT is odd -->navbar<!-- ELSE -->panel bg2<!-- ENDIF -->">
+     <div class="inner">
+        <span class="corners-top"><span></span></span>
+
+        <div class="widget-header" align="{S_CONTENT_FLOW_BEGIN}">
+             <span style="color:{$PORTALXL_FONTCOLOUR-HEADER};"><img src="{ROOT_PATH}portal/images/icon_block/heart.png" height="12" width="12" />&nbsp;{SHOUT_TITLE}</span>
+        </div>
+        <div class="widget-content" align="{S_CONTENT_FLOW_BEGIN}">
+        
+          <table class="tablebg" width="100%" cellspacing="1">
+              <!-- IF RULES_TOP -->
+              <tr id="shout_rules" style="display: none; text-align: center;">
+                  <td id="rules_on" align="center" class="row1" width="1%" style="text-align: center;">
+                      {RULES_TEXT}
+                  </td>
+              </tr>
+              <!-- ENDIF -->
+              <!-- IF COLOR_TOP -->
+              <tr id="colour_palette" style="display: none; background-color: none;">
+                  <td class="row1" width="1%">
+                      <script type="text/javascript">
+                      // <![CDATA[
+                      function change_palette()
+                      {
+                          dE('colour_palette');
+                      }
+                      colorPalette('h', 24, 12);
+                      // ]]>
+                      </script>
+                  </td>
+              </tr>
+              <!-- ENDIF -->
+              <!-- IF CHARS_TOP -->
+              <tr id="chars_view" style="display: none;">
+                  <td style="clear: left; font-size: 11px;" class="row1" width="60%">
+                      <script type="text/javascript">
+                      // <![CDATA[
+                      function change_chars()
+                      {
+                          dE('chars_view');
+                      }
+                      specialchar();
+                      // ]]> 
+                      </script>
+                  </td>
+                  <td class="row1" width="40%">
+                      <div style="clear: right;">
+                          <div style="padding-left: 30px; padding-top: 1px; font-size: 14px; float: none;">{L_SHOUT_CHARS}</div>
+                          <br />
+                          <div id="zoom" style="padding-left: 30px; padding-top: 5px; font-size: 45px; float: none;">&nbsp;</div>
+                          <div id="zoom2" style="padding-left: 30px; padding-top: 5px; font-size: 11px; float: none;">&nbsp;</div>
+                      </div>
+                  </td>
+              </tr>
+              <!-- ENDIF -->
+              <!-- IF SMILIES_TOP -->
+              <tr id="smilies_ul" class="row1" style="display: none; padding-bottom: 5px;">
+                  <td>
+                      <div id="smilies" style="padding: 8px;"></div>
+                  </td>
+              </tr>
+              <!-- ENDIF -->
+              <noscript>
+              <tr>
+                  <td width="100%" class="row1" align="center">
+                      <p align="left"><img alt="{L_NO_AJAX_USER}" title="{L_NO_AJAX_USER}" src="{ROOT_PATH}images/shoutbox/alert.png" /></p>
+                      <a class="forumlink" style="color: red;">{L_NO_AJAX_USER}</a>
+                  </td>
+              </tr>
+              </noscript>
+              <tr>
+                  <td class="row1" width="100%" style="padding: 0;">
+                      <span id="shoutbox"></span>
+                  </td>
+              </tr>
+              <!-- IF SMILIES_END -->
+              <tr id="smilies_ul" class="row1" style="display: none;padding-top: 20px;">
+                  <td>
+                      <div id="smilies" style="padding: 8px;"></div>
+                  </td>
+              </tr>
+              <!-- ENDIF -->
+              <!-- IF RULES_END -->
+              <tr id="shout_rules" style="display: none; padding-top: 10px;">
+                  <td width="1%">
+                      <div id="rules_on" class="shout_rules">{RULES_TEXT}</div>
+                  </td>
+              </tr>
+              <!-- ENDIF -->
+              <!-- IF COLOR_END -->
+              <tr id="colour_palette" style="display: none;">
+                  <td class="row1" width="1%">
+                      <script type="text/javascript">
+                      // <![CDATA[
+                      function change_palette()
+                      {
+                          dE('colour_palette');
+                      }
+                      colorPalette('h', 24, 12);
+                      // ]]>
+                      </script>
+                  </td>
+              </tr>
+              <!-- ENDIF -->
+              <!-- IF CHARS_END -->
+              <tr id="chars_view" style="display: none;">
+                  <td style="clear: left; font-size: 11px;" class="row1" width="1%">
+                      <script type="text/javascript">
+                      // <![CDATA[
+                      function change_chars()
+                      {
+                          dE('chars_view');
+                      }
+                      specialchar();
+                      // ]]> 
+                      </script>
+                  </td>
+                  <td class="row1">
+                      <div style="clear: right;">
+                          <div style="padding-left: 30px; padding-top: 1px; font-size: 14px; float: none;">{L_SHOUT_CHARS}</div>
+                          <br />
+                          <div id="zoom" style="padding-left: 30px; padding-top: 5px; font-size: 45px; float: none;">&nbsp;</div>
+                          <div id="zoom2" style="padding-left: 30px; padding-top: 5px; font-size: 11px; float: none;">&nbsp;</div>
+                      </div>
+                  </td>
+              </tr>
+              <!-- ENDIF -->
+              <div id="div_sound" style="position: absolute; left: -1000px; top: -1000px;"></div>
+              <div id="div_sound_error" style="position: absolute; left: -1000px; top: -1000px;"></div>
+              <div id="div_sound_del" style="position: absolute; left: -1000px; top: -1000px;"></div>
+          </table>
+          {SHOUT_SCRIPT}
+          
+        </div>
+        
+        <span class="corners-bottom"><span></span></span>
+     </div>
+  </div>
+
+    </div>
+</div>
+
+<!-- shout_body.html end //-->

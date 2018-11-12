@@ -1,0 +1,159 @@
+<!-- INCLUDE overall_header.html -->
+<!--// breizh_installer.html v1.1.0 -->
+<style type="text/css">
+<!--
+  div#license {
+	overflow: auto;
+	width: 600px;
+	height: 330px;
+	padding: 15px;
+	text-align: justify;
+	margin-bottom: 15px;
+	background-color: #fff8dc;
+	border: 1px solid rgb(200,200,200);
+	-webkit-border-radius: 14px / 12px;
+	-moz-border-radius: 14px / 12px;
+	border-radius: 14px / 12px;
+	-webkit-box-shadow: 0px 0px 10px rgba(0,0,0,0.8);
+	-moz-box-shadow: 0px 0px 10px rgba(0,0,0,0.8);
+	box-shadow: 0px 0px 10px rgba(0,0,0,0.8);
+  }
+  h1.dirt {
+	color: #FFFFFF;
+	margin-bottom: 15px;
+	text-shadow: 2px 2px 3px #000000;
+  }
+  h3.yop {
+	text-align: center;
+	font-size: 14px;
+	text-shadow: 1px 1px 3px #333333;
+  }
+-->
+</style>
+
+<form id="confirm" action="{S_CONFIRM_ACTION}" method="post">
+	<div class="panel">
+		<div class="inner" style="text-align: center;"><span class="corners-top"><span></span></span>
+			<h1 class="dirt">{MESSAGE_TITLE}</h1>
+		<span class="corners-bottom"><span></span></span></div>
+	</div>
+	
+	<!-- IF IN_LICENSE -->
+	<div class="panel bg2">
+		<div class="inner">
+			<span class="corners-top"><span></span></span>
+				<h3 class="yop"><strong>{L_INSTALL_LICENSE}</strong></h3>
+				<p style="text-align: center;font-size: 12px;">{INSTALL_TERMS}</p>
+				<!-- IF S_LANG_FR --><p style="text-align: center;font-size: 11px;"><a href="{U_TERMS_LANG}" title="{INSTALL_TERMS_LANG}">{INSTALL_TERMS_LANG}</a></p><!-- ENDIF -->
+				<div style="margin-left: 15%;font-size: 12px;">
+					<div id="license">{CONTENT}</div>
+				</div>
+				<div style="margin-left: 18%;font-size: 12px;">
+					<div style="margin-bottom: 10px;">
+						<label><input type="radio" id="accept0" name="accept" value="0" checked="checked" /> {L_INSTALL_NO_ACCEPT} </label>&nbsp;&nbsp;
+						<label><input type="radio" id="accept1" name="accept" value="1" /> {L_INSTALL_ACCEPT_TERMS}</label>
+					</div>
+				</div>
+			<span class="corners-bottom"><span></span></span>
+		</div>
+	</div>
+	<!-- ENDIF -->
+	
+	<!-- IF MESSAGE_TEXT -->
+	<div class="panel bg2">
+		<div class="inner">
+			<span class="corners-top"><span></span></span>
+				<h3 class="yop"><strong>{INSTALL_WELCOME_TEXT}</strong></h3>
+				<p style="margin-left: 15px;">{MESSAGE_TEXT}</p>
+				<p style="margin-left: 15px;">{INFO_TEXT}</p>
+				<p style="margin-left: 15px;">{INSTALL_INFO_STYLE}</p>
+				<!-- IF ERROR_THEME --><p style="margin-left: 15px;">{ERROR_THEME}</p><!-- ENDIF -->
+				<div style="margin-left: 20%;font-size: 12px;">
+					<div style="margin: 15px;">
+						<!-- IF INSTALL_BUTTON --><label><input type="radio" id="delete0" name="delete" value="0" checked="checked" /> {INSTALL_UPDATE} </label><!-- ENDIF -->
+						<!-- IF INSTALL_BUTTON and DELETE_BUTTON --><br /><br /><!-- ELSE -->&nbsp;&nbsp;<!-- ENDIF -->
+						<!-- IF DELETE_BUTTON --><label><input type="radio" id="delete1" name="delete" value="1" /> {L_INSTALL_BUTTON_DEL}</label><!-- ENDIF -->
+					</div>
+				</div>
+			<span class="corners-bottom"><span></span></span>
+		</div>
+	</div>
+	<!-- ENDIF -->
+	
+	<!-- IF S_IN_CHECK -->
+	<div class="panel bg2">
+		<div class="inner">
+			<span class="corners-top"><span></span></span>
+				<h3 class="yop"><strong>{CHECK_TITLE}:</strong></h3>
+				<p style="text-align: center;">{CHECK_MESSAGE}</p>
+				<!-- IF FINISH_MESSAGE -->
+				<p style="text-align: center;">{FINISH_MESSAGE}</p>
+				<p style="text-align: center;">{L_INSTALL_BREIZH}</p>
+				<!-- ENDIF -->
+				<!-- IF DEL_BUTTON --><p style="text-align: center;">
+					<label><input type="radio" id="del0" name="del" value="0" checked="checked" /> {L_NO} </label>&nbsp;&nbsp;&nbsp;
+					<label><input type="radio" id="del1" name="del" value="1" /> {L_YES}</label>
+				</p><!-- ENDIF -->
+			<span class="corners-bottom"><span></span></span>
+		</div>
+	</div>
+	<!-- ENDIF -->
+	
+	<!-- IF MESSAGE_LOG -->
+	<div class="panel bg2">
+		<div class="inner">
+			<span class="corners-top"><span></span></span>
+				<p><strong>{L_INSTALL_LOG_TITLE}:</strong></p>
+				<p style="margin-left: 10px;">{MESSAGE_LOG}</p>
+			<span class="corners-bottom"><span></span></span>
+		</div>
+	</div>
+	<!-- ENDIF -->
+	
+	<!-- IF ERROR -->
+	<div class="rules">
+		<div class="inner">
+			<span class="corners-top"><span></span></span>
+			<fieldset class="submit-buttons">
+				<h3 class="yop"><img src="./images/alert.png" alt="{L_INSTALL_ERROR}" title="{L_INSTALL_ERROR}" /> {L_INSTALL_ERROR}</h3>
+				<br />
+				<p>{ERROR}</p>
+				<p>{L_INSTALL_DEL_ERROR}</p>
+			</fieldset>
+			<span class="corners-bottom"><span></span></span>
+		</div>
+	</div>
+	<!-- ENDIF -->
+	
+	<div class="<!-- IF ERROR -->rules<!-- ELSE -->panel bg2<!-- ENDIF -->">
+		<div class="inner">
+			<span class="corners-top"><span></span></span>
+			<fieldset class="submit-buttons">
+				<input type="submit" name="confirm" value="{SUBMIT_BUTTON}" title="{SUBMIT_BUTTON}" class="button1" />
+			</fieldset>
+			<span class="corners-bottom"><span></span></span>
+		</div>
+	</div>
+	
+	<!-- IF MESSAGE_ETAT and not MESSAGE_TEXT and not S_IN_MODE_DEL -->
+	<div class="panel bg2">
+		<div class="inner">
+			<span class="corners-top"><span></span></span>
+				<p style="text-align: center;"><strong>{L_INSTALL_ETAT}</strong></p>
+				<table style="margin-left: 30%;font-size: 11px;">
+					{MESSAGE_ETAT}
+				</table><br />
+				<p style="margin-left: 25%;font-size:11px;">{INSTALL_ETAT_INFO}</p>
+			<span class="corners-bottom"><span></span></span>
+		</div>
+	</div>
+	<!-- ENDIF -->	
+</form>
+<div class="panel bg2">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<div class="copyright">{INSTALL_COPYRIGHT}</div>
+		<span class="corners-bottom"><span></span></span>
+	</div>
+</div>
+<!-- INCLUDE overall_footer.html -->

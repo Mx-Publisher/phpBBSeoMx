@@ -2639,13 +2639,13 @@ function redirect($url, $return = false, $disable_cd_check = false)
 			}
 		}
 	}
-	
+
 	// Make sure we don't redirect to external URLs
 	if (!$disable_cd_check && strpos($url, generate_board_url(true) . '/') !== 0)
 	{
 		trigger_error('Tried to redirect to potentially insecure url.', E_USER_ERROR);
 	}
-
+	
 	// Make sure no linebreaks are there... to prevent http response splitting for PHP < 4.4.2
 	if (strpos(urldecode($url), "\n") !== false || strpos(urldecode($url), "\r") !== false || strpos($url, ';') !== false)
 	{
@@ -3434,7 +3434,7 @@ function parse_cfg_file($filename, $lines = false)
 		}
 
 		// Determine first occurrence, since in values the equal sign is allowed
-		$key = strtolower(trim(substr($line, 0, $delim_pos)));
+		$key = htmlspecialchars(strtolower(trim(substr($line, 0, $delim_pos))));
 		$value = trim(substr($line, $delim_pos + 1));
 
 		if (in_array($value, array('off', 'false', '0')))
@@ -3451,7 +3451,11 @@ function parse_cfg_file($filename, $lines = false)
 		}
 		else if (($value[0] == "'" && $value[sizeof($value) - 1] == "'") || ($value[0] == '"' && $value[sizeof($value) - 1] == '"'))
 		{
-			$value = substr($value, 1, sizeof($value)-2);
+			$value = htmlspecialchars(substr($value, 1, sizeof($value)-2));
+		}
+		else
+		{
+			$value = htmlspecialchars($value);
 		}
 
 		$parsed_items[$key] = $value;
@@ -4524,20 +4528,327 @@ function phpbb_http_login($param)
 	trigger_error('NOT_AUTHORISED');
 }
 
+
+/**
+* Get user avatar
+*
+* @param array $user_row Row from the users table
+* @param string $alt Optional language string for alt tag within image, can be a language key or text
+* @param bool $ignore_config Ignores the config-setting, to be still able to view the avatar in the UCP
+* @param bool $lazy If true, will be lazy loaded (requires JS)
+*
+* @return string Avatar html
+*/
+function phpbb_get_user_avatar($user_row, $alt = 'USER_AVATAR', $ignore_config = false, $lazy = false)
+{
+	return phpbb_get_avatar($user_row, $alt, $ignore_config, $lazy);
+}
+
+/**
+* Get group avatar
+*
+* @param array $group_row Row from the groups table
+* @param string $alt Optional language string for alt tag within image, can be a language key or text
+* @param bool $ignore_config Ignores the config-setting, to be still able to view the avatar in the UCP
+* @param bool $lazy If true, will be lazy loaded (requires JS)
+*
+* @return string Avatar html
+*/
+function phpbb_get_group_avatar($user_row, $alt = 'GROUP_AVATAR', $ignore_config = false, $lazy = false)
+{
+	return phpbb_get_avatar($user_row, $alt, $ignore_config, $lazy);
+}
+
+/**
+* Build gravatar URL for output on page
+*
+* @param array $row User data or group data that has been cleaned with
+*        \phpbb\avatar\manager::clean_row
+* @return string Gravatar URL
+*/
+function get_gravatar_url($row)
+{
+	$url = '//secure.gravatar.com/avatar/';
+	
+	$url .=  md5(strtolower(trim($row['avatar'])));
+
+	if ($row['avatar_width'] || $row['avatar_height'])
+	{
+		$url .= '?s=' . max($row['avatar_width'], $row['avatar_height']);
+	}
+	
+	return $url;
+}
+
+/**
+* Get avatar
+*
+* @param array $row Row cleaned by \phpbb\avatar\manager::clean_row
+* @param string $alt Optional language string for alt tag within image, can be a language key or text
+* @param bool $ignore_config Ignores the config-setting, to be still able to view the avatar in the UCP
+* @param bool $lazy If true, will be lazy loaded (requires JS)
+*
+* @return string Avatar html
+*/
+function phpbb_get_avatar($row, $alt, $ignore_config = false, $lazy = false)
+{
+	global $user, $board_config, $cache, $phpbb_root_path, $phpEx;
+
+	if (!$user->optionget('viewavatars') && !$ignore_config)
+	{
+		return '';
+	}
+	
+	$row = array(
+		'avatar' 		=> isset($row['avatar']) ? $row['avatar'] : $row['user_avatar'],
+		'avatar_type' 	=> isset($row['avatar_type']) ? $row['avatar_type'] : $row['user_avatar_type'],
+		'avatar_width' 	=> isset($row['avatar_width']) ? $row['avatar_width'] : (isset($row['user_avatar_width']) ? $row['user_avatar_width'] : '120'),
+		'avatar_height' => isset($row['avatar_height']) ? $row['avatar_height'] : (isset($row['user_avatar_height']) ? $row['user_avatar_height'] : '120'),
+	);
+	
+	$avatar_data = array(
+		'src' => $row['avatar'],
+		'width' => $row['avatar_width'],
+		'height' => $row['avatar_height'],
+	);
+
+	
+	$driver = $row['avatar_type'];
+	$html = '';
+
+	if ($driver)
+	{
+		$html = '<img src="' . get_gravatar_url($row) . '" ' .
+			($row['avatar_width'] ? ('width="' . $row['avatar_width'] . '" ') : '') .
+			($row['avatar_height'] ? ('height="' . $row['avatar_height'] . '" ') : '') .
+			'alt="' . ((!empty($lang[$alt])) ? $lang[$alt] : $alt) . '" />';
+			
+		if (!empty($html))
+		{
+			return $html;
+		}
+
+		$root_path = generate_board_url();
+
+		$avatar_data = array(
+			'src' => $root_path . $board_config['avatar_gallery_path'] . '/' . $row['avatar'],
+			'width' => $row['avatar_width'],
+			'height' => $row['avatar_height'],
+		);
+	}
+	else
+	{
+		$avatar_data['src'] = '';
+	}
+
+	if (!empty($avatar_data['src']))
+	{
+		if ($lazy)
+		{
+			// Determine board url - we may need it later
+			$board_url = generate_board_url() . '/';
+			// This path is sent with the base template paths in the assign_vars()
+			// call below. We need to correct it in case we are accessing from a
+			// controller because the web paths will be incorrect otherwise.
+
+			$web_path = $board_url;
+
+			if (is_dir($phpbb_root_path . $user->template_path . $user->template_name . '/theme/images/'))
+			{			
+				$theme_images = "{$web_path}{$user->template_path}" . rawurlencode($user->template_name) . '/theme/images';
+			}
+			elseif (is_dir($phpbb_root_path . $user->template_path . $user->template_name . '/images/'))
+			{			
+				$theme_images = "{$web_path}{$user->template_path}" . rawurlencode($user->template_name . '/images');
+			}			
+			$src = 'src="' . $theme_images . '/no_avatar.gif" data-src="' . $avatar_data['src'] . '"';
+		}
+		else
+		{
+			$src = 'src="' . $avatar_data['src'] . '"';
+		}
+
+		$html = '<img class="avatar" ' . $src . ' ' .
+			($avatar_data['width'] ? ('width="' . $avatar_data['width'] . '" ') : '') .
+			($avatar_data['height'] ? ('height="' . $avatar_data['height'] . '" ') : '') .
+			'alt="' . ((!empty($user->lang[$alt])) ? $user->lang[$alt] : $alt) . '" />';
+	}
+	return $html;
+}
+
+/**
+* Get user rank title and image
+*
+* @param array $user_data the current stored users data
+* @param int $user_posts the users number of posts
+*
+* @return array An associative array containing the rank title (title), the rank image as full img tag (img) and the rank image source (img_src)
+*
+* Note: since we do not want to break backwards-compatibility, this function will only properly assign ranks to guests if you call it for them with user_posts == false
+*/
+function phpbb_get_user_rank($user_data, $user_posts, &$rank_title = null, &$rank_img = null, &$rank_img_src = null)
+{
+	global $ranks, $config, $phpbb_root_path;
+
+	$user_rank_data = array(
+		'title'		=> $rank_title ? $rank_title : null,
+		'img'		=> $rank_img ? $rank_img : null,
+		'img_src'	=> $rank_img_src ? $rank_img_src : null,
+	);	
+	
+	if (empty($ranks))
+	{
+		global $cache;
+		$ranks = $cache->obtain_ranks();
+	}
+
+	if (!empty($user_data))
+	{
+		$user_rank_data['title'] = (isset($ranks['special'][$user_data['user_rank']]['rank_title'])) ? $ranks['special'][$user_data['user_rank']]['rank_title'] : '';
+		$user_rank_data['img_src'] = (!empty($ranks['special'][$user_data['user_rank']]['rank_image'])) ? $phpbb_root_path . $config['ranks_path'] . '/' . $ranks['special'][$user_data['user_rank']]['rank_image'] : '';
+		$user_rank_data['img'] = (!empty($ranks['special'][$user_data['user_rank']]['rank_image'])) ? '<img src="' . $user_rank_data['img_src'] . '" alt="' . $ranks['special'][$user_data['user_rank']]['rank_title'] . '" title="' . $ranks['special'][$user_data['user_rank']]['rank_title'] . '" />' : '';
+	
+	}
+	else if ($user_posts !== false)
+	{
+		if (!empty($ranks['normal']))
+		{
+			foreach ($ranks['normal'] as $rank)
+			{
+				if ($user_posts >= $rank['rank_min'])
+				{
+					$user_rank_data['title'] = $rank['rank_title'];
+					$user_rank_data['img'] = (!empty($rank['rank_image'])) ? '<img src="' . $phpbb_root_path . $config['ranks_path'] . '/' . $rank['rank_image'] . '" alt="' . $rank['rank_title'] . '" title="' . $rank['rank_title'] . '" />' : '';
+					$user_rank_data['img_src'] = (!empty($rank['rank_image'])) ? $phpbb_root_path . $config['ranks_path'] . '/' . $rank['rank_image'] : '';
+					break;
+				}
+			}
+		}
+	}
+	
+	return $user_rank_data;		
+}
+
+/*
+* Gets all social networks and instant messaging (SN/IM) fields feeded only from profile table (doesn't get chat id...)
+* This function should simplify adding/removing SN/IM fields to user profile
+*/
+function get_user_sn_im_array()
+{
+	$user_sn_im_array = array(
+		'500px' => array('field' => 'user_500px', 'lang' => '500PX', 'icon_tpl' => '', 'icon_tpl_vt' => '', 'url' => '{REF}', 'alt_name' => '500px', 'form' => '500px'),
+		'aim' => array('field' => 'user_aim', 'lang' => 'AIM', 'icon_tpl' => 'icon_aim', 'icon_tpl_vt' => 'icon_aim2', 'url' => 'aim:goim?screenname={REF}&amp;message=Hello', 'alt_name' => 'aim', 'form' => 'aim'),
+		'facebook' => array('field' => 'user_facebook', 'lang' => 'FACEBOOK', 'icon_tpl' => '', 'icon_tpl_vt' => '', 'url' => '{REF}', 'alt_name' => 'facebook', 'form' => 'facebook'),
+		'flickr' => array('field' => 'user_flickr', 'lang' => 'FLICKR', 'icon_tpl' => '', 'icon_tpl_vt' => '', 'url' => '{REF}', 'alt_name' => 'flickr', 'form' => 'flickr'),
+		'github' => array('field' => 'user_github', 'lang' => 'GITHUB', 'icon_tpl' => '', 'icon_tpl_vt' => '', 'url' => '{REF}', 'alt_name' => 'github', 'form' => 'github'),
+		'googleplus' => array('field' => 'user_googleplus', 'lang' => 'GOOGLEPLUS', 'icon_tpl' => '', 'icon_tpl_vt' => '', 'url' => '{REF}', 'alt_name' => 'googleplus', 'form' => 'googleplus'),
+		'icq' => array('field' => 'user_icq', 'lang' => 'ICQ', 'icon_tpl' => 'icon_icq', 'icon_tpl_vt' => 'icon_icq2', 'url' => 'http://www.icq.com/people/webmsg.php?to={REF}', 'alt_name' => 'icq', 'form' => 'icq'),
+		'instagram' => array('field' => 'user_instagram', 'lang' => 'INSTAGRAM', 'icon_tpl' => '', 'icon_tpl_vt' => '', 'url' => '{REF}', 'alt_name' => 'instagram', 'form' => 'instagram'),
+		'jabber' => array('field' => 'user_jabber', 'lang' => 'JABBER', 'icon_tpl' => '', 'icon_tpl_vt' => '', 'url' => '{REF}', 'alt_name' => 'jabber', 'form' => 'jabber'),
+		'linkedin' => array('field' => 'user_linkedin', 'lang' => 'LINKEDIN', 'icon_tpl' => '', 'icon_tpl_vt' => '', 'url' => '{REF}', 'alt_name' => 'linkedin', 'form' => 'linkedin'),
+		'msn' => array('field' => 'user_msnm', 'lang' => 'MSNM', 'icon_tpl' => 'icon_msnm', 'icon_tpl_vt' => 'icon_msnm2', 'url' => 'http://spaces.live.com/{REF}', 'alt_name' => 'msnm', 'form' => 'msn'),
+		'pinterest' => array('field' => 'user_pinterest', 'lang' => 'PINTEREST', 'icon_tpl' => '', 'icon_tpl_vt' => '', 'url' => '{REF}', 'alt_name' => 'pinterest', 'form' => 'pinterest'),
+		'skype' => array('field' => 'user_skype', 'lang' => 'SKYPE', 'icon_tpl' => 'icon_skype', 'icon_tpl_vt' => 'icon_skype2', 'url' => 'callto://{REF}', 'alt_name' => 'skype', 'form' => 'skype'),
+		'twitter' => array('field' => 'user_twitter', 'lang' => 'TWITTER', 'icon_tpl' => '', 'icon_tpl_vt' => '', 'url' => '{REF}', 'alt_name' => 'twitter', 'form' => 'twitter'),
+		'vimeo' => array('field' => 'user_vimeo', 'lang' => 'VIMEO', 'icon_tpl' => '', 'icon_tpl_vt' => '', 'url' => '{REF}', 'alt_name' => 'vimeo', 'form' => 'vimeo'),
+		'yahoo' => array('field' => 'user_yim', 'lang' => 'YIM', 'icon_tpl' => 'icon_yim', 'icon_tpl_vt' => 'icon_yim2', 'url' => 'http://edit.yahoo.com/config/send_webmesg?.target={REF}&amp;.src=pg', 'alt_name' => 'yim', 'form' => 'yim'),
+		'youtube' => array('field' => 'user_youtube', 'lang' => 'YOUTUBE', 'icon_tpl' => '', 'icon_tpl_vt' => '', 'url' => '{REF}', 'alt_name' => 'youtube', 'form' => 'youtube'),
+	);
+
+	return $user_sn_im_array;
+}
+
+/*
+* This function will build a complete IM link with image and lang
+*/
+function build_im_link($im_type, $user_data, $im_icon_type = false, $im_img = false, $im_url = false, $im_status = false, $im_lang = false)
+{
+	global $config, $user, $lang, $images;
+
+	$available_im = get_user_sn_im_array();
+	$extra_im = array(
+		'chat' => array('field' => 'user_id', 'lang' => 'AJAX_SHOUTBOX_PVT_LINK', 'icon_tpl' => 'icon_im_chat', 'icon_tpl_vt' => 'icon_im_chat', 'url' => '{REF}')
+	);
+	$available_im = array_merge($available_im, $extra_im);
+
+	// Default values
+	$im_icon = '';
+	$im_icon_append = '';
+	if (!empty($user_data[$available_im[$im_type]['field']]))
+	{
+		$im_id = $user_data[$available_im[$im_type]['field']];
+		$im_ref = $im_id;
+	}
+	else
+	{
+		return '';
+	}
+
+	if (!empty($im_status) && in_array($im_type, array('chat')) && in_array($im_status, array('online', 'offline', 'hidden')))
+	{
+		$im_icon_append = '_' . $im_status;
+	}
+
+	if (!empty($available_im[$im_type]))
+	{
+		if (!empty($im_icon_type) && in_array($im_icon_type, array('icon', 'icon_tpl', 'icon_tpl_vt')))
+		{
+			if ($im_icon_type == 'icon')
+			{
+				$im_icon = $images['icon_im_' . $im_type . $im_icon_append];
+			}
+			else
+			{
+				$im_icon = $images[$available_im[$im_type][$im_icon_type]];
+			}
+		}
+
+		$im_ref = str_replace('{REF}', $im_ref, $available_im[$im_type]['url']);
+		if ($im_type == 'chat')
+		{
+			// JHL: No chat icon if the user is anonymous, or the profiled user is offline
+			if (empty($user->data['session_logged_in']) || empty($user_data['user_session_time']) || ($user_data['user_session_time'] < (time() - $config['online_time'])))
+			{
+				return '';
+			}
+
+			$ajax_chat_page = !empty($config['ajax_chat_link_type']) ? CMS_PAGE_AJAX_CHAT : CMS_PAGE_AJAX_SHOUTBOX;
+			$ajax_chat_room = 'chat_room=' . (min($user->data['user_id'], $user_data['user_id']) . '|' . max($user->data['user_id'], $user_data['user_id']));
+			$ajax_chat_link = append_sid($ajax_chat_page . '?' . $ajax_chat_room);
+
+			$im_ref = !empty($config['ajax_chat_link_type']) ? ($ajax_chat_link . '" target="_chat') : ('#" onclick="window.open(\'' . $ajax_chat_link . '\', \'_chat\', \'width=720,height=600,resizable=yes\'); return false;');
+		}
+
+		$im_img = (!empty($im_img) && !empty($im_icon)) ? $im_icon : false;
+		$im_lang = !empty($im_lang) ? $im_lang : (!empty($available_im[$im_type]['lang']) ? $lang[$available_im[$im_type]['lang']] : '');
+	}
+
+	$link_title = ($im_type == 'chat') ? '' : (' - ' . $im_id);
+	$link_title = $im_lang . $link_title;
+	$link_content = !empty($im_img) ? ('<img src="' . $im_img . '" alt="' . $im_lang . '"' . (empty($im_url) ? '' : (' title="' . $im_id . '"')) . ' />') : $im_lang;
+	$im_link = !empty($im_url) ? $im_ref : ('<a href="' . $im_ref . '" title="' . $link_title . '">' . $link_content . '</a>');
+
+	return $im_link;
+}
+
+
+
+
 /**
 * Generate page header
 */
 function page_header($page_title = '', $display_online_list = true, $item_id = 0, $item = 'forum')
 {
 	global $db, $config, $template, $SID, $_SID, $_EXTRA_URL, $user, $auth, $phpEx, $phpbb_root_path;
-
+	$config['allow_cdn'] = $config['load_jquery_url'] = true;
 	if (defined('HEADER_INC'))
 	{
 		return;
 	}
 	// www.phpBB-SEO.com SEO TOOLKIT BEGIN
 	global $phpbb_seo;
-	if (!empty($phpbb_seo)) {
+	if (!empty($phpbb_seo)) 
+	{
 		$template->assign_vars( array(
 			'PHPBB_FULL_URL' => $phpbb_seo->seo_path['phpbb_url'],
 			'SEO_BASE_HREF' => $phpbb_seo->seo_opt['seo_base_href'],
@@ -4640,7 +4951,8 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 	}
 
 	$l_privmsgs_text = $l_privmsgs_text_unread = '';
-	$s_privmsg_new = false;
+	// Output the notifications
+	$total_msgs = $notifications = $s_privmsg_new = false;
 
 	// Obtain number of new private messages if user is logged in
 	if (!empty($user->data['is_registered']))
@@ -4657,17 +4969,17 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 					WHERE user_id = ' . $user->data['user_id'];
 				$db->sql_query($sql);
 
-				$s_privmsg_new = true;
+				$total_msgs = $notifications = $s_privmsg_new = true;
 			}
 			else
 			{
-				$s_privmsg_new = false;
+				$total_msgs = $notifications = $s_privmsg_new = false;
 			}
 		}
 		else
 		{
 			$l_privmsgs_text = $user->lang['NO_NEW_PM'];
-			$s_privmsg_new = false;
+			$total_msgs = $notifications = $s_privmsg_new = false;
 		}
 
 		$l_privmsgs_text_unread = '';
@@ -4678,7 +4990,10 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 			$l_privmsgs_text_unread = sprintf($l_message_unread, $user->data['user_unread_privmsg']);
 		}
 	}
-
+	
+	$notification_mark_hash = generate_link_hash('mark_all_notifications_read');
+	$mark_hash = generate_link_hash('mark_notification_read');
+	
 	$forum_id = request_var('f', 0);
 	$topic_id = request_var('t', 0);
 
@@ -4697,10 +5012,25 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 
 	// Determine board url - we may need it later
 	$board_url = generate_board_url() . '/';
-	$web_path = (defined('PHPBB_USE_BOARD_URL_PATH') && PHPBB_USE_BOARD_URL_PATH) ? $board_url : $phpbb_root_path;
 
 	// Which timezone?
 	$tz = ($user->data['user_id'] != ANONYMOUS) ? strval(doubleval($user->data['user_timezone'])) : strval(doubleval($config['board_timezone']));
+	
+
+	$default_lang = ($user->data['user_lang']) ? $user->data['user_lang'] : $config['default_lang'];
+	
+	$server_name = !empty($config['server_name']) ? preg_replace('/^\/?(.*?)\/?$/', "\\1", trim($config['server_name'])) : 'localhost';
+	$server_protocol = ($config['cookie_secure'] ) ? 'https://' : 'http://';
+	$server_port = (($config['server_port']) && ($config['server_port'] <> 80)) ? ':' . trim($config['server_port']) . '/' : '/';
+	$script_name_phpbb = preg_replace('/^\/?(.*?)\/?$/', "\\1", trim($config['script_path'])) . '/';		
+	$server_url = $server_protocol . str_replace("//", "/", $server_name . $server_port . $server_name . '/'); //On some server the slash is not added and this trick will fix it	
+
+
+
+
+		
+	$corrected_url = $server_protocol . $server_name . $server_port . $script_name_phpbb;
+	$web_path = (defined('PHPBB_USE_BOARD_URL_PATH') && PHPBB_USE_BOARD_URL_PATH) ? $board_url : $corrected_url;
 
 	// Send a proper content-language to the output
 	$user_lang = $user->lang['USER_LANG'];
@@ -4724,6 +5054,8 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 		}
 	}
 
+	$phpbb_version_parts = explode('.', PHPBB_VERSION, 3);
+	$phpbb_major = $phpbb_version_parts[0] . '.' . $phpbb_version_parts[1];
 	// The following assigns all _common_ variables that may be used at any point in a template.
 	$template->assign_vars(array(
 		'SITENAME'						=> $config['sitename'],
@@ -4738,6 +5070,16 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 		'RECORD_USERS'					=> $l_online_record,
 		'PRIVATE_MESSAGE_INFO'			=> $l_privmsgs_text,
 		'PRIVATE_MESSAGE_INFO_UNREAD'	=> $l_privmsgs_text_unread,
+		'PRIVATE_MESSAGE_COUNT'			=> (!empty($user->data['user_unread_privmsg'])) ? $user->data['user_unread_privmsg'] : 0,
+		'CURRENT_USER_AVATAR'			=> phpbb_get_user_avatar($user->data),
+		'CURRENT_USERNAME_SIMPLE'		=> get_username_string('no_profile', $user->data['user_id'], $user->data['username'], $user->data['user_colour']),
+		'CURRENT_USERNAME_FULL'			=> get_username_string('full', $user->data['user_id'], $user->data['username'], $user->data['user_colour']),
+		'UNREAD_NOTIFICATIONS_COUNT'	=> ($notifications !== false) ? $notifications['unread_count'] : '',
+		'NOTIFICATIONS_COUNT'			=> ($notifications !== false) ? $notifications['unread_count'] : '',
+		'U_VIEW_ALL_NOTIFICATIONS'		=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=ucp_notifications'),
+		'U_MARK_ALL_NOTIFICATIONS'		=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=ucp_notifications&amp;mode=notification_list&amp;mark=all&amp;token=' . $notification_mark_hash),
+		'U_NOTIFICATION_SETTINGS'		=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=ucp_notifications&amp;mode=notification_options'),
+		'S_NOTIFICATIONS_DISPLAY'		=> false,
 
 		'S_USER_NEW_PRIVMSG'			=> $user->data['user_new_privmsg'],
 		'S_USER_UNREAD_PRIVMSG'			=> $user->data['user_unread_privmsg'],
@@ -4748,9 +5090,12 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 		'SESSION_ID'		=> $user->session_id,
 		'ROOT_PATH'			=> $phpbb_root_path,
 		'BOARD_URL'			=> $board_url,
+		'PHPBB_VERSION'		=> PHPBB_VERSION,
+		'PHPBB_MAJOR'		=> $phpbb_major,
 
 		'L_LOGIN_LOGOUT'	=> $l_login_logout,
 		'L_INDEX'			=> $user->lang['FORUM_INDEX'],
+		'L_SITE_HOME'		=> $user->lang['HOME'],
 		'L_ONLINE_EXPLAIN'	=> $l_online_time,
 
 		'U_PRIVATEMSGS'			=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=pm&amp;folder=inbox'),
@@ -4764,8 +5109,10 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 		'U_LOGIN_LOGOUT'		=> $u_login_logout,
 		'U_INDEX'				=> append_sid("{$phpbb_root_path}index.$phpEx"),
 		'U_SEARCH'				=> append_sid("{$phpbb_root_path}search.$phpEx"),
+		'U_SITE_HOME'			=> $server_url, //$config['site_home_url'],
 		'U_REGISTER'			=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'mode=register'),
 		'U_PROFILE'				=> append_sid("{$phpbb_root_path}ucp.$phpEx"),
+		'U_USER_PROFILE'		=> get_username_string('profile', $user->data['user_id'], $user->data['username'], $user->data['user_colour']),
 		'U_MODCP'				=> append_sid("{$phpbb_root_path}mcp.$phpEx", false, true, $user->session_id),
 		'U_FAQ'					=> append_sid("{$phpbb_root_path}faq.$phpEx"),
 		'U_SEARCH_SELF'			=> append_sid("{$phpbb_root_path}search.$phpEx", 'search_id=egosearch'),
@@ -4774,6 +5121,7 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 		'U_SEARCH_UNREAD'		=> append_sid("{$phpbb_root_path}search.$phpEx", 'search_id=unreadposts'),
 		'U_SEARCH_ACTIVE_TOPICS'=> append_sid("{$phpbb_root_path}search.$phpEx", 'search_id=active_topics'),
 		'U_DELETE_COOKIES'		=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'mode=delete_cookies'),
+		'U_CONTACT_US'			=> append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=contactadmin'),
 		'U_TEAM'				=> ($user->data['user_id'] != ANONYMOUS && !$auth->acl_get('u_viewprofile')) ? '' : append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=leaders'),
 		'U_TERMS_USE'			=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'mode=terms'),
 		'U_PRIVACY'				=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'mode=privacy'),
@@ -4817,6 +5165,9 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 
 		'S_SEARCH_HIDDEN_FIELDS'	=> build_hidden_fields($s_search_hidden_fields),
 
+		'T_ASSETS_VERSION'		=> PHPBB_VERSION, //$config['assets_version'],
+		'T_ASSETS_PATH'			=> "{$web_path}assets",
+	
 		'T_THEME_PATH'			=> "{$web_path}styles/" . rawurlencode($user->theme['theme_path']) . '/theme',
 		'T_TEMPLATE_PATH'		=> "{$web_path}styles/" . rawurlencode($user->theme['template_path']) . '/template',
 		'T_SUPER_TEMPLATE_PATH'	=> (isset($user->theme['template_inherit_path']) && $user->theme['template_inherit_path']) ? "{$web_path}styles/" . rawurlencode($user->theme['template_inherit_path']) . '/template' : "{$web_path}styles/" . rawurlencode($user->theme['template_path']) . '/template',
@@ -4829,8 +5180,14 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 		'T_ICONS_PATH'			=> "{$web_path}{$config['icons_path']}/",
 		'T_RANKS_PATH'			=> "{$web_path}{$config['ranks_path']}/",
 		'T_UPLOAD_PATH'			=> "{$web_path}{$config['upload_path']}/",
-		'T_STYLESHEET_LINK'		=> (!$user->theme['theme_storedb']) ? "{$web_path}styles/" . rawurlencode($user->theme['theme_path']) . '/theme/stylesheet.css' : append_sid("{$phpbb_root_path}style.$phpEx", 'id=' . $user->theme['style_id'] . '&amp;lang=' . $user->lang_name),
 		'T_STYLESHEET_NAME'		=> $user->theme['theme_name'],
+		'T_STYLESHEET_LINK'		=> "{$web_path}styles/" . rawurlencode($user->theme['theme_path']) . '/theme/stylesheet.css?assets_version=' . PHPBB_VERSION, //$config['assets_version'],
+		'T_STYLESHEET_LANG_LINK'=> "{$web_path}styles/" . rawurlencode($user->theme['theme_path']) . '/theme/' . $user->lang_name . '/stylesheet.css?assets_version=' . PHPBB_VERSION, //$config['assets_version'],
+		'T_FONT_IONIC_LINK'			=> "{$web_path}assets/css/ionicons.min.css",
+		'T_FONT_AWESOME_LINK'	=> "{$web_path}assets/css/font-awesome.min.css?assets_version=" . PHPBB_VERSION, //$config['assets_version'],
+		'T_JQUERY_LINK'			=> "{$web_path}assets/javascript/jquery.min.js?assets_version=" . PHPBB_VERSION, //$config['assets_version'],
+		'S_ALLOW_CDN'			=> !empty($config['allow_cdn']),
+		'S_COOKIE_NOTICE'		=> !empty($config['cookie_notice']),
 
 		'T_THEME_NAME'			=> rawurlencode($user->theme['theme_path']),
 		'T_TEMPLATE_NAME'		=> rawurlencode($user->theme['template_path']),
@@ -4848,6 +5205,22 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 		'SITE_LOGO_IMG'			=> $user->img('site_logo'),
 
 		'A_COOKIE_SETTINGS'		=> addslashes('; path=' . $config['cookie_path'] . ((!$config['cookie_domain'] || $config['cookie_domain'] == 'localhost' || $config['cookie_domain'] == '127.0.0.1') ? '' : '; domain=' . $config['cookie_domain']) . ((!$config['cookie_secure']) ? '' : '; secure')),
+		
+		// phpBB3.1 and 3.2 variables	
+		'L_QUICK_LINKS'			=> isset($user->lang['QUICK_LINKS']) ? $user->lang['QUICK_LINKS'] : $user->lang('Quick Links'), 	
+		'L_ACP_SHORT'			=> $user->lang('ACP'), 	
+		'L_MCP_SHORT'			=> $user->lang('MCP'), 	
+		'L_UCP'					=> $user->lang('UCP'),
+		'L_COLON'				=> isset($user->lang['COLON']) ? $user->lang['COLON'] : ':',		
+		'S_ENABLE_FEEDS'			=> false,
+		'S_ENABLE_FEEDS_OVERALL'	=> false,
+		'S_ENABLE_FEEDS_FORUMS'		=> false,
+		'S_ENABLE_FEEDS_TOPICS'		=> false,
+		'S_ENABLE_FEEDS_TOPICS_ACTIVE'	=> false,
+		'S_ENABLE_FEEDS_NEWS'		=> false,		
+		'U_FEED'					=> '',	
+		
+			
 	));
 
 	// application/xhtml+xml not used because of IE

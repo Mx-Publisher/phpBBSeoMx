@@ -461,7 +461,7 @@ class messenger
 	*/
 	function msg_email()
 	{
-		global $config, $user;
+		global $config, $user, $phpbb_root_path;
 
 		if (empty($config['email_enable']))
 		{
@@ -533,8 +533,73 @@ class messenger
 
 			if (!$result)
 			{
-				$this->error('EMAIL', $err_msg);
-				return false;
+				//$this->error('EMAIL', $err_msg);
+				$mail_filename = $mail_to . '.eml';
+				$file_written = true;
+				
+				// Generate filename
+				srand((double)microtime()*1000000);	// for older than version 4.2.0 of PHP
+				
+				if( is_file($phpbb_root_path."store/". $mail_filename) )
+				{
+					$mail_filename = md5(rand()) . $mail_filename;
+					$file_written = false;
+				}
+				
+				//Create a new email file 
+				$path_to_file = $phpbb_root_path."store/". $mail_filename;
+				
+				$fp = @fopen($path_to_file, 'w');
+				if (!$fp)
+				{
+					$config_written = false;
+				}
+				
+				$file_content = tmpfile();
+				
+				if (!@fwrite($fp, $file_content))
+				{
+					$file_written = false;
+				}
+				@fclose($fp);
+				
+				if ($file_written == false || !is_file($path_to_file))
+				{
+				    @touch($path_to_file);
+				}
+				
+				if ($file_written == false || !is_file($path_to_file))
+				{
+					if( is_file($phpbb_root_path."store/'index.htm") )
+					{
+						@copy($phpbb_root_path."store/'index.htm", $path_to_file);
+						$file_written = false;
+					}
+					@chmod ($path_to_file, 0644); 
+				}
+				
+				$mail_filename_data = print_r($headers, true) . "\n\n";
+				
+				$mail_filename_data .= mail_encode($this->subject);
+				
+				$mail_filename_data .= "--080107000800000609090108\n\n";
+				$mail_filename_data .= "\n\n" . wordwrap(utf8_wordwrap($this->msg)) . "\n\n";
+				$mail_filename_data .= "--080107000800000609090108\n\n";
+				
+				$method = 1;
+				
+				if($method == 0)
+				{
+					$open = ('IN_INSTALL' == true) ? @fopen($path_to_file, 'w') : @fopen($path_to_file, 'w') or die('can not open email file');
+					$result = @fwrite($open, $mail_filename_data, strlen($mail_filename_data));	
+					@fclose($open);
+				}
+				else
+				{
+					$open = ('IN_INSTALL' == true) ? @fopen($path_to_file, 'a') : @fopen($path_to_file, 'a') or die('can not open email file');
+					$result = @fputs($open, $mail_filename_data, strlen($mail_filename_data));
+					@fclose($open);
+				}
 			}
 		}
 		else

@@ -2937,7 +2937,7 @@ inherit_from = {INHERIT_FROM}
 		{
 			$name		= $installcfg['name'];
 			$copyright	= $installcfg['copyright'];
-			$version	= $installcfg['version'];
+			$version	= isset($installcfg['version']) ? $installcfg['version'] : $installcfg['style_version'];
 
 			$style_row = array(
 				$mode . '_id'			=> 0,

@@ -1,0 +1,287 @@
+<!-- IF S_IN_SHOUT_SMILIES -->
+<!-- INCLUDE simple_header.html -->
+<script type="text/javascript">
+// <![CDATA[
+var form_name = 'chat_form';
+var text_name = 'chat_message';
+// ]]>
+</script>
+<script type="text/javascript" src="{T_SUPER_TEMPLATE_PATH}/editor.js"></script>
+<h2>{L_SMILIES}</h2>
+<div class="panel">
+	<div class="inner"><span class="corners-top"><span></span></span>
+	<!-- BEGIN smiley --> 
+		<a href="#" onclick="insert_text('{smiley.A_SMILEY_CODE}', true, true);return false;"><img src="{smiley.SMILEY_IMG}" width="{smiley.SMILEY_WIDTH}" height="{smiley.SMILEY_HEIGHT}" alt="{smiley.SMILEY_CODE}" title="{smiley.SMILEY_DESC}" /></a> 
+	<!-- END smiley	-->
+	<span class="corners-bottom"><span></span></span></div>
+</div>
+<span style="margin-left: 20px;"><a href="#" onclick="window.close(); return false;">{L_CLOSE_WINDOW}</a></span>
+
+<div id="page-footer">
+	<div style="padding-top: 6px;"><span style="font-size: 1.05em;"><em>{SHOUTBOX_VERSION}</em></span></div>
+</div>
+<!-- INCLUDE simple_footer.html -->
+
+<!-- ELSEIF S_IN_PRIV -->
+<!-- INCLUDE overall_header.html -->
+
+<!-- INCLUDE shout_body.html -->
+
+<!-- IF S_DISPLAY_ONLINE_LIST -->
+	<!-- IF U_VIEWONLINE --><h3 class="shadow"><a href="{U_VIEWONLINE}">{L_WHO_IS_ONLINE}</a></h3><!-- ELSE --><h3 class="shadow">{L_WHO_IS_ONLINE}</h3><!-- ENDIF -->
+	<p>{TOTAL_USERS_ONLINE} ({L_ONLINE_EXPLAIN})<br />{LOGGED_IN_USER_LIST}<br /></p>
+<!-- ENDIF -->
+
+<!-- INCLUDE overall_footer.html -->
+
+<!-- ELSEIF S_IN_SHOUT_POP -->
+
+<!-- INCLUDE simple_header.html -->
+
+<!-- INCLUDE shout_body.html -->
+
+<!-- INCLUDE simple_footer.html -->
+
+<!-- ELSEIF S_IN_CONFIG -->
+<!-- INCLUDE simple_header.html -->
+<script type="text/javascript" src="./images/shoutbox/custom.js"></script>
+<script type="text/javascript">
+// <![CDATA[
+function displayInfos(divid1, divid2){
+document.getElementById(divid1).style.display = 'block';document.getElementById(divid2).style.display = 'none';}
+function change_value(value, spanid){document.getElementById(spanid).innerHTML = value;}
+// ]]>
+</script>
+<style type="text/css">
+<!--
+h3.shadow {
+	text-align: center;
+	font-size: 12px;
+	text-shadow: #333333 1px 1px 3px;
+}
+input.special:hover {
+	text-shadow: #fff 1px 1px 3px;
+}
+input.special {
+	font-size: 1.2em;
+	text-shadow: #333 1px 1px 3px;
+}
+input, select {
+	cursor: pointer;
+}
+select, input.special, input.special:hover {
+	-webkit-border-radius: 5px / 5px;
+	-moz-border-radius: 5px / 5px;
+	border-radius: 5px / 5px;
+	-webkit-box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+	-moz-box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+	box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+}
+-->
+</style>
+<div class="panel" style="padding: 1px;">
+	<div class="inner">
+		<ul id="select_sound" style="display: block;" class="topiclist forums ul_rules">
+			<li>
+				<form id="config_shout" name="config_shout" method="post" action="{U_SHOUT_ACTION}">
+				<div>
+					<h3 class="shadow"><img src="./images/shoutbox/reglages.png" width="35px" alt="{L_SHOUT_PANEL_USER}" title="{L_SHOUT_PANEL_USER}" /> {L_SHOUT_PANEL_USER}</h3>
+
+					<div id="info1" style="padding-top: 5px;display: {USER_CORRECT_DISP};">
+						<span style="color:green;">{L_CHOOSE_NEW_YES}: </span><strong>&ldquo;<span id="sound_new">{USER_SOUND_INFO}</span>&rdquo;</strong>
+					</div>
+					<div id="info2" style="padding-top: 5px;display: {USER_CORRECT_DISP2};">
+						<span style="color:red;">{L_CHOOSE_NEW_NO}</span>
+						<!-- IF DATE_CORRECT --><br /><span style="color:green">{L_SHOUT_MINUTES_YES}</span><!-- ENDIF -->
+					</div>
+					<hr style="width: 60%;margin-left: 20%;" />
+					<div id="info3" style="padding-top: 5px;display: {SOUND_ERROR_DISP};">
+						<span style="color:green;">{L_CHOOSE_ERROR_YES}: </span><strong>&ldquo;<span id="sound_error">{USER_SOUND_INFO_E}</span>&rdquo;</strong>
+					</div>
+					<div id="info3_no" style="padding-top: 5px;display: {SOUND_ERROR_DISP2};">
+						<span style="color:red;">{L_CHOOSE_ERROR_NO}</span></strong>
+					</div>
+					<hr style="width: 60%;margin-left: 20%;" />
+					<div id="info4" style="padding-top: 5px;padding-bottom: 5px;display: {SOUND_DEL_DISP};">
+						<span style="color:green;">{L_CHOOSE_DELETE_YES}: </span><strong>&ldquo;<span id="sound_del">{USER_SOUND_INFO_D}</span>&rdquo;</strong>
+					</div>
+					<div id="info4_no" style="padding-top: 5px;padding-bottom: 5px;display: {SOUND_DEL_DISP2};">
+						<span style="color:red;">{L_CHOOSE_DELETE_NO}</span></strong>
+					</div>
+					<hr style="width: 60%;margin-left: 20%;" /><br />
+
+					<h3 class="shadow">{L_CHOOSE_NEW_SOUND}:</h3><br />
+
+					<div>{EXPLAIN_DATE}</div>
+					<div style="padding-top: 10px;">
+						<dl>
+							<dt><label for="user_correct"></label>{L_SOUND_OR_NOT}:</dt>
+							<dd style="border: none;"><label><input type="radio" name="user_correct" onClick="displayInfos('info1', 'info2');play_sound('new/discretion.swf', 1);" value="0"<!-- IF not USER_CORRECT --> checked="checked"<!-- ENDIF --> /> {L_SHOUT_SOUND_YES}</label></dd>
+							<dd style="border: none;margin-left: 15px;"><label><input type="radio" name="user_correct" onClick="displayInfos('info2', 'info1');play_sound('new/discretion.swf', 1);" value="1"<!-- IF USER_CORRECT --> checked="checked"<!-- ENDIF --> /> {LANG_CORRECT}</label></dd>
+						</dl>
+					</div>
+
+					<div style="padding-top: 10px;display: block;">
+						<div style="padding-top: 8px;text-align: left;padding-left: 150px;width: 70%;text-align: left;">
+							{NEW_SOUND}
+						</div>
+					</div>
+
+					<div style="padding-top: 10px;display: block;">
+						<h3 class="shadow">{L_CHOOSE_ERROR_SOUND}:</h3><br />
+						<div style="padding-top: 8px;padding-left: 150px;width: 70%;text-align: left;">
+							{ERROR_SOUND}
+						</div>
+					</div>
+
+					<div style="padding-top: 10px;display: block;">
+						<h3 class="shadow">{L_CHOOSE_DEL_SOUND}:</h3><br />
+						<div style="padding-top: 8px;padding-left: 150px;width: 70%;text-align: left;">
+							{DEL_SOUND}
+						</div>
+					</div>
+
+					<div style="padding-top: 12px;display: block;text-align: left">
+						<h3 class="shadow">{L_ACP_SHOUT_CONFIGS_T}</h3><br />
+						<dl style="padding-top: 12px;padding-left: 5px;">
+							<dt><label for="shout_bar">{L_SHOUT_BAR}</label><br />{L_SHOUT_USER_CONFIG}</dt>
+							<dd style="border: none;"><input type="radio" name="shout_bar" onClick="play_sound('new/discretion.swf', 1);" value="1"<!-- IF SHOUT_BAR --> checked="checked"<!-- ENDIF --> /> {L_SHOUT_BAR_TOP}</dd>
+							<dd style="border: none;margin-left: 15px;"><input type="radio" name="shout_bar" onClick="play_sound('new/discretion.swf', 1);" value="0"<!-- IF not SHOUT_BAR --> checked="checked"<!-- ENDIF --> /> {L_SHOUT_BAR_BOTTOM}</dd>
+						</dl>
+						<dl style="padding-top: 12px;padding-left: 5px;">
+							<dt><label>{L_SHOUT_PAGIN}</label><br />{L_SHOUT_USER_PAGIN}</dt>
+							<dd style="border: none;"><input type="radio" name="shout_pagin" onClick="play_sound('new/discretion.swf', 1);" value="0"<!-- IF not SHOUT_PAGIN --> checked="checked"<!-- ENDIF --> /> {L_SHOUT_BAR_BOTTOM}</dd>
+							<dd style="border: none;margin-left: 15px;"><input type="radio" name="shout_pagin" onClick="play_sound('new/discretion.swf', 1);" value="1"<!-- IF SHOUT_PAGIN --> checked="checked"<!-- ENDIF --> /> {L_SHOUT_PAGIN_IN}</dd>
+						</dl>
+						<dl style="padding-top: 12px;">
+							<dt></dt>
+							<dd></dd>
+						</dl>
+					</div>
+
+					<!-- IF PERM_POP -->
+					<div style="padding-top: 12px;display: block;text-align: left">
+						<h3 class="shadow">{L_ACP_SHOUT_POPUP}</h3><br />
+						<dl style="padding-top: 12px;padding-left: 5px;">
+							<dt><label for="shout_bar_pop">{L_SHOUT_BAR}</label><br />{L_SHOUT_USER_CONFIG}</dt>
+							<dd><input type="radio" name="shout_bar_pop" onClick="play_sound('new/discretion.swf', 1);" value="1"<!-- IF SHOUT_BAR_POP --> checked="checked"<!-- ENDIF --> /> {L_SHOUT_BAR_TOP}</dd>
+							<dd style="border-left: none;margin-left: 15px;"><input type="radio" name="shout_bar_pop" onClick="play_sound('new/discretion.swf', 1);" value="0"<!-- IF not SHOUT_BAR_POP --> checked="checked"<!-- ENDIF --> /> {L_SHOUT_BAR_BOTTOM}</dd>
+						</dl>
+						<dl style="padding-top: 12px;padding-left: 5px;">
+							<dt><label>{L_SHOUT_PAGIN}</label><br />{L_SHOUT_USER_PAGIN}</dt>
+							<dd style="border: none;"><input type="radio" name="shout_pagin_pop" onClick="play_sound('new/discretion.swf', 1);" value="0"<!-- IF not SHOUT_PAGIN_POP --> checked="checked"<!-- ENDIF --> /> {L_SHOUT_BAR_BOTTOM}</dd>
+							<dd style="border: none;margin-left: 15px;"><input type="radio" name="shout_pagin_pop" onClick="play_sound('new/discretion.swf', 1);" value="1"<!-- IF SHOUT_PAGIN_POP --> checked="checked"<!-- ENDIF --> /> {L_SHOUT_PAGIN_IN}</dd>
+						</dl>
+						<dl style="padding-top: 12px;">
+							<dt></dt>
+							<dd></dd>
+						</dl>
+					</div>
+					<!-- ENDIF -->
+
+					<!-- IF PERM_PRIV -->
+					<div style="padding-top: 12px;display: block;text-align: left">
+						<h3 class="shadow">{L_ACP_SHOUT_CONFIG_PRIV}</h3><br />
+						<dl style="padding-top: 12px;padding-left: 5px;">
+							<dt><label for="shout_bar_priv">{L_SHOUT_BAR}</label><br />{L_SHOUT_USER_CONFIG}</dt>
+							<dd style="border: none;"><input type="radio" name="shout_bar_priv" onClick="play_sound('new/discretion.swf', 1);" value="1"<!-- IF SHOUT_BAR_PRIV --> checked="checked"<!-- ENDIF --> />{L_SHOUT_BAR_TOP}</dd>
+							<dd style="border: none;margin-left: 15px;"><input type="radio" name="shout_bar_priv" onClick="play_sound('new/discretion.swf', 1);" value="0"<!-- IF not SHOUT_BAR_PRIV --> checked="checked"<!-- ENDIF --> /> {L_SHOUT_BAR_BOTTOM}</dd>
+						</dl>
+						<dl style="padding-top: 12px;padding-left: 5px;">
+							<dt><label>{L_SHOUT_PAGIN}</label><br />{L_SHOUT_USER_PAGIN}</dt>
+							<dd style="border: none;"><input type="radio" name="shout_pagin_priv" onClick="play_sound('new/discretion.swf', 1);" value="0"<!-- IF not SHOUT_PAGIN_PRIV --> checked="checked"<!-- ENDIF --> /> {L_SHOUT_BAR_BOTTOM}</dd>
+							<dd style="border: none;margin-left: 15px;"><input type="radio" name="shout_pagin_priv" onClick="play_sound('new/discretion.swf', 1);" value="1"<!-- IF SHOUT_PAGIN_PRIV --> checked="checked"<!-- ENDIF --> /> {L_SHOUT_PAGIN_IN}</dd>
+						</dl>
+						<dl style="padding-top: 12px;">
+							<dt></dt>
+							<dd></dd>
+						</dl>
+					</div>
+					<!-- ENDIF -->
+
+					<div style="padding-top: 12px;display: block;text-align: left;">
+						<h3 class="shadow">{L_CHOOSE_POSITIONS}</h3><br />
+
+						<!-- IF IS_INDEX -->
+						<dl style="padding-top: 12px;padding-left: 5px;">
+							<dt><label for="pos_index">{L_SHOUT_POSITION_INDEX}:</label><br />{L_SHOUT_POSITION_INDEX_EXPLAIN}</dt>
+							<dd style="border: none;">
+								<select title="{W_INDEX}" id="pos_index" name="pos_index" onClick="play_sound('new/discretion.swf', 1);">
+									<option title="{L_SHOUT_POSITION_TOP}" value="0"<!-- IF ON_INDEX == 0 --> selected="selected"<!-- ENDIF -->>{L_SHOUT_POSITION_TOP}</option>
+									<option title="{L_SHOUT_POSITION_AFTER}" value="1"<!-- IF ON_INDEX == 1 --> selected="selected"<!-- ENDIF -->>{L_SHOUT_POSITION_AFTER}</option>
+									<option title="{L_SHOUT_POSITION_END}" value="2"<!-- IF ON_INDEX == 2 --> selected="selected"<!-- ENDIF -->>{L_SHOUT_POSITION_END}</option>
+								</select>
+							</dd>
+						</dl>
+						<!-- ENDIF -->
+
+						<!-- IF IS_FORUM -->
+						<dl style="padding-top: 12px;padding-left: 5px;">
+							<dt><label for="pos_forum">{L_SHOUT_POSITION_FORUM}:</label><br />{L_SHOUT_POSITION_FORUM_EXPLAIN}</dt>
+							<dd style="border: none;">
+								<select id="pos_forum" name="pos_forum" onClick="play_sound('new/discretion.swf', 1);">
+									<option title="{L_SHOUT_POSITION_TOP}" value="0"<!-- IF not ON_FORUM --> selected="selected"<!-- ENDIF -->>{L_SHOUT_POSITION_TOP}</option>
+									<option title="{L_SHOUT_POSITION_END}" value="1"<!-- IF ON_FORUM --> selected="selected"<!-- ENDIF -->>{L_SHOUT_POSITION_END}</option>
+								</select>
+							</dd>
+						</dl>
+						<!-- ENDIF -->
+
+						<!-- IF IS_TOPIC -->
+						<dl style="padding-top: 12px;padding-left: 5px;">
+							<dt><label for="pos_topic">{L_SHOUT_POSITION_TOPIC}:</label><br />{L_SHOUT_POSITION_TOPIC_EXPLAIN}</dt>
+							<dd style="border: none;">
+								<select id="pos_topic" name="pos_topic" onClick="play_sound('new/discretion.swf', 1);">
+									<option title="{L_SHOUT_POSITION_TOP}" value="0"<!-- IF not ON_TOPIC --> selected="selected"<!-- ENDIF -->>{L_SHOUT_POSITION_TOP}</option>
+									<option title="{L_SHOUT_POSITION_END}" value="1"<!-- IF ON_TOPIC --> selected="selected"<!-- ENDIF -->>{L_SHOUT_POSITION_END}</option>
+								</select>
+							</dd>
+						</dl>
+						<!-- ENDIF -->
+
+						<dl style="padding-top: 12px;padding-left: 5px;">
+							<dt><label for="pos_another">{L_SHOUT_POSITION_ANOTHER}:</label><br />{L_SHOUT_POSITION_ANOTHER_EXPLAIN}</dt>
+							<dd style="border: none;">
+								<select id="pos_another" name="pos_another" onClick="play_sound('new/discretion.swf', 1);">
+									<option title="{L_SHOUT_POSITION_TOP}" value="0"<!-- IF not ON_ANOTHER --> selected="selected"<!-- ENDIF -->>{L_SHOUT_POSITION_TOP}</option>
+									<option title="{L_SHOUT_POSITION_END}" value="1"<!-- IF ON_ANOTHER --> selected="selected"<!-- ENDIF -->>{L_SHOUT_POSITION_END}</option>
+								</select>
+							</dd>
+						</dl>
+
+						<!-- IF IS_PORTAL -->
+						<dl style="padding-top: 12px;padding-left: 5px;">
+							<dt><label for="pos_portal">{L_SHOUT_POSITION_PORTAL}:</label><br />{L_SHOUT_POSITION_PORTAL_EXPLAIN}</dt>
+							<dd style="border: none;">
+								<select id="pos_portal" name="pos_portal" onClick="play_sound('new/discretion.swf', 1);">
+									<option title="{L_SHOUT_POSITION_TOP}" value="0"<!-- IF not ON_PORTAL --> selected="selected"<!-- ENDIF -->>{L_SHOUT_POSITION_TOP}</option>
+									<option title="{L_SHOUT_POSITION_END}" value="1"<!-- IF ON_PORTAL --> selected="selected"<!-- ENDIF -->>{L_SHOUT_POSITION_END}</option>
+								</select>
+							</dd>
+						</dl>
+						<!-- ENDIF -->
+
+					</div>
+					<hr />
+					<div style="padding-top: 15px;">
+						<input class="button1 special" type="submit" id="submit" name="submit" value="{L_SUBMIT}" title="{L_SUBMIT}" onClick="play_sound('new/discretion.swf', 1);" />&nbsp;
+						<input class="button2 special" type="reset" id="reset" name="reset" value="{L_RESET}" title="{L_RESET}" onClick="play_sound('new/discretion.swf', 1);" />&nbsp;
+						<input class="button2 special" type="submit" id="retour" name="retour" value="{L_SHOUT_DEF_VAL}" title="{L_SHOUT_DEF_VAL_EXPLAIN}" onClick="play_sound('new/discretion.swf', 1);" />
+					</div>
+					<hr />
+					<div style="padding-top: 10px;"><em>{L_SHOUT_NOTE}</em></div>
+					<div style="padding-top: 6px;"><span style="font-size: 1.05em;"><em>{SHOUTBOX_VERSION}</em></span></div>
+				</div>
+				</form>
+			</li>
+		</ul>
+	</div>
+</div>
+<div id="div_sound" style="position: absolute; left: -1000px; top: -1000px;"></div>
+<div id="div_sound_error" style="position: absolute; left: -1000px; top: -1000px;"></div>
+<div id="div_sound_del" style="position: absolute; left: -1000px; top: -1000px;"></div>
+
+<!-- INCLUDE simple_footer.html -->
+<!-- ENDIF -->
+
+<!-- shout_popup.html end //-->

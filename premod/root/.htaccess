@@ -1,9 +1,114 @@
-<Files "config.php">
-Order Allow,Deny
-Deny from All
-</Files>
 
-<Files "common.php">
-Order Allow,Deny
-Deny from All
-</Files>
+
+    # Lines That should already be in your .htacess
+    <Files "config.php">
+    Order Allow,Deny
+    Deny from All
+    </Files>
+    <Files "common.php">
+    Order Allow,Deny
+    Deny from All
+    </Files>
+
+    # You may need to un-comment the following lines
+    # Options +FollowSymlinks
+    # To make sure that rewritten dir or file (/|.html) will not load dir.php in case it exist
+    # Options -MultiViews
+    # REMEBER YOU ONLY NEED TO STARD MOD REWRITE ONCE
+    RewriteEngine On
+    # Uncomment the statement below if you want to make use of
+    # HTTP authentication and it does not already work.
+    # This could be required if you are for example using PHP via Apache CGI.
+    # RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization},L]
+    # REWRITE BASE
+    RewriteBase /phpBBSeo/
+    # HERE IS A GOOD PLACE TO FORCE CANONICAL DOMAIN
+    # Define fully qualified ssl aware protocol
+    # RewriteCond %{SERVER_PORT}s ^(443(s)|[0-9]+s)$
+    # RewriteRule ^.*$ - [env=HttpFullProto:http%2://]
+    # RewriteCond %{HTTP_HOST} !^localhost$ [NC]
+    # RewriteRule ^(.*)$ %{ENV:HttpFullProto}localhost/phpBBSeo/$1 [QSA,L,R=301]
+
+    # DO NOT GO FURTHER IF THE REQUESTED FILE / DIR DOES EXISTS
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule . - [L]
+    #####################################################
+    # PHPBB SEO REWRITE RULES ALL MODES
+    #####################################################
+    # AUTHOR : dcz www.phpbb-seo.com
+    # STARTED : 01/2006
+    #################################
+    # FORUMS PAGES
+    ###############
+    # FORUM INDEX REWRITERULE WOULD STAND HERE IF USED. "forum" REQUIRES TO BE SET AS FORUM INDEX
+    # RewriteRule ^forum\.html$ index.php [QSA,L,NC]
+    # FORUM ALL MODES
+    RewriteRule ^(forum|[a-z0-9_-]*-f)([0-9]+)(-([0-9]+))?\.html$ viewforum.php?f=$2&start=$4 [QSA,L,NC]
+    # TOPIC WITH VIRTUAL FOLDER ALL MODES
+    RewriteRule ^(forum|[a-z0-9_-]*-f)([0-9]+)/(topic|[a-z0-9_-]*-t)([0-9]+)(-([0-9]+))?\.html$ viewtopic.php?f=$2&t=$4&start=$6 [QSA,L,NC]
+    # TOPIC WITHOUT FORUM ID & DELIM ALL MODES
+    RewriteRule ^([a-z0-9_-]*)/?(topic|[a-z0-9_-]*-t)([0-9]+)(-([0-9]+))?\.html$ viewtopic.php?forum_uri=$1&t=$3&start=$5 [QSA,L,NC]
+    # PHPBB FILES ALL MODES
+    RewriteRule ^resources/[a-z0-9_-]+/(thumb/)?([0-9]+)$ download/file.php?id=$2&t=$1 [QSA,L,NC]
+    # PROFILES ALL MODES WITH ID
+    RewriteRule ^(member|[a-z0-9_-]*-u)([0-9]+)\.html$ memberlist.php?mode=viewprofile&u=$2 [QSA,L,NC]
+    # USER MESSAGES ALL MODES WITH ID
+    RewriteRule ^(member|[a-z0-9_-]*-u)([0-9]+)-(topics|posts)(-([0-9]+))?\.html$ search.php?author_id=$2&sr=$3&start=$5 [QSA,L,NC]
+    # GROUPS ALL MODES
+    RewriteRule ^(group|[a-z0-9_-]*-g)([0-9]+)(-([0-9]+))?\.html$ memberlist.php?mode=group&g=$2&start=$4 [QSA,L,NC]
+    # POST
+    RewriteRule ^post([0-9]+)\.html$ viewtopic.php?p=$1 [QSA,L,NC]
+    # ACTIVE TOPICS
+    RewriteRule ^active-topics(-([0-9]+))?\.html$ search.php?search_id=active_topics&start=$2&sr=topics [QSA,L,NC]
+    # UNANSWERED TOPICS
+    RewriteRule ^unanswered(-([0-9]+))?\.html$ search.php?search_id=unanswered&start=$2&sr=topics [QSA,L,NC]
+    # NEW POSTS
+    RewriteRule ^newposts(-([0-9]+))?\.html$ search.php?search_id=newposts&start=$2&sr=topics [QSA,L,NC]
+    # UNREAD POSTS
+    RewriteRule ^unreadposts(-([0-9]+))?\.html$ search.php?search_id=unreadposts&start=$2 [QSA,L,NC]
+    # THE TEAM
+    RewriteRule ^the-team\.html$ memberlist.php?mode=leaders [QSA,L,NC]
+    # HERE IS A GOOD PLACE TO ADD OTHER PHPBB RELATED REWRITERULES
+
+    #####################################################
+    # GYM Sitemaps & RSS
+    # Global channels
+    RewriteRule ^rss(/(news)+)?(/(digest)+)?(/(short|long)+)?/?$ gymrss.php?channels&$2&$4&$6 [QSA,L,NC]
+    # HTML Global news & maps
+    RewriteRule ^(news|maps)/?(page([0-9]+)\.html)?$ map.php?$1&start=$3 [QSA,L,NC]
+    # END GYM Sitemaps & RSS
+    #####################################################
+
+    # FORUM WITHOUT ID & DELIM ALL MODES
+    # THESE FOUR LINES MUST BE LOCATED AT THE END OF YOUR HTACCESS TO WORK PROPERLY
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^([a-z0-9_-]+)(-([0-9]+))\.html$ viewforum.php?forum_uri=$1&start=$3 [QSA,L,NC]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^([a-z0-9_-]+)\.html$ viewforum.php?forum_uri=$1 [QSA,L,NC]
+    # FIX RELATIVE PATHS : FILES
+    RewriteRule ^.+/(style\.php|ucp\.php|mcp\.php|faq\.php|download/file.php)$ $1 [QSA,L,NC,R=301]
+    # FIX RELATIVE PATHS : IMAGES
+    RewriteRule ^.+/(styles/.*|images/.*)/$ $1 [QSA,L,NC,R=301]
+    # END PHPBB PAGES
+    #####################################################
+
+    #####################################################
+    # GYM Sitemaps & RSS
+    # HTML Module additional modes
+    RewriteRule ^(news|maps)/([a-z0-9_-]+)(/([a-z0-9_-]+))?/?(page([0-9]+)\.html)?$ map.php?$2=$4&$1&start=$6 [QSA,L,NC]
+    # Main feeds & channels
+    RewriteRule ^rss(/(news)+)?(/(digest)+)?(/(short|long)+)?(/([a-z0-9_-]+))?/([a-z0-9_]+)\.xml(\.gz)?$ gymrss.php?$9=$8&$2&$4&$6&gzip=$10 [QSA,L,NC]
+    # Module feeds
+    RewriteRule ^[a-z0-9_-]*-[a-z]{1,2}([0-9]+)(/(news)+)?(/(digest)+)?(/(short|long)+)?/([a-z0-9_]+)\.xml(\.gz)?$ gymrss.php?$8=$1&$3&$5&$7&gzip=$9 [QSA,L,NC]
+    # Module feeds without ids
+    RewriteRule ^([a-z0-9_-]+)(/(news)+)?(/(digest)+)?(/(short|long)+)?/([a-z0-9_]+)\.xml(\.gz)?$ gymrss.php?nametoid=$1&$3&$5&$7&modulename=$8&gzip=$9 [QSA,L,NC]
+    # Google SitemapIndex
+    RewriteRule ^sitemapindex\.xml(\.gz)?$ sitemap.php?gzip=$1 [QSA,L,NC]
+    # Module cat sitemaps
+    RewriteRule ^[a-z0-9_-]+-([a-z]{1,2})([0-9]+)\.xml(\.gz)?$ sitemap.php?module_sep=$1&module_sub=$2&gzip=$3 [QSA,L,NC]
+    # Module sitemaps
+    RewriteRule ^([a-z0-9_]+)-([a-z0-9_-]+)\.xml(\.gz)?$ sitemap.php?$1=$2&gzip=$3 [QSA,L,NC]
+    # END GYM Sitemaps & RSS
+    #####################################################
+

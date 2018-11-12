@@ -533,7 +533,6 @@ function send_file_to_browser($attachment, $upload_dir, $category)
 		}
 	}
 
-
 	// Close the db connection before sending the file
 	$db->sql_close();
 

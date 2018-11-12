@@ -115,13 +115,21 @@ class template_compile
 		{
 			global $$echo_var;
 		}
+		
+		/** Fix our BEGIN statements step2 **/
+		$code = str_replace('{% else %}', '<!-- BEGINELSE -->', $code);
 
+		$code = str_replace('{% set', '<!-- SET', $code);
+		$code = str_replace('%}', '-->', $code);
+		$code = str_replace('{%', '<!-- ', $code);
+	
 		// Remove any "loose" php ... we want to give admins the ability
 		// to switch on/off PHP for a given template. Allowing unchecked
 		// php is a no-no. There is a potential issue here in that non-php
 		// content may be removed ... however designers should use entities
 		// if they wish to display < and >
 		$this->remove_php_tags($code);
+		
 
 		// Pull out all block/statement level elements and separate plain text
 		preg_match_all('#<!-- PHP -->(.*?)<!-- ENDPHP -->#s', $code, $matches);
@@ -135,9 +143,21 @@ class template_compile
 		preg_match_all('#<!-- INCLUDEPHP ([a-zA-Z0-9\_\-\+\./]+) -->#', $code, $matches);
 		$includephp_blocks = $matches[1];
 		$code = preg_replace('#<!-- INCLUDEPHP [a-zA-Z0-9\_\-\+\./]+ -->#', '<!-- INCLUDEPHP -->', $code);
+		
+		preg_match_all('#<!-- IINCLUDEJS ([a-zA-Z0-9\_\-\+\./]+) -->#', $code, $matches);
+		$includejs_blocks = $matches[1];
+		$code = preg_replace('#<!-- INCLUDEJS [a-zA-Z0-9\_\-\+\./]+ -->#', '<!-- INCLUDEJS -->', $code);
+		
+		preg_match_all('#<!-- INCLUDECSS ([a-zA-Z0-9\_\-\+\./]+) -->#', $code, $matches);
+		$includecss_blocks = $matches[1];
+		$code = preg_replace('#<!-- INCLUDECSS [a-zA-Z0-9\_\-\+\./]+ -->#', '<!-- INCLUDECSS -->', $code);
 
 		preg_match_all('#<!-- ([^<].*?) (.*?)? ?-->#', $code, $blocks, PREG_SET_ORDER);
 
+		
+		// Replace ELSE IF with ELSEIF
+		$code = preg_replace('#<!-- ELSE IF (.+?) -->#', '<!-- ELSEIF $1 -->', $code);
+		
 		$text_blocks = preg_split('#<!-- [^<].*? (?:.*?)? ?-->#', $code);
 
 		for ($i = 0, $j = sizeof($text_blocks); $i < $j; $i++)
@@ -230,6 +250,14 @@ class template_compile
 
 				case 'INCLUDEPHP':
 					$compile_blocks[] = ($config['tpl_allow_php']) ? '<?php ' . $this->compile_tag_include_php(array_shift($includephp_blocks)) . ' ?>' : '';
+				break;
+
+				case 'INCLUDEJS':
+					$compile_blocks[] = ($config['tpl_allow_php']) ? '<?php ' . $this->compile_tag_include_js(array_shift($includejs_blocks)) . ' ?>' : '';
+				break;
+
+				case 'INCLUDECSS':
+					$compile_blocks[] = ($config['tpl_allow_php']) ? '<?php ' . $this->compile_tag_include_css(array_shift($includecss_blocks)) . ' ?>' : '';
 				break;
 
 				case 'PHP':
@@ -649,7 +677,25 @@ class template_compile
 	{
 		return "\$this->_php_include('$tag_args');";
 	}
-
+	
+	/**
+	* Compile INCLUDE_JS tag
+	* @access private
+	*/
+	function compile_tag_include_js($asset_file)
+	{
+		return "<script type=\"text/javascript\" src=\"' . " . "\$asset_file" . ". '\"></script>\n";
+	}
+	
+	/**
+	* Compile INCLUDE_CSS tag
+	* @access private
+	*/
+	function compile_tag_include_css($asset_file)
+	{
+		return "<link href=\"' . " . "\$asset_file . '\"" . ' rel="stylesheet" type="text/css" media="screen" />';
+	}
+	
 	/**
 	* parse expression
 	* This is from Smarty

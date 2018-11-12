@@ -1,0 +1,67 @@
+/* proSilver Style Sheet DM Video
+-------------------------------------------------*/
+
+dl.icon {
+	min-height: 35px;
+	background-position: 10px 50%;
+	background-repeat: no-repeat;
+}
+
+dd.dmv-singer {
+	width: 15%;
+	text-align: center;
+	line-height: 2.2em;
+	font-size: 1.1em;
+}
+
+dd.dmv-title {
+	width: 35%;
+	text-align: left;
+	line-height: 2.2em;
+	font-size: 1.1em;
+}
+
+dd.dmv-views{
+	width: 10%;
+	text-align: center;
+	line-height: 2.2em;
+	font-size: 1.1em;
+}
+
+dd.dmv-lastpost {
+	width: 15%;
+	text-align: left;
+	font-size: 1.1em;
+}
+
+dd.dmv-comments {
+	width: 65%;
+	text-align: left;
+	font-size: 1.1em;
+}
+
+dd.dmv-action{
+	width: 10%;
+	text-align: left;
+	line-height: 2.2em;
+	font-size: 1.1em;
+}
+
+.icon-videos
+{
+	background-position: 0 50%;
+	background-repeat: no-repeat;
+	background-image: none;
+	padding: 1px 0 0 17px;
+}
+
+
+.buttons div.video-icon		{ width: 119px; height: 25px; }
+.buttons div.video-comment	{ width: 119px; height: 25px; }
+
+.video-icon span		{ background: transparent none 0 0 no-repeat; }
+.video-icon span		{ background-image: url("{T_IMAGESET_LANG_PATH}/button_video_new.gif"); }
+.video-comment span	{ background: transparent none 0 0 no-repeat; }
+.video-comment span	{ background-image: url("{T_IMAGESET_LANG_PATH}/button_comment_new.gif"); }
+
+.icon-videos 	{ background-image: url("{T_THEME_PATH}/images/icon_video.gif"); }

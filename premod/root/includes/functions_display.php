@@ -522,7 +522,8 @@ function display_forums($root_data = '', $display_moderators = true, $return_mod
 			'S_AUTH_READ'		=> $auth->acl_get('f_read', $row['forum_id']),
 			'S_LOCKED_FORUM'	=> ($row['forum_status'] == ITEM_LOCKED) ? true : false,
 			'S_LIST_SUBFORUMS'	=> ($row['display_subforum_list']) ? true : false,
-			'S_SUBFORUMS'		=> (sizeof($subforums_list)) ? true : false,
+			'S_SUBFORUMS'		=> (count($subforums_list)) ? true : false,
+			'S_DISPLAY_SUBJECT'	=>	!empty($last_post_subject) ? true : false,
 			'S_FEED_ENABLED'	=> ($config['feed_forum'] && !phpbb_optionget(FORUM_OPTION_FEED_EXCLUDE, $row['forum_options']) && $row['forum_type'] == FORUM_POST) ? true : false,
 
 			'FORUM_ID'				=> $row['forum_id'],
@@ -530,12 +531,14 @@ function display_forums($root_data = '', $display_moderators = true, $return_mod
 			'FORUM_DESC'			=> generate_text_for_display($row['forum_desc'], $row['forum_desc_uid'], $row['forum_desc_bitfield'], $row['forum_desc_options']),
 			'TOPICS'				=> $row['forum_topics'],
 			$l_post_click_count		=> $post_click_count,
+			'FORUM_IMG_STYLE'		=> $folder_image,
 			'FORUM_FOLDER_IMG'		=> $user->img($folder_image, $folder_alt),
 			'FORUM_FOLDER_IMG_SRC'	=> $user->img($folder_image, $folder_alt, false, '', 'src'),
 			'FORUM_FOLDER_IMG_ALT'	=> isset($user->lang[$folder_alt]) ? $user->lang[$folder_alt] : '',
 			'FORUM_IMAGE'			=> ($row['forum_image']) ? '<img src="' . $phpbb_root_path . $row['forum_image'] . '" alt="' . $user->lang[$folder_alt] . '" />' : '',
 			'FORUM_IMAGE_SRC'		=> ($row['forum_image']) ? $phpbb_root_path . $row['forum_image'] : '',
-			'LAST_POST_SUBJECT'		=> censor_text($last_post_subject),
+			'LAST_POST_SUBJECT'		=> $last_post_subject,
+			//'LAST_POST_SUBJECT_TRUNCATED'	=> $last_post_subject_truncated,
 			'LAST_POST_TIME'		=> $last_post_time,
 			'LAST_POSTER'			=> get_username_string('username', $row['forum_last_poster_id'], $row['forum_last_poster_name'], $row['forum_last_poster_colour']),
 			'LAST_POSTER_COLOUR'	=> get_username_string('colour', $row['forum_last_poster_id'], $row['forum_last_poster_name'], $row['forum_last_poster_colour']),
@@ -547,6 +550,7 @@ function display_forums($root_data = '', $display_moderators = true, $return_mod
 			'L_MODERATOR_STR'		=> $l_moderator,
 
 			'U_UNAPPROVED_TOPICS'	=> ($row['forum_id_unapproved_topics']) ? append_sid("{$phpbb_root_path}mcp.$phpEx", 'i=queue&amp;mode=unapproved_topics&amp;f=' . $row['forum_id_unapproved_topics']) : '',
+			//'U_UNAPPROVED_POSTS'	=> ($row['forum_id_unapproved_posts']) ? append_sid("{$phpbb_root_path}mcp.$phpEx", 'i=queue&amp;mode=unapproved_posts&amp;f=' . $row['forum_id_unapproved_posts']) : '',
 			'U_VIEWFORUM'		=> $u_viewforum,
 			'U_LAST_POSTER'		=> get_username_string('profile', $row['forum_last_poster_id'], $row['forum_last_poster_name'], $row['forum_last_poster_colour']),
 			// www.phpBB-SEO.com SEO TOOLKIT BEGIN -> no dupe

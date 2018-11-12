@@ -200,7 +200,7 @@ function adm_page_footer($copyright_html = true)
 		'TRANSLATION_INFO'	=> (!empty($user->lang['TRANSLATION_INFO'])) ? $user->lang['TRANSLATION_INFO'] : '',
 		'S_COPYRIGHT_HTML'	=> $copyright_html,
 		'CREDIT_LINE'		=> $user->lang('POWERED_BY', '<a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Group'),
-		'VERSION'			=> $config['version'])
+		'VERSION'			=> isset($config['version']) ? $config['version'] : $config['style_version']) //This will allow installing phpBB 3.1+ styles
 	);
 
 	$template->display('body');
@@ -536,7 +536,6 @@ function validate_config_vars($config_vars, &$cfg_array, &$error)
 					break;
 				}
 
-
 				$cfg_array[$config_name] = trim($cfg_array[$config_name]);
 
 				// Make sure no NUL byte is present...
@@ -546,20 +545,22 @@ function validate_config_vars($config_vars, &$cfg_array, &$error)
 					break;
 				}
 
-				if (!file_exists($phpbb_root_path . $cfg_array[$config_name]))
+				$path = in_array($config_definition['validate'], array('wpath', 'path', 'rpath', 'rwpath')) ? $phpbb_root_path . $cfg_array[$config_name] : $cfg_array[$config_name];
+
+				if (!file_exists($path))
 				{
 					$error[] = sprintf($user->lang['DIRECTORY_DOES_NOT_EXIST'], $cfg_array[$config_name]);
 				}
 
-				if (file_exists($phpbb_root_path . $cfg_array[$config_name]) && !is_dir($phpbb_root_path . $cfg_array[$config_name]))
+				if (file_exists($path) && !is_dir($path))
 				{
 					$error[] = sprintf($user->lang['DIRECTORY_NOT_DIR'], $cfg_array[$config_name]);
 				}
 
 				// Check if the path is writable
-				if ($config_definition['validate'] == 'wpath' || $config_definition['validate'] == 'rwpath')
+				if ($config_definition['validate'] == 'wpath' || $config_definition['validate'] == 'rwpath' || $config_definition['validate'] === 'absolute_path_writable')
 				{
-					if (file_exists($phpbb_root_path . $cfg_array[$config_name]) && !phpbb_is_writable($phpbb_root_path . $cfg_array[$config_name]))
+					if (file_exists($path) && !phpbb_is_writable($path))
 					{
 						$error[] = sprintf($user->lang['DIRECTORY_NOT_WRITABLE'], $cfg_array[$config_name]);
 					}

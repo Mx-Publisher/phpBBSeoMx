@@ -1,0 +1,119 @@
+/*
+  phpBB 3.0 Style Sheet
+	Style name:	proSilver
+	Copyright 2008 Kamahl http://www.hardheavy.sk/ kamahl19@gmail.com
+*/
+
+#navbarhead-site-description {
+	float: left;
+	width: 100%;
+}
+
+#navbarhead-site-description h1 {
+	margin-right: 0;
+}
+
+#navbarhead-site-description span {
+	display: none;
+}
+
+#navbarhead { 
+  margin-bottom: 3px;
+  height: 30px;
+  background: url("{T_THEME_PATH}/images/menu/menu_bg.gif") repeat-x;
+  margin-top: 0px !important;
+}
+
+#navbarhead ul {
+  list-style: none;
+}
+
+#navbarhead_corner_left {
+  float: left;
+  display: block;
+  width: 20px;
+  height: 30px;
+  background: url("{T_THEME_PATH}/images/menu/menu_corner.gif") no-repeat;
+}
+
+#navbarhead_corner_right {
+	float: right;
+	display: block;
+	width: 10px;
+	height: 30px;
+	background: url("{T_THEME_PATH}/images/menu/menu_corner_right.gif") no-repeat;
+}
+
+.navbarhead_button span {
+	font-size: 11px;
+}
+
+.navbarhead_button {
+	height: 30px;
+	float: left;
+	padding-right:5px;
+}
+
+.navbarhead_button_active {
+	height: 30px;
+	float: left;
+	padding-right:5px;
+}
+
+.navbarhead_button a {
+	display: block;
+	color: #FFFFFF;
+	font-size: 12px;
+	font-weight: bold;
+	font-family: Arial, Helvetica, sans-serif;
+	text-decoration: none;
+	padding: 7px 5px 7px 5px;
+	background: url("{T_THEME_PATH}/images/menu/button.gif") top left repeat-x;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+.navbarhead_button a:hover {
+	background: url("{T_THEME_PATH}/images/menu/button_active.gif") top left repeat-x;
+	color: #000000;
+	padding: 7px 5px 7px 5px;
+	border-left: 1px solid #FFFFFF;
+	border-right: 1px solid #FFFFFF;
+}
+
+.navbarhead_button_active a {
+	display: block;
+	font-size: 12px;
+	font-weight: bold;
+	font-family: Arial, Helvetica, sans-serif;
+	text-decoration: none;
+	padding: 7px 5px 7px 5px;
+	background: url("{T_THEME_PATH}/images/menu/button_active.gif") 0 -30px repeat-x;
+	color: maroon;
+	border-left: 1px solid white;
+	border-right: 1px solid white;
+}
+
+.navbarhead_button_active a:hover {
+	background: url("{T_THEME_PATH}/images/menu/button_active.gif") top left repeat-x;
+	color: #000000;
+	border-left: 1px solid white;
+	border-right: 1px solid white;
+}
+
+#navbarhead-search {
+	float: right;
+	width: 160px;
+	height: 30px;
+	background: url("{T_THEME_PATH}/images/menu/menu_search.gif") no-repeat;
+}
+
+.navbarhead-search-input {
+	position: relative;
+	top: 8px;
+	left: 25px;
+	float: left;
+	width: 115px;
+	background-color: #fff;
+	border: none;
+}

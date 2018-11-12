@@ -1,0 +1,148 @@
+<script type="text/javascript">
+function createdata(listnameobject, column, resultid)
+{
+	// Let's delete all the current input type="hidden" fields, this is easier to find out which were changed
+	var data = document.getElementById(column);
+
+	if ( data.hasChildNodes() )	{
+		while ( data.childNodes.length >= 1 ) {
+			data.removeChild( data.firstChild );       
+		} 
+	}
+	
+	// Run through all childs
+	jQuery.each( listnameobject, function(){
+	
+		// We only want the ID of the answer
+		var answer = $( this ).attr("id");
+		answer = answer.replace(/answer_/g, '');
+		
+		// And add a hidden input field
+		inputbox = document.createElement("input"); 
+		inputbox.type = 'hidden';
+		inputbox.name = column + '[]';
+		inputbox.value = answer;
+		data.appendChild(inputbox);
+	});
+}
+
+$(function() {
+	// Javascript nubs
+	document.getElementById('enable_js').style.display = 'block';
+
+	$("#sortable1, #sortable2").sortable({
+		connectWith: '.connectedSortable',
+		items: 'li',
+		forcePlaceholderSize: true,
+		placeholder: 'bg3'
+		
+	}).disableSelection();
+	
+	$("#sortable1, #sortable2").bind('sortreceive', function(event, ui) {
+		// If the left or right column receive an item, put the child nodes in an array
+		var arrSortableListItemsLeft = $( "#sortable1" ).children();
+		var arrSortableListItemsRight = $( "#sortable2" ).children();
+		
+		// And create hidden input fields
+		createdata(arrSortableListItemsLeft, 'sortables_options_left', '#sortables_options_left');
+		createdata(arrSortableListItemsRight, 'sortables_options_right', '#sortables_options_right');
+	});
+});
+
+</script>
+
+<!-- IF S_TYPE == 1 -->
+<div class="panel">
+	<div class="inner"><span class="corners-top"><span></span></span>
+	
+    <table class="tablebg" width="100%" cellspacing="1">
+	<tr>
+		<th colspan="2" valign="middle"><h3>{L_CONFIRMATION}</h3></th>
+	</tr>
+            
+<!-- ENDIF -->
+	<noscript>
+	<tr>
+		<td class="row1"><b class="genmed">{SORTABLES_CONFIRM_QUESTION}:</b><br /><span class="gensmall">{L_CONFIRM_QUESTION_EXPLAIN_NOJS}</span></td>
+		<td class="row2" width="50%">
+        
+          <div style="float:left;">
+            <table class="tablebg" width="100%" cellspacing="1">
+              <tr>
+                <td class="row1" style="width:150px; float:left;">
+                    <strong><!-- IF SORTABLES_NAME_LEFT -->{SORTABLES_NAME_LEFT}<!-- ELSE -->{L_COLUMN_LEFT}<!-- ENDIF --></strong>
+                </td>
+              </tr>
+              <tr>
+                <td class="row1" style="width:150px; float:right; text-align:right;">
+                    <strong><!-- IF SORTABLES_NAME_RIGHT -->{SORTABLES_NAME_RIGHT}<!-- ELSE -->{L_COLUMN_RIGHT}<!-- ENDIF --></strong>
+                </td>
+              </tr>
+              <tr>
+                <td class="row1">
+                    <!-- BEGIN options -->
+                    <div style="width:10px; float:left; clear:left; height:2em;"><input type="checkbox" name="sortables_options_left[]" value="{options.ID}"/></div>
+                    <div style="width:280px; float:left; text-align:center;	height:2em;">{options.TEXT}</div>
+                    <div style="width:10px; float:right; text-align:right; height:2em;"><input type="checkbox" name="sortables_options_right[]" value="{options.ID}" /></div>
+                    <!-- END options -->
+                </td>
+              </tr>
+            </table>
+          </div>
+		</td>
+	</tr>
+	</noscript>
+
+	<!-- The normal version -->
+	<tr>
+		<td class="row1" valign="top"><strong>{SORTABLES_CONFIRM_QUESTION}</strong><br /><br /><span class="gen">{L_CONFIRM_QUESTION_EXPLAIN}</span></td>
+		<td class="row2" width="50%">
+
+        <div id="enable_js" style="display:none;">
+           <table class="tablebg" width="100%" cellspacing="1">
+              <tr>
+                <td class="row1" valign="top" width="50%">
+                
+                <strong><!-- IF SORTABLES_NAME_LEFT -->{SORTABLES_NAME_LEFT}<!-- ELSE -->{L_COLUMN_LEFT}<!-- ENDIF --></strong><hr />
+                <ul id="sortable1" class="connectedSortable" style="min-height: 100px; min-width:100px; list-style-type: none; padding: 0 5px 5px 5px;">
+                <!-- IF SORTABLES_DEFAULT_SORT == 'LEFT' -->
+                    <!-- BEGIN options -->
+                    <li class="bg2" style="cursor:move; margin: 5px 0 5px 0; padding: 5px;" id="answer_{options.ID}">{options.TEXT}</li>
+                    <!-- END options -->
+                <!-- ENDIF -->
+                </ul>
+                      
+                </td>
+                <td class="row1" valign="top" width="50%">
+                
+                <strong><!-- IF SORTABLES_NAME_RIGHT -->{SORTABLES_NAME_RIGHT}<!-- ELSE -->{L_COLUMN_RIGHT}<!-- ENDIF --></strong><hr />
+                <ul id="sortable2" class="connectedSortable" style="min-height: 100px; min-width:100px; list-style-type: none; padding: 0 5px 5px 5px;">
+                <!-- IF SORTABLES_DEFAULT_SORT == 'RIGHT' -->
+                    <!-- BEGIN options -->
+                    <li class="bg2" style="cursor:move; margin: 5px 0 5px 0; padding: 5px;" id="answer_{options.ID}">{options.TEXT}</li>
+                    <!-- END options -->
+                <!-- ENDIF -->
+                </ul>
+                      
+                </td>
+              </tr>
+            </table>
+        </div>
+		
+		</td>
+	</tr>
+
+    <input type="hidden" name="sortables_confirm_id" id="confirm_id" value="{SORTABLES_CONFIRM_ID}" />
+    <div id="sortables_options_left"></div>
+    <div id="sortables_options_right"></div>
+
+<!-- IF S_TYPE == 1 -->
+	<tr>
+		<td class="row1">&nbsp;</td>
+		<td class="row2">&nbsp;</td>
+	</tr>
+    </table>
+    
+	<span class="corners-bottom"><span></span></span></div>
+</div>
+<!-- ENDIF -->

@@ -19,7 +19,15 @@ if (!defined('E_DEPRECATED'))
 {
 	define('E_DEPRECATED', 8192);
 }
-$level = E_ALL & ~E_NOTICE & ~E_DEPRECATED;
+if (!defined('E_STRICT'))
+{
+	define('E_STRICT', 2048);
+}
+@ini_set('display_errors', 1);
+//error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
+@session_cache_expire (1440);
+@set_time_limit (1500);
+$level = E_ALL | E_NOTICE | E_STRICT;
 if (version_compare(PHP_VERSION, '5.4.0-dev', '>='))
 {
 	// PHP 5.4 adds E_STRICT to E_ALL.
@@ -29,11 +37,7 @@ if (version_compare(PHP_VERSION, '5.4.0-dev', '>='))
 	// Therefore, in phpBB 3.0.x we disable E_STRICT on PHP 5.4+,
 	// while phpBB 3.1 will fix utf8 normalizer.
 	// E_STRICT is defined starting with PHP 5
-	if (!defined('E_STRICT'))
-	{
-		define('E_STRICT', 2048);
-	}
-	$level &= ~E_STRICT;
+	//$level &= ~E_STRICT;
 }
 error_reporting($level);
 
@@ -80,31 +84,13 @@ function deregister_globals()
 	{
 		if (isset($not_unset[$varname]))
 		{
-			// Hacking attempt. No point in continuing unless it's a COOKIE (so a cookie called GLOBALS doesn't lock users out completely)
-			if ($varname !== 'GLOBALS' || isset($_GET['GLOBALS']) || isset($_POST['GLOBALS']) || isset($_SERVER['GLOBALS']) || isset($_SESSION['GLOBALS']) || isset($_ENV['GLOBALS']) || isset($_FILES['GLOBALS']))
+			// Hacking attempt. No point in continuing.
+			if (isset($_COOKIE[$varname]))
 			{
-				exit;
+				echo "Clear your cookies. ";
 			}
-			else
-			{
-				$cookie = &$_COOKIE;
-				while (isset($cookie['GLOBALS']))
-				{
-					if (!is_array($cookie['GLOBALS']))
-					{
-						break;
-					}
-
-					foreach ($cookie['GLOBALS'] as $registered_var => $value)
-					{
-						if (!isset($not_unset[$registered_var]))
-						{
-							unset($GLOBALS[$registered_var]);
-						}
-					}
-					$cookie = &$cookie['GLOBALS'];
-				}
-			}
+			echo "Malicious variable name detected. Contact the administrator and ask them to disable register_globals.";
+			exit;
 		}
 
 		unset($GLOBALS[$varname]);

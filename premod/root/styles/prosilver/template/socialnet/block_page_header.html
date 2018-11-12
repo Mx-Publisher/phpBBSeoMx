@@ -1,0 +1,34 @@
+<div class="sn-page-blockHeader<!-- IF $BLOCK_HEADER_TYPE == 'forabg' --> forabg<!-- ENDIF -->">
+	<div class="inner"><span class="corners-top"><span></span></span>
+	<!-- IF $BLOCK_HEADER_TYPE == 'forabg' -->
+		<ul class="topiclist">
+			<li class="header">
+				<dl>
+					<dt>
+	<!-- ELSE -->
+		<h3>
+	<!-- ENDIF -->
+         {$BLOCK_HEADER}
+	<!-- IF $BLOCK_HEADER_ADDITIONAL_LINK -->
+		 &bull; <a href="{$BLOCK_HEADER_ADDITIONAL_LINK}">{$BLOCK_HEADER_ADDITIONAL}</a>
+	<!-- ELSEIF $BLOCK_HEADER_ADDITIONAL -->
+		 ({$BLOCK_HEADER_ADDITIONAL})
+	<!-- ENDIF -->
+	<!-- IF $BLOCK_HEADER_LINK -->
+		<span class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+			<a <!-- IF $BLOCK_HEADER_LINK != 'false' -->href="{$BLOCK_HEADER_LINK}"<!-- ENDIF -->>{L_SN_AP_SEE_ALL}</a>
+		</span>
+	<!-- ENDIF -->
+	<!-- IF $BLOCK_HEADER_TYPE == 'forabg' -->
+					</dt>
+				</dl>
+			</li>
+		</ul>
+	<!-- ELSE -->
+		</h3>
+	<!-- ENDIF -->
+	</div>
+</div>
+<!-- UNDEFINE $BLOCK_HEADER_LINK -->
+<!-- UNDEFINE $BLOCK_HEADER_ADDITIONAL -->
+<!-- UNDEFINE $BLOCK_HEADER_ADDITIONAL_LINK -->

@@ -278,12 +278,20 @@ class dbal
 	*/
 	function sql_like_expression($expression)
 	{
-		$expression = utf8_str_replace(array('_', '%'), array("\_", "\%"), $expression);
-		$expression = utf8_str_replace(array(chr(0) . "\_", chr(0) . "\%"), array('_', '%'), $expression);
-
+		if (function_exists('utf8_str_replace'))
+		{
+			$expression = utf8_str_replace(array('_', '%'), array("\_", "\%"), $expression);
+			$expression = utf8_str_replace(array(chr(0) . "\_", chr(0) . "\%"), array('_', '%'), $expression);
+		}
+		elseif (!function_exists('utf8_str_replace'))
+		{
+			
+			$expression = str_replace(array('_', '%'), array("\_", "\%"), $expression);
+			$expression = str_replace(array(chr(0) . "\_", chr(0) . "\%"), array('_', '%'), $expression);
+		}
 		return $this->_sql_like_expression('LIKE \'' . $this->sql_escape($expression) . '\'');
 	}
-
+	
 	/**
 	* Returns whether results of a query need to be buffered to run a transaction while iterating over them.
 	*

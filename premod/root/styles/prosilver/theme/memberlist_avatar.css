@@ -1,0 +1,46 @@
+/**
+ * @package styles
+ * @version $Id: memberlist_avatar.css,v 1.1.1.1 2009/05/15 05:19:08 portalxl group Exp $
+ * @copyright (c) 2007 David Lewis (Highway of Life) - http://startrekguide.com
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ ---------------------------------------- */
+.thumbnail {
+	z-index: 0;
+	position:relative;
+    text-align:center;
+    margin-top:0px;
+    margin-bottom:0px;
+    padding:0px;
+}
+
+a.thumbnail:hover {
+	background-color: transparent;
+	z-index: 200;
+}
+
+.thumbnail span {
+	position: absolute;
+	background: #12A3EB url("{T_THEME_PATH}/images/bg_header.gif") repeat-x;
+	padding: 4px;
+	left: 0px;
+	display: none;
+	color: #FFF;
+	text-decoration: none;
+}
+
+.thumbnail span img {
+	border-width: 0;
+	padding: 2px;
+}
+
+a.thumbnail:hover span {
+	position:absolute;
+	display:block;
+	bottom: 60px;
+	left: 10px;
+}
+
+.memberlist-avatar {
+	width: 11%;
+	text-align: left;
+}

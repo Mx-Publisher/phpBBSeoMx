@@ -120,7 +120,7 @@ class session
 
 		$script_path .= (substr($script_path, -1, 1) == '/') ? '' : '/';
 		$root_script_path .= (substr($root_script_path, -1, 1) == '/') ? '' : '/';
-		
+
 		$forum_id = (isset($_REQUEST['f']) && $_REQUEST['f'] > 0 && $_REQUEST['f'] < 16777215) ? (int) $_REQUEST['f'] : 0;
 
 		$page_array += array(
@@ -558,7 +558,12 @@ class session
 		$method = 'autologin_' . $method;
 		if (function_exists($method))
 		{
-			$this->data = $method();
+			$user_data = $method();
+
+			if ($user_id === false || (isset($user_data['user_id']) && $user_id == $user_data['user_id']))
+			{
+				$this->data = $user_data;
+			}
 
 			if (sizeof($this->data))
 			{
@@ -578,11 +583,18 @@ class session
 					AND k.user_id = u.user_id
 					AND k.key_id = '" . $db->sql_escape(md5($this->cookie_data['k'])) . "'";
 			$result = $db->sql_query($sql);
-			$this->data = $db->sql_fetchrow($result);
+			$user_data = $db->sql_fetchrow($result);
+
+			if ($user_id === false || (isset($user_data['user_id']) && $user_id == $user_data['user_id']))
+			{
+				$this->data = $user_data;
+				$bot = false;
+			}
+
 			$db->sql_freeresult($result);
-			$bot = false;
 		}
-		else if ($user_id !== false && !sizeof($this->data))
+
+		if ($user_id !== false && !sizeof($this->data))
 		{
 			$this->cookie_data['k'] = '';
 			$this->cookie_data['u'] = $user_id;
@@ -1042,7 +1054,7 @@ class session
 
 		$name_data = rawurlencode($config['cookie_name'] . '_' . $name) . '=' . rawurlencode($cookiedata);
 		$expire = gmdate('D, d-M-Y H:i:s \\G\\M\\T', $cookietime);
-		$domain = (!$config['cookie_domain'] || $config['cookie_domain'] == 'localhost' || $config['cookie_domain'] == '127.0.0.1') ? '' : '; domain=' . $config['cookie_domain'];
+		$domain = (!$config['cookie_domain'] || $config['cookie_domain'] == '127.0.0.1' || strpos($config['cookie_domain'], '.') === false) ? '' : '; domain=' . $config['cookie_domain'];
 
 		header('Set-Cookie: ' . $name_data . (($cookietime) ? '; expires=' . $expire : '') . '; path=' . $config['cookie_path'] . $domain . ((!$config['cookie_secure']) ? '' : '; secure') . '; HttpOnly', false);
 	}
@@ -1510,7 +1522,7 @@ class user extends session
 	var $date_format;
 	var $timezone;
 	var $dst;
-
+	var $style;
 	var $lang_name = false;
 	var $lang_id = false;
 	var $lang_path;
@@ -1571,7 +1583,7 @@ class user extends session
 			/**
 			* If a guest user is surfing, we try to guess his/her language first by obtaining the browser language
 			* If re-enabled we need to make sure only those languages installed are checked
-			* Commented out so we do not loose the code.
+			* Commented out so we do not loose the code. **/
 
 			if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))
 			{
@@ -1602,7 +1614,7 @@ class user extends session
 					}
 				}
 			}
-			*/
+			/**/
 		}
 
 		// We include common language file here to not load it every time a custom language file is included
@@ -1629,7 +1641,7 @@ class user extends session
 		}
 		else
 		{
-			// Set up style
+			//$style = 12; 
 			$style = ($style) ? $style : ((!$config['override_user_style']) ? $this->data['user_style'] : $config['default_style']);
 		}
 
@@ -1647,7 +1659,7 @@ class user extends session
 		if (!$this->theme && $style == $this->data['user_style'])
 		{
 			$style = $this->data['user_style'] = $config['default_style'];
-
+			//$style = 12;
 			$sql = 'UPDATE ' . USERS_TABLE . "
 				SET user_style = $style
 				WHERE user_id = {$this->data['user_id']}";
@@ -1663,6 +1675,15 @@ class user extends session
 			$this->theme = $db->sql_fetchrow($result);
 			$db->sql_freeresult($result);
 		}
+		$sql = 'SELECT s.style_id, t.template_storedb, t.template_path, t.template_id, t.bbcode_bitfield, c.theme_path, c.theme_name, c.theme_storedb, c.theme_id, i.imageset_path, i.imageset_id, i.imageset_name
+			FROM ' . STYLES_TABLE . ' s, ' . STYLES_TEMPLATE_TABLE . ' t, ' . STYLES_THEME_TABLE . ' c, ' . STYLES_IMAGESET_TABLE . " i
+			WHERE s.style_id = $style
+				AND t.template_id = s.template_id
+				AND c.theme_id = s.theme_id
+				AND i.imageset_id = s.imageset_id";
+		$result = $db->sql_query($sql, 3600);
+		$this->theme = $db->sql_fetchrow($result);
+		$db->sql_freeresult($result);		
 
 		if (!$this->theme)
 		{

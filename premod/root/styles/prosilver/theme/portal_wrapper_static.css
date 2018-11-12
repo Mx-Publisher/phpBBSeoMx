@@ -1,0 +1,204 @@
+
+/* --------------------------------------------------------------
+   html, body tag copy from colours.css inhere
+   -------------------------------------------------------------- */
+html, body {
+	background: url("{T_THEME_PATH}/images/body_bg0.gif") fixed;
+	background-color: #D6D6D6;
+	background-position: center center;
+	color: #68696D;
+}
+
+body {
+	background-color: #D6D6D6;
+	color: #536482;
+	font-family: Verdana, Helvetica, Arial, sans-serif;
+	margin: 0;
+}
+
+/* Round cornered boxes and backgrounds rotating header */
+.headerbar {
+	background-color: #12A3EB;
+    background: url("{T_THEME_PATH}/headers/rotate.php");
+	clear: both;
+}
+
+/* Site description and logo rotating header set to hight of header picture -10 px */
+#site-description {
+	height: 130px;
+}
+ 
+#search-box {
+	margin-top: 80px;
+}
+ 
+.portal-opacity25 {
+   /* CSS Transparency Settings for All Browsers 25% opaque
+   -------------------------------------------------------- */
+   opacity: 0.25; /* Current standard in CSS */
+   -moz-opacity: 0.25; /* Old school versions like Netscape Navigator */
+   -khtml-opacity: 0.25; /* Old versions of Safari (1.x) */
+   -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=25)"; /* IE8 first! */
+   filter: alpha(opacity=25); /* IE IE5-7 second! */
+   zoom: 1; /* hasLayout for IE6 and IE7 */
+}
+
+.portal-opacity50 {
+   /* CSS Transparency Settings for All Browsers 50% opaque
+   -------------------------------------------------------- */
+   font-weight: bold;
+   position: relative; /* position: relative used for IE */ 
+   opacity: 0.50; /* Current standard in CSS */
+   -moz-opacity: 0.50; /* Old school versions like Netscape Navigator */
+   -khtml-opacity: 0.50; /* Old versions of Safari (1.x) */
+   -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)"; /* IE8 first! */
+   filter: alpha(opacity=50); /* IE IE5-7 second! */
+   zoom: 1; /* hasLayout for IE6 and IE7 */
+}
+
+.portal-opacity75 {
+   /* CSS Transparency Settings for All Browsers 75% opaque
+   -------------------------------------------------------- */
+   opacity: 0.75; /* Current standard in CSS */
+   -moz-opacity: 0.75; /* Old school versions like Netscape Navigator */
+   -khtml-opacity: 0.75; /* Old versions of Safari (1.x) */
+   -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=75)"; /* IE8 first! */
+   filter: alpha(opacity=75); /* IE IE5-7 second! */
+   zoom: 1; /* hasLayout for IE6 and IE7 */
+}
+
+.portal-opacity85 {
+   /* CSS Transparency Settings for All Browsers 85% opaque
+   -------------------------------------------------------- */
+   opacity: 0.85; /* Current standard in CSS */
+   -moz-opacity: 0.85; /* Old school versions like Netscape Navigator */
+   -khtml-opacity: 0.85; /* Old versions of Safari (1.x) */
+   -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=85)"; /* IE8 first! */
+   filter: alpha(opacity=85); /* IE IE5-7 second! */
+   zoom: 1; /* hasLayout for IE6 and IE7 */
+}
+
+.portal-opacity90 {
+   /* CSS Transparency Settings for All Browsers 90% opaque
+   -------------------------------------------------------- */
+   opacity: 0.90; /* Current standard in CSS */
+   -moz-opacity: 0.90; /* Old school versions like Netscape Navigator */
+   -khtml-opacity: 0.90; /* Old versions of Safari (1.x) */
+   -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=90)"; /* IE8 first! */
+   filter: alpha(opacity=90); /* IE IE5-7 second! */
+   zoom: 1; /* hasLayout for IE6 and IE7 */
+}
+
+.portal-opacity95 {
+   /* CSS Transparency Settings for All Browsers 95% opaque
+   -------------------------------------------------------- */
+   opacity: 0.95; /* Current standard in CSS */
+   -moz-opacity: 0.95; /* Old school versions like Netscape Navigator */
+   -khtml-opacity: 0.95; /* Old versions of Safari (1.x) */
+   -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=95)"; /* IE8 first! */
+   filter: alpha(opacity=95); /* IE IE5-7 second! */
+   zoom: 1; /* hasLayout for IE6 and IE7 */
+}
+/* --------------------------------------------------------------
+   html, body tag copy from colours.css inhere
+   -------------------------------------------------------------- */
+
+/* --------------------------------------------------------------
+   wrap tag copy from common.css inhere
+   -------------------------------------------------------------- */
+.outside {
+	margin: 0px auto;
+	overflow: hidden;
+	width: 970px; /* change here to set the outer width (borders) of the wrapper */
+}
+
+#wrap {
+	margin: 0px auto;
+	min-width: 650px;
+	padding: 0px 20px 0 20px;
+	width: 930px; /* change here to set the inner width (forum) of the wrapper */
+}
+/* --------------------------------------------------------------
+   wrap tag copy from common.css inhere
+   -------------------------------------------------------------- */
+
+/* --------------------------------------------------------------
+   additional proSilver Markup Styles outside rouded
+   -------------------------------------------------------------- */
+.top-left, .top-right, .bottom-left, .bottom-right { 
+   height: 20px;       /* CHANGE: replace by the height of one of your corners (= 1/2 height of the image) */
+   font-size: 2px;    /* DNC: correction IE for height of the <div>'s */
+}
+   
+.top-left { 
+   background-image: url("{T_THEME_PATH}/images/corners0.gif"); background-repeat: no-repeat; /* CHANGE: path and name of your image */
+   background-position: 0 -20px; /* CHANGE: replace second number by negative height of one of your corners */
+   margin-left: 1px;  /* CHANGE: replace by the width of one of your corners */
+   margin-top: 0px;  /* CHANGE: replace by the height of one of your corners */
+   margin-right: 9px; /* CHANGE: replace by the width of one of your corners */
+}
+
+.top-right { 
+   background-image: url("{T_THEME_PATH}/images/corners0.gif"); background-repeat: no-repeat; /* CHANGE: path and name of your image */
+   background-position: 100% 0;    /* DNC: position right corner at right side, no vertical changes */
+   margin-left: 0px;  /* CHANGE: replace by the width of one of your corners */
+   margin-top: -9px;  /* CHANGE: replace by the height of one of your corners */
+   margin-right: 1px; /* CHANGE: replace by the width of one of your corners */
+}
+
+.top-center { 
+   background-image: url("{T_THEME_PATH}/images/bg_head.gif"); /* CHANGE: path and name of your image */
+   background-position: 0 0px; /* CHANGE: replace second number by negative height of one of your corners */
+   height: 20px;       /* CHANGE: replace by the height of one of your corners (= 1/2 height of the image) */
+   font-size: 2px;    /* DNC: correction IE for height of the <div>'s */
+   margin-left: 20px;  /* CHANGE: replace by the width of one of your corners */
+   margin-top: -20px;  /* CHANGE: replace by the height of one of your corners */
+   margin-right: 20px; /* CHANGE: replace by the width of one of your corners */
+   margin-bottom: -20px; /* CHANGE: replace by the width of one of your corners */
+}
+   
+.bottom-left  { 
+   background-image: url("{T_THEME_PATH}/images/corners_.gif"); background-repeat: no-repeat; /* CHANGE: path and name of your image */
+   background-position: 0 0px; /* CHANGE: replace second number by negative height of one of your corners */
+   margin-right: 0px; /* CHANGE: replace by the width of one of your corners */
+   margin-left: 1px;  /* CHANGE: replace by the width of one of your corners */
+   margin-top: 0px;  /* CHANGE: replace by the height of one of your corners */
+}
+
+.bottom-right { 
+   background-image: url("{T_THEME_PATH}/images/corners_.gif"); background-repeat: no-repeat; /* CHANGE: path and name of your image */
+   background-position: 100% -20px; /* CHANGE: replace second number by negative height of one of your corners */
+   margin-right: 1px; /* CHANGE: replace by the width of one of your corners */
+   margin-left: 0px;  /* CHANGE: replace by the width of one of your corners */
+   margin-top: -20px;  /* CHANGE: replace by the height of one of your corners */
+}
+
+.bottom-center { 
+   background-image: url("{T_THEME_PATH}/images/bg_foot.gif"); /* CHANGE: path and name of your image */
+   background-position: 0 0px; /* CHANGE: replace second number by negative height of one of your corners */
+   height: 20px;       /* CHANGE: replace by the height of one of your corners (= 1/2 height of the image) */
+   font-size: 2px;    /* DNC: correction IE for height of the <div>'s */
+   margin-left: 20px;  /* CHANGE: replace by the width of one of your corners */
+   margin-top: -20px;  /* CHANGE: replace by the height of one of your corners */
+   margin-right: 20px; /* CHANGE: replace by the width of one of your corners */
+   margin-bottom: -20px; /* CHANGE: replace by the width of one of your corners */
+}
+
+.inside {
+   border-left: 0px solid #000000; /* YCC: color & properties of the left-borderline */
+   border-right: 0px solid #000000;/* YCC: color & properties of the right-borderline */
+   background: #FFFFFF;            /* YCC: background-color of the inside */
+   color: #000000;                 /* YCC: default text-color of the inside */
+   padding-left: 0px;              /* YCC: all texts at some distance of the left border */
+   padding-right: 0px;             /* YCC: all texts at some distance of the right border */
+   background-image: url("{T_THEME_PATH}/images/bg_body0.gif"); /* CHANGE: path and name of your image */
+   background-repeat:repeat-y; 
+   margin-left: 0px;  /* CHANGE: replace by the width of one of your corners */
+   margin-right: 0px; /* CHANGE: replace by the width of one of your corners */ 
+}
+   
+.notopgap    { margin-top: 0; }    /* DNC: to avoid splitting of the box */
+.nobottomgap { margin-bottom: 0; } /* DNC: to avoid splitting of the box */
+/* --------------------------------------------------------------
+   additional proSilver Markup Styles outside rouded
+   -------------------------------------------------------------- */

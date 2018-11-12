@@ -1247,9 +1247,8 @@ function validate_data($data, $val_ary)
 		{
 			$function = array_shift($validate);
 			array_unshift($validate, $data[$var]);
-			$function_prefix = (function_exists('phpbb_validate_' . $function)) ? 'phpbb_validate_' : 'validate_';
 
-			if ($result = call_user_func_array($function_prefix . $function, $validate))
+			if ($result = call_user_func_array('validate_' . $function, $validate))
 			{
 				// Since errors are checked later for their language file existence, we need to make sure custom errors are not adjusted.
 				$error[] = (empty($user->lang[$result . '_' . strtoupper($var)])) ? $result : $result . '_' . strtoupper($var);
@@ -1554,7 +1553,7 @@ function validate_username($username, $allowed_username = false)
 */
 function validate_password($password)
 {
-	global $config;
+	global $config, $db, $user;
 
 	if ($password === '' || $config['pass_complex'] === 'PASS_TYPE_ANY')
 	{
@@ -1637,6 +1636,124 @@ function validate_password($password)
 	return false;
 }
 
+/* +MOD: Live Email Validate (LEV)
+*
+* test SMTP mail delivery
+*/
+function probe_smtp_mailbox($email, $hostname)
+{
+	global $config, $user, $phpEx;
+	@set_time_limit(30);
+	
+	if ($connect = fsockopen($hostname, 25, $errno, $errstr, 15))
+	{
+		usleep(888);
+		$out = fgetss($connect, 1024);
+
+	    if (preg_match('#^220#', $out))
+	    {
+	      fputs($connect, "HELO " . $config['server_name'] . "\r\n");
+
+	      while (preg_match('#^220#', $out))
+	      {
+	        $out = fgetss($connect, 1024);
+	      }
+
+	      fputs($connect, "VRFY <" . $email . ">\r\n");
+	      $verify = fgetss($connect, 1024);
+
+	      fputs($connect, "MAIL FROM: <" . $config['board_email'] . ">\r\n");
+	      $from = fgetss($connect, 1024);
+
+	      fputs($connect, "RCPT TO: <" . $email . ">\r\n");
+	      $to = fgetss($connect, 1024);
+
+	      fputs($connect, "QUIT\r\n");
+	      fclose($connect);
+		  //$user->lang['Email_unverified'] = "Unverified E-Mail Adress";
+		  //$user->lang['No_connection'] = "No Connection";
+		  
+	      if (preg_match('#^250#', $from) && preg_match('#^250#', $to) && !preg_match('#^550#', $verify))
+	      {
+	        $result = false;
+	      }
+	      else
+	      {
+	      	$result = "Unverified E-Mail Adress";
+	      }
+	    }
+	    @fclose($connect);
+	}
+	else
+	{
+		$result = "No Connection";
+	}
+	return $result;
+}
+
+// Try to find an MX record that matches the hostname - Unix
+function check_smtp_addr_unix($email)
+{
+  list($username, $domain) = explode('@', $email);
+
+  if (checkdnsrr($domain, 'MX'))
+  {
+    getmxrr($domain, $mxhosts);
+    $result = probe_smtp_mailbox($email, $mxhosts[0]);
+
+    if ($result['error'] == false)
+    {
+    	return $result;
+    }
+
+    for ($i = 1; $i < count($mxhosts); $i++)
+    {
+      $result = probe_smtp_mailbox($email, $mxhosts[$i]);
+      if ($result['error'] == false)
+      {
+      	return $result;
+      }
+    }
+    return $result;
+  }
+  else
+  {
+  	return (probe_smtp_mailbox($email, $domain));
+  }
+}
+
+// Try to find an MX record that matches the hostname - Win32
+function check_smtp_addr_win($email)
+{
+  list($username, $domain) = explode('@', $email);
+  exec("nslookup -type=MX $domain", $outputs);
+
+  foreach ($outputs as $hostname)
+  {
+    if (strpos($domain, $hostname))
+    {
+      $result = probe_smtp_mailbox($email, $domain);
+
+      if ($result['error'] == false)
+      {
+      	return $result;
+      }
+    }
+  }
+
+  if (isset($result))
+  {
+  	return $result;
+  }
+  else
+  {
+  	return (probe_smtp_mailbox($email, $domain));
+  }
+}
+/*
+* -MOD: Live Email Validate (LEV)
+*/
+
 /**
 * Check to see if email address is banned or already present in the DB
 *
@@ -1672,6 +1789,18 @@ function validate_email($email, $allowed_email = false)
 		{
 			return 'DOMAIN_NO_MX_RECORD';
 		}
+		/* +MOD: Live Email Validate (LEV)
+		*
+		*/
+		global $_SERVER;
+		$system = preg_match("/Microsoft|Win32|IIS|WebSTAR|Xitami/", $_SERVER['SERVER_SOFTWARE']) ? $result = check_smtp_addr_win($email) : $result = check_smtp_addr_unix($email);
+		if ($result == true)
+		{
+			return $result;
+		}
+		/*
+		* -MOD: Live Email Validate (LEV)
+		*/
 	}
 
 	if (($ban_reason = $user->check_ban(false, false, $email, true)) !== false)
@@ -1892,30 +2021,6 @@ function validate_jabber($jid)
 	}
 
 	if (!$result)
-	{
-		return 'WRONG_DATA';
-	}
-
-	return false;
-}
-
-/**
-* Validate hex colour value
-*
-* @param string $colour The hex colour value
-* @param bool $optional Whether the colour value is optional. True if an empty
-*			string will be accepted as correct input, false if not.
-* @return bool|string Error message if colour value is incorrect, false if it
-*			fits the hex colour code
-*/
-function phpbb_validate_hex_colour($colour, $optional = false)
-{
-	if ($colour === '')
-	{
-		return (($optional) ? false : 'WRONG_DATA');
-	}
-
-	if (!preg_match('/^([0-9a-fA-F]{6}|[0-9a-fA-F]{3})$/', $colour))
 	{
 		return 'WRONG_DATA';
 	}

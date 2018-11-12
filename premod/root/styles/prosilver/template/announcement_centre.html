@@ -1,0 +1,66 @@
+<!-- IF ANNOUNCEMENT_ENABLE-->
+	<!-- IF ANNOUNCEMENT_ENABLE_GUESTS and not S_USER_LOGGED_IN and not ANNOUNCEMENT_SHOW_EVERYONE and not ANNOUNCEMENT_SHOW or ANNOUNCEMENT_SHOW-->
+	<div class="navbar" style="margin-top: 0px; margin-bottom: 5px;">
+		<div class="inner"><span class="corners-top"><span></span></span>
+			<table class="table1" cellspacing="1">
+				<thead>
+					<tr>
+						<th>
+						<!-- IF ANNOUNCEMENT_ENABLE_GUESTS and not S_USER_LOGGED_IN and not ANNOUNCEMENT_SHOW_EVERYONE and not ANNOUNCEMENT_SHOW-->
+							<!-- IF ANNOUNCEMENT_TITLE_GUESTS --><h5>{ANNOUNCEMENT_TITLE_GUESTS}</h5> <!-- ELSE --> <h5>{L_ANNOUNCEMENT_TITLE_GUESTS}</h5><!-- ENDIF -->
+						<!-- ELSEIF ANNOUNCEMENT_SHOW-->
+							<!-- IF ANNOUNCEMENT_TITLE --> <h5>{ANNOUNCEMENT_TITLE}</h5> <!-- ELSE --> <h5>{L_ANNOUNCEMENT_TITLE}</h5><!-- ENDIF -->
+						<!-- ENDIF -->
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="bg3">
+						<td style="text-align:center;">
+						<!-- IF ANNOUNCEMENT_ENABLE_GUESTS and not S_USER_LOGGED_IN and not ANNOUNCEMENT_SHOW_EVERYONE and not ANNOUNCEMENT_SHOW-->
+							<br />{ANNOUNCEMENT_TEXT_GUESTS}<br /><br />
+						<!-- ELSEIF ANNOUNCEMENT_SHOW-->
+							<!-- IF ANNOUNCEMENT_SHOW_BIRTHDAY-->
+							<img src="{T_IMAGESET_PATH}/birthday.png" title="{L_CONGRATULATIONS}" alt="{L_CONGRATULATIONS}" /><br />
+								<table width="100%" >
+									<tr style="border: 0px; padding:0;">
+										<td align="center" style="border: 0px; padding:0;">
+											<table>	
+												<tr align="center" style="border: 0px; padding:0;">
+												<!-- IF ANNOUNCEMENT_BIRTHDAY_AVATAR -->
+													<!-- BEGIN bdannounce -->
+													<td style="border: 0px; padding:0;">
+														<table>
+															<tr style="height:42px; align:center; border: 0px;">
+																<td style="border: 0px; padding:0;">{bdannounce.AVATAR}</td>
+															</tr>
+															<tr align="center" valign="bottom" style="border: 0px; padding:0;">
+																<td style="border: 0px; padding:0;font-size: 10px;"><b>{bdannounce.USERNAME}</b></td>
+															</tr>
+														</table>
+													</td>
+													<!-- END bdannounce -->
+												<!-- ELSE -->
+													<!-- BEGIN bdannounce -->
+													<td style="border: 0px; padding:0 0 0 3px;font-size: 10px;"><b>{bdannounce.USERNAME}</b></td>
+													<!-- END bdannounce -->
+												<!-- ENDIF -->
+												</tr>
+											</table>
+										</td>
+									</tr>
+								</table>
+							<!-- ELSE -->
+							<br />{ANNOUNCEMENT_TEXT}<br /><br />
+							<!-- ENDIF -->
+						<!-- ENDIF -->
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		
+		<span class="corners-bottom"><span></span></span></div>
+	</div>
+	<!-- ENDIF -->
+<!-- ENDIF -->
+

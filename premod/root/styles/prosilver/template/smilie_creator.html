@@ -1,0 +1,186 @@
+<!-- INCLUDE simple_header.html -->
+<script type="text/javascript">
+// <![CDATA[
+function makeschild()
+{
+	var text = document.getElementById("schilderstellung").schildtext.value;
+	var color = document.getElementById("schilderstellung").color.value;
+	var shadowcolor = document.getElementById("schilderstellung").shadowcolor.value;
+	var shieldshadow = document.getElementById("schilderstellung").shieldshadow.value;
+	var smilie = 1;
+
+	<!-- BEGIN smilie_selection-->
+		<!-- IF smilie_selection.SMILIE_JS -->
+			if(document.getElementById("schilderstellung").smilie["{smilie_selection.SMILIE_JS}"].checked) var smilie = document.getElementById("schilderstellung").smilie["{smilie_selection.SMILIE_JS}"].value;
+		<!-- ENDIF -->
+	<!-- END smilie_selection -->
+	
+	if(document.getElementById("schilderstellung").smilie["{SMILIE_RANDOM}"].checked) var smilie = 'random';
+
+	if(document.getElementById("schilderstellung").smilie["{SMILIE_STANDARD}"].checked) var smilie = 'standard';
+	
+	if(text)
+	{
+		var text2form = "[schild="+smilie+","+shieldshadow+","+color+","+shadowcolor+"]"+text+"[/schild]";
+
+		opener.document.forms['postform'].message.value += text2form;
+		if(!confirm("{SMILIES_NEXT}"))
+		{
+			window.close();
+			opener.document.forms['post'].message.focus();
+		}
+		else
+		{
+			document.getElementById("schilderstellung").reset();
+		}
+	}
+	else
+	{
+		alert("{SC_ERROR}");
+	}
+}
+// ]]>
+</script>
+
+<div class="panel">
+	<div class="inner"><span class="corners-top"><span></span></span>
+<!-- IF S_MODE_TEXT2SCHILD -->
+		<h3>{L_SMILIE_CREATOR}</h3>
+		<form action ="" id="schilderstellung" >
+		<table cellpadding="4" cellspacing="1" border="0" width="100%">
+			<tr>
+				<td class="bg1">
+					<strong>{L_SHIELDTEXT}:</strong>
+				</td>
+				<td class="bg2">
+					<input class="inputbox autowidth" type="text" name="schildtext" size="40" maxlength="396" />
+				</td>
+			</tr>
+			<tr>
+				<td class="bg1">	
+					<strong>{L_FONTCOLOR}:</strong>
+				</td>
+				<td class="bg2">
+					<table>
+						<tr>
+							<td>
+								<select name="color">
+								<option style="color:black; background-color: white;" 		value="000000">{L_COLOR_DEFAULT}</option>
+								<option style="color:darkred; background-color: white;"		value="8B0000">{L_COLOR_DARK_RED}</option>
+								<option style="color:red; background-color: white;"			value="FF0000">{L_COLOR_RED}</option>
+								<option style="color:orange; background-color: white;"		value="FFA500">{L_COLOR_ORANGE}</option>
+								<option style="color:brown; background-color: white;"		value="A52A2A">{L_COLOR_BROWN}</option>
+								<option style="color:yellow; background-color: white;"		value="FFFF00">{L_COLOR_YELLOW}</option>
+								<option style="color:green; background-color: white;"		value="008000">{L_COLOR_GREEN}</option>
+								<option style="color:olive; background-color: white;"		value="808000">{L_COLOR_OLIVE}</option>
+								<option style="color:cyan; background-color: white;"		value="00FFFF">{L_COLOR_CYAN}</option>
+								<option style="color:blue; background-color: white;"		value="0000FF">{L_COLOR_BLUE}</option>
+								<option style="color:darkblue; background-color: white;" 	value="00008B">{L_COLOR_DARK_BLUE}</option>
+								<option style="color:indigo; background-color: white;" 		value="4B0082">{L_COLOR_INDIGO}</option>
+								<option style="color:violet; background-color: white;" 		value="EE82EE">{L_COLOR_VIOLETT}</option>
+								<option style="color:white; background-color: black;" 		value="FFFFFF">{L_COLOR_WHITE}</option>
+								<option style="color:black; background-color: white;" 		value="000000">{L_COLOR_BLACK}</option>
+								</select>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td class="bg1">
+					<strong>{L_SHADOWCOLOR}:</strong>
+				</td>
+				<td class="bg2">
+					<table>
+						<tr>
+							<td>
+								<select name="shadowcolor">
+								<option style="color:black; background-color: white;" 		value="C0C0C0">{L_COLOR_DEFAULT}</option>
+								<option style="color:darkred; background-color: white;" 	value="8B0000">{L_COLOR_DARK_RED}</option>
+								<option style="color:red; background-color: white;" 		value="FF0000">{L_COLOR_RED}</option>
+								<option style="color:orange; background-color: white;" 		value="FFA500">{L_COLOR_ORANGE}</option>
+								<option style="color:brown; background-color: white;" 		value="A52A2A">{L_COLOR_BROWN}</option>
+								<option style="color:yellow; background-color: white;" 		value="FFFF00">{L_COLOR_YELLOW}</option>
+								<option style="color:green; background-color: white;" 		value="008000">{L_COLOR_GREEN}</option>
+								<option style="color:olive; background-color: white;" 		value="808000">{L_COLOR_OLIVE}</option>
+								<option style="color:cyan; background-color: white;" 		value="00FFFF">{L_COLOR_CYAN}</option>
+								<option style="color:blue; background-color: white;" 		value="0000FF">{L_COLOR_BLUE}</option>
+								<option style="color:darkblue; background-color: white;" 	value="00008B">{L_COLOR_DARK_BLUE}</option>
+								<option style="color:indigo; background-color: white;" 		value="4B0082">{L_COLOR_INDIGO}</option>
+								<option style="color:violet; background-color: white;" 		value="EE82EE">{L_COLOR_VIOLETT}</option>
+								<option style="color:white; background-color: black;" 		value="FFFFFF">{L_COLOR_WHITE}</option>
+								<option style="color:black; background-color: white;" 		value="000000">{L_COLOR_BLACK}</option>
+								</select>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td class="bg1">
+					<strong>{L_SHIELDSHADOW}:</strong>
+				</td>
+				<td class="bg2">
+					<table>
+						<tr>
+							<td>
+								<select name="shieldshadow">
+								<option value="1">{L_SHIELDSHADOW_ON}</option>
+								<option value="0">{L_SHIELDSHADOW_OFF}</option>
+								</select>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td valign="top" class="bg1">
+					<strong>{L_SMILIECHOOSER}:</strong>
+				</td>
+				<td class="bg2">
+					<table>
+						<tr>
+						<!-- BEGIN smilie_selection -->
+						<!-- IF  smilie_selection.COL_COUNTER -->
+						</tr>
+						<tr>
+						<!-- ELSE -->
+							<td>
+								<input type="radio" class="radio" name="smilie" value="{smilie_selection.SMILIE_SELECT}" /><img src="{smilie.selection.PHPBB_ROOT_PATH}images/smilie_creator/smilie{smilie_selection.SMILIE_SELECT}.png" alt="" />
+							</td>
+						<!-- ENDIF -->
+						<!-- END smilie_selection -->
+						</tr>
+						<tr>
+							<td colspan="5">
+								<input type="radio" class="radio" name="smilie" value="{SMILIE_RANDOM}" checked="checked" />{L_RANDOM_SMILIE}
+							</td>
+						</tr>
+						<tr>
+							<td colspan="5">
+								<input type="radio" class="radio" name="smilie" value="{SMILIE_STANDARD}" />{L_DEFAULT_SMILIE}
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="6">
+					<br />
+				</td>
+			</tr>
+			<tr>
+				<td align="center" colspan="5" valign="middle">
+					<a href="#" class="button2" onclick="makeschild()">{L_CREATE_SMILIE}</a> <a href="#" class="button1" onclick="window.close()">{L_STOP_CREATING}</a>
+					<br /><br/>
+				</td>
+			</tr>
+	</table>
+	</form>
+<!-- ELSE -->
+
+{L_SC_ERROR}
+<!-- ENDIF -->
+	<span class="corners-bottom"><span></span></span></div>
+</div>
+<!-- INCLUDE simple_footer.html -->
