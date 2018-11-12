@@ -1,0 +1,8 @@
+Subject: Raport sters - "{POST_SUBJECT}"
+
+Salut {USERNAME},
+
+Primiti aceasta notificare pentru ca raportul dumneavoastra pe care l-ti completat la mesajul "{POST_SUBJECT}" in "{TOPIC_TITLE}" la "{SITENAME}" a fost sters de un moderator sau administrator.
+
+
+{EMAIL_SIG}

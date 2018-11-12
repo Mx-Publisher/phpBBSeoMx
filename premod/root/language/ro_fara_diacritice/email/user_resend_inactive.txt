@@ -1,0 +1,20 @@
+Subject: Bine ati venit la "{SITENAME}"
+
+{WELCOME_MSG}
+
+Va rugam sa pastrati acest e-mail. Informatia pentru contul dumneavoastra urmeaza aici:
+
+----------------------------
+Utilizator: {USERNAME}
+----------------------------
+
+Parola dumneavoastra a fost stocata codat in baza noastra de date. Daca uitati parola, veti putea cere o parola noua care va fi activata la fel cum a fost activat acest cont de utilizator.
+
+Contul dumneavoastra este momentan inactiv. Nu il veti putea folosi pana nu vizitati link-ul de mai jos:
+
+{U_ACTIVATE}
+
+
+Multumim pentru inregistrare.
+
+{EMAIL_SIG}

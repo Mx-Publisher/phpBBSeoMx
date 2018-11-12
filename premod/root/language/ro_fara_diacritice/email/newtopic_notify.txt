@@ -1,0 +1,13 @@
+Subject: Notificare subiect nou - "{FORUM_NAME}"
+
+Salut {USERNAME},
+
+Primiti acest mesaj deoarece urmariti forumul "{FORUM_NAME}" la "{SITENAME}". Acest forum are un nou subiect de la ultima dumneavoastra vizita, "{TOPIC_TITLE}". Puteti sa vizualizati forumul urmand legatura de mai jos. Nu va vom mai trimite notificari pana nu vizitati forumul.
+
+{U_FORUM}
+
+Daca nu mai doriti sa urmariti acest forum, puteti sa folositi legatura "Dezabonare forum" din forumul de mai sus sau folositi urmatoarea legatura:
+
+{U_STOP_WATCHING_FORUM}
+
+{EMAIL_SIG}

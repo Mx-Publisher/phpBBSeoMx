@@ -1,0 +1,23 @@
+#-----[ FIND ]-----------------------------------------------------
+#
+
+?>
+
+#
+#-----[ BEFORE ADD ]---------------------------------------------
+#
+
+// Anti Bot Question
+$lang = array_merge($lang, array(
+	'AB_QUESTION_ERROR'				=> 'The Answer to the Anti-Bot Question you entered is incorrect, Please check your answer and try again.',
+	'AB_NO_ANSWER'				=> 'No Anti-Bot Question Answer Entered.',
+));
+
+// phpbb Calendar Version 0.1.0
+$lang = array_merge($lang, array(
+	'DISPLAY_EVENTS_DAYCOUNT' => 'How many days into the future do you want to display?',
+	'UCP_MAIN_CALENDAR_MYEVENTS' => 'Manage my events',
+	'UCP_MAIN_CALENDAR_REGISTRATION'=> 'Manage event registration',
+));
+
+

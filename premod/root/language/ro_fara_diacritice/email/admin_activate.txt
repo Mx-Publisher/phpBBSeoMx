@@ -1,0 +1,14 @@
+Subject: Cont de utilizator nou
+
+Salut,
+
+Contul detinut de "{USERNAME}" a fost dezactivat sau creat recent, ar fi indicat sa verificati detaliile acestui utilizator (daca este necesar), tratand problema cu importanta cuvenita.
+
+Folositi aceasta legatura pentru a vedea profilul utilizatorului:
+{U_USER_DETAILS}
+
+Folositi aceasta legatura pentru a activa contul:
+{U_ACTIVATE}
+
+
+{EMAIL_SIG}

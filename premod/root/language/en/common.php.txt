@@ -1,0 +1,321 @@
+#-----[ FIND ]-----------------------------------------------------
+#
+
+		'-12'	=> '[UTC - 12] Baker Island Time',
+
+#
+#-----[ BEFORE ADD ]---------------------------------------------
+#
+
+// AdvancedBlockMOD 1.0.6						
+		'-19'	=> '[UTC - 199] Pluto Time',
+// AdvancedBlockMOD 1.0.6						
+
+#
+#-----[ FIND ]-----------------------------------------------------
+#
+
+		'14'	=> '[UTC + 14] Line Island Time',
+
+#
+#-----[ AFTER ADD ]---------------------------------------------
+#
+
+// AdvancedBlockMOD 1.0.6						
+		'19'	=> '[UTC + 199] Mercury Time',
+// AdvancedBlockMOD 1.0.6						
+
+#
+#-----[ FIND ]-----------------------------------------------------
+#
+
+
+?>
+
+#
+#-----[ BEFORE ADD ]---------------------------------------------
+#
+
+/*
+* Portal XL related language definitions
+*/
+
+// Portal
+$lang = array_merge($lang, array(
+    'PORTAL_MODS'			=> 'Mods Database',	
+));
+
+// [img] Resize Width Images
+$lang = array_merge($lang, array(
+	'IMG_CLICK_HERE'	=> 'Click here to view full size of this image!',
+));
+
+// Event Calendar
+$lang = array_merge($lang, array(
+	'CALENDAR'		=> 'Calendar',
+	// minical short day names	
+	'mini_datetime'	=> array(
+		  'Su'		=> 'Su',
+		  'Mo'		=> 'Mo',
+		  'Tu'		=> 'Tu',
+		  'We'		=> 'We',
+		  'Th'		=> 'Th',
+		  'Fr'		=> 'Fr',
+		  'Sa'		=> 'Sa',
+	),
+));
+
+// Animate Digits IP Tracking Counter
+$lang = array_merge($lang, array(
+	'COUNTER' 			=> 'Visit counter',
+	'COUNTER_STARTDATE' => 'Counted from %s',
+	'HITS_PER_DAY'		=> 'Hits per day',
+	'HITS_PER_HOUR'		=> 'Hits per hour',
+	'HITS_PER_MONTH'	=> 'Hits per month',
+	'HITS_PER_USER'		=> 'Hits per user',
+	'HITS_PER_WEEK'		=> 'Hits per week',
+	'HITS_PER_YEAR'		=> 'Hits per year',
+	'IP_TRACKING_NO' 	=> '[No IP Tracking]',
+	'IP_TRACKING_YES' 	=> '[IP Tracking]',
+));
+
+// Anti Bot Question
+$lang = array_merge($lang, array(
+	'AB_QUESTION_EXPLAIN'	=> 'For protection against spam, Answer the above question.',
+));
+
+// start Thank Post MOD
+$lang = array_merge($lang, array(
+	'REMOVE_THANKS'			=> 'Remove your thanks for ',
+	'THANK_POST1'			=> 'Thank ',
+	'THANK_POST2'			=> '\'s post',
+	'THANK_TEXT_1'			=> 'The following',
+	'THANK_TEXT_2'			=> 'user would like to thank',
+	'THANK_TEXT_2pl'		=> 'users would like to thank',
+	'THANK_GENDER_F'		=> 'for her post',
+	'THANK_GENDER_M'		=> 'for his post',
+	'THANK_GENDER_U'		=> 'for his or her post',
+	'RECEIVED'				=> 'Received',
+	'THANKS'				=> 'thanks',
+	'GIVEN'					=> 'Given',
+	'TP_UPDATED'			=> 'Your Thank Post MOD installation has been updated!',
+));
+// end Thank Post MOD
+
+// Posts per day
+$lang = array_merge($lang, array(
+	'POSTS_PER_DAY_OTHER'	=> 'Posts per day <strong>%.2f</strong>',
+	'POSTS_PER_DAY_ZERO'	=> 'Posts per day <strong>None</strong>',
+));
+
+// Announcements Centre
+$lang = array_merge($lang, array(
+	'ANNOUNCEMENT_TITLE_GUESTS'		=> 'Guest Announcements local',
+	'ANNOUNCEMENT_TITLE'			=> 'Site Announcements local',
+));
+
+// Portal FAQ
+$lang = array_merge($lang, array(
+	'FAQ_PORTAL'				=> 'Portal FAQ',
+	'FAQ_PORTAL_EXPLAIN'		=> 'Portal Frequently Asked Questions',
+));
+
+// Rules page
+$lang = array_merge($lang, array(
+	'RULES_PAGE'				=> 'Board Rules',
+	'RULES'						=> 'Rules',
+));
+
+// Similar Topics 1.0.0
+$lang = array_merge($lang, array(
+	'SIMILAR_TOPICS'			=> 'Similar topics',
+));
+
+/*
+ * Welcome PM on First Login (WPM)
+ * By DualFusion
+ */
+$lang = array_merge($lang, array(
+	'ACP_WELCOME_PM'		=> 'Welcome PM on First Login',
+	'LOG_CONFIG_WELCOME_PM'	=> '<strong>Altered Welcome PM settings</strong>',
+));
+/* End WPM */
+
+//-- mod : Contact board administration ------------------------------------------------------------
+//-- add
+$lang = array_merge($lang, array(
+	'CONTACT_BOARD_ADMIN'		=> 'Contact board administration',
+	'CONTACT_BOARD_ADMIN_SHORT'	=> 'Contact',
+));
+//-- fin mod : Contact board administration --------------------------------------------------------
+
+// start mod view or mark unread posts
+$lang = array_merge($lang, array(
+	'LOGIN_EXPLAIN_VIEWUNREADS'	=> 'You must be logged in to view your unread post list',
+	'MARK_PM_UNREAD'			=> 'Mark pm as unread',
+	'MARK_POST_UNREAD'			=> 'Mark post as unread',
+	'NO_UNREADS'				=> 'You have no unread posts',
+	'PM_MARKED_UNREAD'			=> 'Private message marked as unread',
+	'POST_MARKED_UNREAD'		=> 'Post marked as unread',
+	'RETURN_INBOX'				=> 'Return to pm inbox',
+	'VIEW_UNREAD_PMS'			=> 'View unread pms',
+	'VIEW_UNREADS'				=> 'View unread posts',
+));
+// end mod view or mark unread posts
+
+
+// Automatic DST 1.0.6
+$lang = array_merge($lang, array(
+	'AUTOMATIC'						=> 'Automatic',
+));
+
+// Character Countdown
+$lang = array_merge($lang, array(
+	'CHARACTERS_COUNT_DOWN'			=> 'Characters typed:',
+));
+
+// www.phpBB-SEO.com SEO TOOLKIT BEGIN - TITLE
+$lang['Page'] = 'Page ';
+// www.phpBB-SEO.com SEO TOOLKIT END - TITLE
+// www.phpBB-SEO.com SEO TOOLKIT BEGIN -> GYM Sitemaps
+$lang = array_merge($lang, array(
+	'GYM_LINKS' => 'Links',
+	'GYM_LINK' => 'Link',
+	'GYM_RSS_SLIDE_START' => 'Start scroller',
+	'GYM_RSS_SLIDE_STOP' => 'Stop scroller',
+	'GYM_RSS_SOURCE' => 'Source',
+));
+// www.phpBB-SEO.com SEO TOOLKIT END -> GYM Sitemaps
+// www.phpBB-SEO.com SEO TOOLKIT BEGIN - Related Topics
+$lang['RELATED_TOPICS'] = 'Related topics';
+// www.phpBB-SEO.com SEO TOOLKIT END - Related Topics
+
+// Radio Mod
+$lang = array_merge($lang, array(
+	'RADIO' => 'Radio',
+));
+
+
+// phpbb Calendar Version 0.1.0
+$lang = array_merge($lang, array(
+	'VIEWING_CALENDAR'			=> 'Viewing calendar',
+	'VIEWING_CALENDAR_DAY'		=> 'Viewing calendar day',
+	'VIEWING_CALENDAR_EVENT'	=> 'Viewing calendar event',
+	'VIEWING_CALENDAR_MONTH'	=> 'Viewing calendar month',
+	'VIEWING_CALENDAR_WEEK'		=> 'Viewing calendar week',
+	'EDITING_CALENDAR_EVENT'	=> 'Editing calendar event',
+	'CREATING_CALENDAR_EVENT'	=> 'Creating calendar event',
+));
+
+// Country Flags Version 3.0.6
+$lang = array_merge($lang, array(
+	'COUNTRY'			=> 'Country',
+	'COUNTRY_FLAGS'		=> 'Country flags',
+	'TOO_SHORT_FLAG'	=> 'You must select your country flag',
+	'GROUP_FLAG'		=> 'Group country flag',
+	'SELECT_FLAG'		=> 'Select your country flag',
+	'SORT_FLAG'			=> 'Country flag',
+	'USER_FLAG'			=> 'User country flag',
+));
+
+// -- Gender MOD 1.0.1
+$lang = array_merge($lang, array(
+	'GENDER'			=> 'Gender',
+	'GENDER_EXPLAIN'	=> 'Please enter your gender here.',
+	'GENDER_X'			=> 'None specified',
+	'GENDER_M'			=> 'Male',
+	'GENDER_F'			=> 'Female',
+));
+
+// Google Search
+$lang = array_merge($lang, array(
+	'SEARCH_GOOGLE' 	=> 'Google search?',
+));
+
+// AdvancedBlockMOD 1.0.6						
+$lang = array_merge($lang, array(
+	'WRONG_TIMEZONE'	=> 'You entered an incorrect timezone. Please stay on earth!',
+));
+
+// Share On 1.2.0 MOD
+$lang = array_merge($lang, array(
+	'SHARE_ON'				=> 'Share on ...',
+	'SHARE_FACEBOOK'		=> 'Facebook',
+	'SHARE_TWITTER'			=> 'Twitter',
+	'SHARE_TUENTI'			=> 'Tuenti',
+	'SHARE_SONICO'			=> 'Sonico',
+	'SHARE_FRIENDFEED'		=> 'FriendFeed',
+	'SHARE_ORKUT'			=> 'Orkut',
+	'SHARE_DIGG'			=> 'Digg',
+	'SHARE_MYSPACE'			=> 'MySpace',
+	'SHARE_DELICIOUS'		=> 'Delicious',
+	'SHARE_TECHNORATI'		=> 'Technorati',
+
+	'SHARE_ON_FACEBOOK'		=> 'Share on Facebook',
+	'SHARE_ON_TWITTER'		=> 'Share on Twitter',
+	'SHARE_ON_TUENTI'		=> 'Share on Tuenti',
+	'SHARE_ON_SONICO'		=> 'Share on Sonico',
+	'SHARE_ON_FRIENDFEED'	=> 'Share on FriendFeed',
+	'SHARE_ON_ORKUT'		=> 'Share on Orkut',
+	'SHARE_ON_DIGG'			=> 'Share on Digg',
+	'SHARE_ON_MYSPACE'		=> 'Share on MySpace',
+	'SHARE_ON_DELICIOUS'	=> 'Share on Delicious',
+	'SHARE_ON_TECHNORATI'	=> 'Share on Technorati',	
+));
+
+// PhpBB3 Knowledge Base Mod 1.0.2				
+$lang = array_merge($lang, array(
+	'KNOWLEDGE_BASE'		=> 'Knowledge Base',
+	'KB_EXPLAIN'			=> 'Knowledge Base',
+	'ARTICLES'				=> 'Articles',
+));
+
+// Topic solved
+$lang = array_merge($lang, array(
+	'SEARCH_UNSOLVED'				=> 'View unsolved topics',
+	'SEARCH_YOUR_UNSOLVED'			=> 'View your unsolved topics',
+	'SEARCH_SOLVED'					=> 'Search only in solved topics',
+	'TOPIC_SOLVED'					=> 'Topic is solved',
+	'SET_TOPIC_SOLVED'				=> 'Set topic as solved',
+	'SET_TOPIC_NOT_SOLVED'			=> 'Set topic as unsolved',
+));
+
+// Mod browser, os & screen
+$lang = array_merge($lang, array(
+	'BROWSER_USE'			=> 'using',
+	'BROWSER_NAME'			=> 'Browser: ',
+	'OS_NAME'				=> 'Platform: ',
+	'RESOLUTION_TYPE'		=> 'Screen Resolution: ',
+	'BROWSER_UNKNOW'		=> 'Unknown',
+	'OS_UNKNOW'				=> 'Unknown',
+));
+
+// Visit counter by forum 1.0.0
+$lang = array_merge($lang, array(
+	'FORUM_VISIT'	=> '%s user',
+	'FORUM_VISITS'	=> '%s users',
+));
+
+// Users and Bots on Seperate Lines 1.0.0
+$lang = array_merge($lang, array(
+   'BOT_USERS_ONLINE' => '%d bots online',
+   'BOT_USERS_TOTAL' => ', %d bots and ',
+   'BOT_USERS_ZERO_ONLINE' => '0 bots online',
+   'BOT_USERS_ZERO_TOTAL' => ', 0 bots and ',
+   'BOT_USER_ONLINE' => '%d bot online',
+   'BOT_USER_TOTAL' => ', %d bot and ',
+   'BOTS_ONLINE' => 'Bots: ',
+   'BOTS_ZERO_ONLINE' => '0 bots',
+));
+
+// Start Poster IP
+$lang = array_merge($lang, array(
+	'VIEWTOPIC_SEE_WHOIS' => 'Whois on:',
+));	
+	
+// Frontpage
+$lang = array_merge($lang, array(
+	'FRONTPAGE'		=> 'Site Frontpage',
+	'FRONTPAGE_SHORT'	=> 'Frontpage',
+));
+

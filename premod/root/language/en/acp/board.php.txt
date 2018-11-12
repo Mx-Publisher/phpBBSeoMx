@@ -1,0 +1,87 @@
+#-----[ FIND ]-----------------------------------------------------
+#
+
+	'CHECK_DNSBL_EXPLAIN'			=> 'If enabled the user’s IP address is checked against the following DNSBL services on registration and posting: <a href="http://spamcop.net">spamcop.net</a> and <a href="http://www.spamhaus.org">www.spamhaus.org</a>. This lookup may take a while, depending on the server’s configuration. If slowdowns are experienced or too many false positives reported it is recommended to disable this check.',
+
+#
+#-----[ REPLACE WITH ]---------------------------------------------
+#
+
+// AdvancedBlockMOD 1.0.6						
+	// 'CHECK_DNSBL_EXPLAIN'			=> 'If enabled the user’s IP address is checked against the following DNSBL services on registration and posting: <a href="http://spamcop.net">spamcop.net</a> and <a href="http://www.spamhaus.org">www.spamhaus.org</a>. This lookup may take a while, depending on the server’s configuration. If slowdowns are experienced or too many false positives reported it is recommended to disable this check.',
+	'CHECK_DNSBL_EXPLAIN'			=> 'If enabled the user’s IP address is checked against DNSBL services on registration and posting. This lookup may take a while, depending on the server’s configuration. If slowdowns are experienced or too many false positives reported it is recommended to disable this check.',
+// AdvancedBlockMOD 1.0.6						
+					
+#
+#-----[ FIND ]-----------------------------------------------------
+#
+
+?>
+
+#
+#-----[ BEFORE ADD ]---------------------------------------------
+#
+
+// Anti Bot Question
+$lang = array_merge($lang, array(
+	'AB_ANSWER'					=> 'Anti-Bot Answer',
+	'AB_ANSWER_EXPLAIN'			=> 'This is the main answer for the question.',
+	'AB_ANSWER_2'				=> 'Anti-Bot Answer Two',
+	'AB_ANSWER_2_EXPLAIN'		=> 'Here you can add a second answer, a good idea if using a question that requires a numerical answer.',
+	'AB_QUESTION_MOD'			=> 'Anti-Bot Question',
+	'AB_QUESTION'				=> 'Anti-Bot Question',
+	'AB_QUESTION_EXPLAIN'		=> 'This is the question a user must answer to register.',
+	'ABQ_ENABLE'				=> 'Enable Anti-Bot Question',
+	'ABQ_ENABLE_EXPLAIN'		=> 'Enable the Anti-Bot question for registering.',
+));
+
+// Country Flags Version 3.0.6
+$lang = array_merge($lang, array(
+	'ACP_FLAG_SETTINGS_EXPLAIN'	=> 'Country flag settings',
+	'FLAGS_PATH'				=> 'Country flag images path',
+	'FLAGS_PATH_EXPLAIN'		=> 'Path under your phpBB root directory, e.g. <samp>images/flags</samp>',
+	'REQUIRE_FLAG' 				=> 'Require country flag field',
+	'REQUIRE_FLAG_EXPLAIN' 		=> 'Require users must select country flag information when new register.',
+));
+
+// Friend list on member view by DaMysterious
+$lang = array_merge($lang, array(
+	'ACP_PROFILE_FRIENDS'			=> 'Profile friends settings',
+	'ACP_PROFILE_FRIENDS_EXPLAIN'	=> 'Profile friends settings',
+	'ACP_FRIEND_SETTINGS'			=> 'Profile friends mod',
+	'ACP_NUM_FRIENDS'				=> 'Number of friends per page',
+	'ACP_NUM_FRIENDS_EXPLAIN'		=> 'Maximum number of friends to display on each page',
+	'ACP_FRIENDS_AV_SIZE'			=> 'Avatar size',
+	'ACP_FRIENDS_AV_SIZE_EXPLAIN'	=> 'Avatar size to display should be between 20 - 100 pixel, recommended value 80 pixel',
+	'ACP_SC_AVATAR_EXPLAIN'			=> 'Example : 25 would put the size at 25 pixel x 25 pixel <br/> To disable avatars set this to 0',
+	'TITLE_EXPLAIN'					=> 'Settings for the friend list on member view.',
+));
+
+// AdvancedBlockMOD 1.0.6						
+$lang = array_merge($lang, array(
+	'CHECK_TZ'						=> 'Check timezone setting',
+	'CHECK_TZ_EXPLAIN'				=> 'If enabled the user’s timezone is checked against non-terrestrial values of -19 and +19 on registration. Spammer often are using the first or the last entry of the dropdown menue. If this option is enabled two strange values are added to the begin and the end of the dropdown menue only on registration.',
+	'LOG_CHECK_DNSBL'				=> 'Enable block log for DNSBL check',
+	'LOG_CHECK_TZ'					=> 'Enable block log for timezone setting check',
+	'LOG_EMAIL_CHECK_MX'			=> 'Enable block log for e-mail domain valid MX record check',
+));
+
+// Email on Birthday version 1.0.1b						
+$lang = array_merge($lang, array(
+	'BIRTHDAY_EMAILS'				=> 'Send Birthday email',
+	'BIRTHDAY_EMAILS_EXPLAIN'		=> 'Sends a birthday email on the users birthday',
+));
+
+// MOD : Index Tabbed - Start
+$lang = array_merge($lang, array(
+	'YES_INDEXTABS'					=> 'Enable tabs', 
+	'YES_INDEXTABS_EXPLAIN'			=> 'Show “Who is Online”, “Birthday” and “Statistics” in tabs or in the mode set by the style',
+));
+
+// Colorized Unread Links
+$lang = array_merge($lang, array(
+	'COLORIZED_LINKS'			=> 'Colorized Unread Links',
+	'COLORIZED_LINKS_EXPLAIN'	=> 'Insert the hexadecimal code for the desired color. Example: #FF0000',
+));
+
+

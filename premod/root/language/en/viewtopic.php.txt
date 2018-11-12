@@ -1,0 +1,17 @@
+#-----[ FIND ]-----------------------------------------------------
+#
+
+?>
+
+#
+#-----[ BEFORE ADD ]---------------------------------------------
+#
+
+$lang = array_merge($lang, array(
+	'PL_LINK'			=> 'Link',
+	'PL_BBCODE'			=> 'BBcode',
+	'PL_HTML'			=> 'HTML',
+	'PL_HIDE'			=> 'Hide post links',
+	'PL_SHOW'			=> 'Show post links',
+));
+

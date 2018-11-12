@@ -1,0 +1,59 @@
+#-----[ FIND ]-----------------------------------------------------
+#
+
+?>
+
+#
+#-----[ BEFORE ADD ]---------------------------------------------
+#
+
+// phpbb Calendar
+$lang = array_merge($lang, array(
+	'IMG_BUTTON_CALENDAR_NEW'	=> 'New Event',
+	'IMG_BUTTON_CALENDAR_DAY'	=> 'View Day',
+	'IMG_BUTTON_CALENDAR_WEEK'	=> 'View Week',
+	'IMG_BUTTON_CALENDAR_MONTH'	=> 'View Month',
+));
+
+// AJAX checking
+$lang = array_merge($lang, array(
+	'IMG_ICON_AJAX_CHECKING'		=> 'AJAX checking',
+	'IMG_ICON_AJAX_TRUE'			=> 'AJAX true',
+	'IMG_ICON_AJAX_FALSE'			=> 'AJAX false',
+	'IMG_ICON_AJAX_PASSWORD_STRENGTH_1'	=> 'AJAX password strength - Very weak',
+	'IMG_ICON_AJAX_PASSWORD_STRENGTH_2'	=> 'AJAX password strength - Weak',
+	'IMG_ICON_AJAX_PASSWORD_STRENGTH_3'	=> 'AJAX password strength - Acceptable',
+	'IMG_ICON_AJAX_PASSWORD_STRENGTH_4'	=> 'AJAX password strength - Strong',
+));
+
+// -- Gender MOD 1.0.1
+$lang = array_merge($lang, array(
+	'IMG_ICON_GENDER_X'	=> 'Gender: None specified',
+	'IMG_ICON_GENDER_M'	=> 'Gender: Male',
+	'IMG_ICON_GENDER_F'	=> 'Gender: Female',
+));
+// -- Gender MOD 1.0.1
+
+// Start DM Video
+$lang = array_merge($lang, array(
+	'IMG_BUTTON_COMMENT_NEW'	=> 'New comment',
+	'IMG_BUTTON_VIDEO_NEW'		=> 'New Video',
+));
+// Start DM Video
+
+// PhpBB3 Knowledge Base Mod 1.0.2				
+$lang = array_merge($lang, array(
+	'IMG_BUTTON_ARTICLE_NEW'	=> 'New article',
+	'IMG_BUTTON_COMMENT_NEW'	=> 'New comment',
+	'IMG_BUTTON_REQUEST_NEW'	=> 'New request',
+));
+
+// Topic solved
+$lang = array_merge($lang, array(
+	'IMG_ICON_TOPIC_SOLVED_HEAD'	=> 'Topic is solved',
+	'IMG_ICON_TOPIC_SOLVED_LIST'	=> 'Topic is solved',
+	'IMG_ICON_TOPIC_SOLVED_POST'	=> 'Topic is solved',
+	'IMG_ICON_TOPIC_SOLVED_SET'		=> 'Set topic as solved',
+	'IMG_ICON_TOPIC_SOLVED_UNSET'	=> 'Set topic as unsolved',
+));
+

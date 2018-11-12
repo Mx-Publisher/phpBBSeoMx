@@ -1,0 +1,71 @@
+#-----[ FIND ]-----------------------------------------------------
+#
+
+?>
+
+#
+#-----[ BEFORE ADD ]---------------------------------------------
+#
+
+// -- User achievements 0.0.2
+$lang = array_merge($lang, array(
+	'ACHIEVE'				=> 'User achievements',
+	'40_POSTS'				=> 'Reached 40 posts',
+	'80_POSTS'				=> 'Reached 80 posts',
+	'160_POSTS'				=> 'Reached 160 posts',
+	'240_POSTS'				=> 'Reached 240 posts',
+	'480_POSTS'				=> 'Reached 480 posts',
+	'600_POSTS'				=> 'Reached 600 posts',
+	'1000_POSTS'			=> 'Reached 1000 posts',
+	'2000_POSTS'			=> 'Reached 2000 posts',
+	'3000_POSTS'			=> 'Reached over 3000 posts',
+	'TOPIC_VIEWS_500'		=> 'Has a topic with over 500 views',
+	'TOPIC_VIEWS_1000'		=> 'Has a topic with over 1000 views',
+	'TOPIC_VIEWS_10000'		=> 'Has a topic with over 10000 views',
+	'TOPIC_REPLIES_25'		=> 'Has a topic with over 25 replies',
+	'TOPIC_REPLIES_50'		=> 'Has a topic with over 50 replies',
+	'TOPIC_REPLIES_100'		=> 'Has a topic with over 100 replies',	
+	'TOPIC_REPLIES_500'		=> 'Has a topic with over 500 replies',	
+	'HAS_ATTACHED'			=> 'Has uploaded a file',
+	'HAS_POLL'				=> 'Has created a poll',
+	'UP_AVATAR'				=> 'Has a Avatar',
+	'FRIEND_5'				=> 'Reached 5 friends',
+	'FRIEND_10'				=> 'Reached 10 friends',
+	'FRIEND_20'				=> 'Reached 20 friends',
+	'FRIEND_50'				=> 'Reached 50 friends',
+	'JOIN_30'				=> 'Has been a member for 30 days',
+	'JOIN_60'				=> 'Has been a member for 60 days',
+	'JOIN_365'				=> 'Has been a member for a year',
+	'POST_PER_DAY_5'		=> 'Posts 5+ times per day',
+	'POST_PER_DAY_10'		=> 'Posts 10+ times per day',
+	'POST_PER_DAY_20'		=> 'Posts 20+ times per day',
+	'VOTED_POLL'			=> 'Has voted on a poll',
+	'CREATED_TOPIC_10'		=> 'Has created 10 topics',
+	'CREATED_TOPIC_20'		=> 'Has created 20 topics',
+	'CREATED_TOPIC_50'		=> 'Has created 50 topics',
+	'TOTAL_REACH'			=> 'total reached',
+	'TROPHY'				=> 'achievement trophys',
+	'TOTAL_POST_REACH'		=> 'Total post goals reached :',
+	'TOPIC_CREATE'			=> 'Topic creation goals reached :',
+	'TOPIC_VIEW'			=> 'Topic views goals reached :',
+	'TOPIC_REPLIES'			=> 'Topic replies goals reached :',
+	'RANDOM_GOALS'			=> 'Total random goals reached :',
+	'MEMBER_GOALS'			=> 'Total member day goals reached :',
+	'FRIEND_GOALS'			=> 'Total friend goals reached :',
+	'JOIN_GOALS'			=> 'Total post per day goals reached :',
+	'NONE_YET'				=> '<strong>This user has not reached the minimum 10 goals reached to gain a trophy!</strong>',
+));
+
+// Friend list on member view by DaMysterious
+$lang = array_merge($lang, array(
+	'LIST_FRIEND'     		=> '1 friend',
+	'LIST_FRIENDS'			=> '%d friends',
+	'FRIEND_LIST'			=> 'Friend list',
+	'FRIEND_AVATAR'			=> 'Avatar',
+	'FRIEND_COUNTRY'		=> 'Country',
+	'ONLINE_FRIENDS'		=> 'Friends on-line',
+	'OFFLINE_FRIENDS'		=> 'Friends off-line',
+	'VIEW_ALL'				=> 'View all',
+	'NO_FRIEND'				=> 'No user selected!',
+	'TOTAL_FRIENDS'			=> 'Total friends',
+));

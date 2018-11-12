@@ -1,0 +1,8 @@
+Subject: Raport inchis - "{POST_SUBJECT}"
+
+Salut {USERNAME},
+
+Primiti acest mesaj deoarece raportul pe care l-ati trimis relativ la mesajul "{POST_SUBJECT}" din subiectul "{TOPIC_TITLE}" aflat in "{SITENAME}" a fost procesat de catre un moderator sau un administrator. Ulterior raportul a fost inchis. Daca mai aveti intrebari contactati {CLOSER_NAME} folosind un mesaj personal.
+
+
+{EMAIL_SIG}

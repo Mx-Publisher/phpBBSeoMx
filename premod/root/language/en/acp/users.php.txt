@@ -1,0 +1,12 @@
+#-----[ FIND ]-----------------------------------------------------
+#
+
+	'RETAIN_POSTS'			=> 'Retain posts',
+
+#
+#-----[ REPLACE WITH ]---------------------------------------------
+#
+
+	'RETAIN_POSTS'			=> 'Retain posts &amp; blogs entries',
+	'DELETE_BLOGS'				=> 'Delete blog entries',
+	'DELETE_POSTS_AND_BLOGS'	=> 'Delete posts &amp; blog entries',

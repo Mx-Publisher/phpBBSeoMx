@@ -1,0 +1,11 @@
+Subject: Subiect aprobat - "{TOPIC_TITLE}"
+
+Salut {USERNAME},
+
+Primiti aceasta notificare pentru ca subiectul dumneavoastra "{TOPIC_TITLE}" la "{SITENAME}" a fost aprobat de un moderator sau administrator.
+
+Daca doriti sa vizualizati subiectul, apasati pe link-ul urmator:
+{U_VIEW_TOPIC}
+
+
+{EMAIL_SIG}

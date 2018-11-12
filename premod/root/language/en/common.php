@@ -43,7 +43,13 @@ $lang = array_merge($lang, array(
 	'TRANSLATION_INFO'	=> '',
 	'DIRECTION'			=> 'ltr',
 	'DATE_FORMAT'		=> '|d M Y|',	// 01 Jan 2007 (with Relative days enabled)
+	'DATETIME_FORMAT'	=> '|d M Y, H:i|',	// 01 Jan 2007, 13:37 (with Relative days enabled)
 	'USER_LANG'			=> 'en-gb',
+
+	// You can define different rules for the determination of plural forms here.
+	// See https://area51.phpbb.com/docs/dev/32x/language/plurals.html for more information
+	// or ask the translation manager for help.
+	'PLURAL_RULE'		=> 1,
 
 	'1_DAY'			=> '1 day',
 	'1_MONTH'		=> '1 month',
@@ -95,7 +101,7 @@ $lang = array_merge($lang, array(
 
 	'BACK_TO_TOP'			=> 'Top',
 	'BACK_TO_PREV'			=> 'Back to previous page',
-	'BAN_TRIGGERED_BY_EMAIL'=> 'A ban has been issued on your e-mail address.',
+	'BAN_TRIGGERED_BY_EMAIL'=> 'A ban has been issued on your email address.',
 	'BAN_TRIGGERED_BY_IP'	=> 'A ban has been issued on your IP address.',
 	'BAN_TRIGGERED_BY_USER'	=> 'A ban has been issued on your username.',
 	'BBCODE_GUIDE'			=> 'BBCode guide',
@@ -108,9 +114,26 @@ $lang = array_merge($lang, array(
 	'BOARD_DISABLED'		=> 'This board is currently disabled.',
 	'BOARD_UNAVAILABLE'		=> 'Sorry but the board is temporarily unavailable, please try again in a few minutes.',
 	'BROWSING_FORUM'		=> 'Users browsing this forum: %1$s',
+	'BROWSING_FORUM'		=> 'Users browsing this forum: %1$s',
 	'BROWSING_FORUM_GUEST'	=> 'Users browsing this forum: %1$s and %2$d guest',
 	'BROWSING_FORUM_GUESTS'	=> 'Users browsing this forum: %1$s and %2$d guests',
+	'BUTTON_DELETE'         => 'Delete',
+	'BUTTON_EDIT'			=> 'Edit',
+	'BUTTON_FORUM_LOCKED'	=> 'Locked',
+	'BUTTON_INFORMATION'    => 'Information',
+	'BUTTON_NEW_TOPIC'		=> 'New Topic',
+	'BUTTON_PM'				=> 'PM',
+	'BUTTON_PM_FORWARD'		=> 'Forward',
+	'BUTTON_PM_NEW'			=> 'New PM',
+	'BUTTON_PM_REPLY'		=> 'Send Reply',
+	'BUTTON_PM_REPLY_ALL'	=> 'Reply All',
+	'BUTTON_POST_REPLY'		=> 'Post Reply',
+	'BUTTON_QUOTE'			=> 'Quote',
+	'BUTTON_REPORT'         => 'Report',
+	'BUTTON_TOPIC_LOCKED'	=> 'Locked',
+	'BUTTON_WARN'           => 'Warn',
 	'BYTES'					=> 'Bytes',
+	'BYTES_SHORT'			=> 'B',
 
 	'CANCEL'				=> 'Cancel',
 	'CHANGE'				=> 'Change',
@@ -118,18 +141,28 @@ $lang = array_merge($lang, array(
 	'CHANGING_PREFERENCES'	=> 'Changing board preferences',
 	'CHANGING_PROFILE'		=> 'Changing profile settings',
 	'CLICK_VIEW_PRIVMSG'	=> '%sGo to your inbox%s',
+
 	'COLLAPSE_VIEW'			=> 'Collapse view',
 	'CLOSE_WINDOW'			=> 'Close window',
 	'COLOUR_SWATCH'			=> 'Colour swatch',
-	'COMMA_SEPARATOR'		=> ', ',	// Used in pagination of ACP & prosilver, use localised comma if appropriate, eg: Ideographic or Arabic
+	'COLON'					=> ':',
+	'COMMA_SEPARATOR'		=> ', ',	// Comma used to join lists into a single string, use localised comma if appropriate, eg: Ideographic or Arabic
 	'CONFIRM'				=> 'Confirm',
 	'CONFIRM_CODE'			=> 'Confirmation code',
 	'CONFIRM_CODE_EXPLAIN'	=> 'Enter the code exactly as it appears. All letters are case insensitive.',
 	'CONFIRM_CODE_WRONG'	=> 'The confirmation code you entered was incorrect.',
 	'CONFIRM_OPERATION'		=> 'Are you sure you wish to carry out this operation?',
+	'CONFIRM_AVATAR_DELETE' => 'Are you sure you wish to delete this avatar?',
 	'CONGRATULATIONS'		=> 'Congratulations to',
 	'CONNECTION_FAILED'		=> 'Connection failed.',
 	'CONNECTION_SUCCESS'	=> 'Connection was successful!',
+	'CONTACT'				=> 'Contact',
+	'CONTACT_USER'			=> 'Contact %s',
+	'CONTACT_US'			=> 'Contact us',
+	'COOKIE_CONSENT_INFO'	=> 'Learn more',
+	'COOKIE_CONSENT_MSG'	=> 'This website uses cookies to ensure you get the best experience on our website.',
+	'COOKIE_CONSENT_OK'		=> 'Got it!',
+	'COOKIE_CONSENT_HREF'	=> 'http://cookiesandyou.com',
 	'COOKIES_DELETED'		=> 'All board cookies successfully deleted.',
 	'CURRENT_TIME'			=> 'It is currently %s',
 
@@ -499,7 +532,8 @@ $lang = array_merge($lang, array(
 	'RETURN_FORUM'				=> '%sReturn to the forum last visited%s',
 	'RETURN_PAGE'				=> '%sReturn to the previous page%s',
 	'RETURN_TOPIC'				=> '%sReturn to the topic last visited%s',
-	'RETURN_TO'					=> 'Return to',
+	'RETURN_TO'					=> 'Return to “%s”',
+	'RETURN_TO_INDEX'			=> 'Return to Board Index',
 	'FEED'						=> 'Feed',
 	'FEED_NEWS'					=> 'News',
 	'FEED_TOPICS_ACTIVE'		=> 'Active Topics',

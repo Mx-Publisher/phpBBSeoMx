@@ -1,0 +1,20 @@
+Subject: phpBB a fost instalat
+
+Felicitari,
+
+Ati instalat cu succes phpBB pe serverul dumneavoastra.
+
+Acest email contine informatii importante despre instalare si trebuie pastrate intr-un loc sigur. Parola a fost codata in baza de date si nu poate fi recuperata, dar se poate genera o noua parola daca o pierdeti pe aceasta.
+
+-----------------------------
+Nume utilizator  : {USERNAME}
+Parola           : {PASSWORD}
+
+Adresa forumului : {U_BOARD}
+-----------------------------
+
+Informatii folositoare despre instalarea phpBB pot fi gasite in dosarul docs sau pe paginile de suport de la phpBB.com — http://www.phpbb.com/support/ si phpBB.ro - http://www.phpbb.ro 
+
+Pentru a mentine in conditii de siguranta forumul, va recomandam sa ramaneti la curent cu modificarile soft care pot fi obtinute cu usurinta inscriindu-va in lista de mail a phpBB.com, aflata la URL-ul de mai sus.
+
+{EMAIL_SIG}

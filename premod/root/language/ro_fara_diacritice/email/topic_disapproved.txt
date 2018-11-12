@@ -1,0 +1,12 @@
+Subject: Subiect neaprobat - "{TOPIC_TITLE}"
+
+Salut {USERNAME},
+
+Primiti aceasta notificare pentru ca subiectul dumneavoastra "{TOPIC_TITLE}" la "{SITENAME}" nu a fost aprobat de un moderator sau administrator.
+
+Nu a fost aprobat din urmatorul motiv:
+
+{REASON}
+
+
+{EMAIL_SIG}

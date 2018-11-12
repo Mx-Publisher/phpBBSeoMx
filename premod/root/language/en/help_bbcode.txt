@@ -1,0 +1,19 @@
+#-----[ FIND ]-----------------------------------------------------
+#
+
+	array(
+		0 => '--',
+		1 => 'Other matters'
+	),
+
+#
+#-----[ BEFORE ADD ]---------------------------------------------
+#
+	array(
+		0 => '--',
+		1 => 'Showing videos in posts'
+	),
+	array(
+		0 => 'Adding an video to a post',
+		1 => 'There are BBCodes to videos from different videoportals in a post insert. Two very important things to remember when using this tag are: many users do not appreciate lots of videos being shown in posts and secondly the video you display must already be available on the internet (it cannot exist only on your computer for example, unless you run a webserver!). To display an video you must surround the URL pointing to the video with <strong>[youtube][/youtube]</strong> tags. For youtube example:<br /><br /><strong>[youtube]</strong>http://de.youtube.com/watch?v=ADbeCHQLUpk<strong>[/youtube]</strong><br /><br />Just works with all other video BBCodes, by the administrator activated are.'
+	),

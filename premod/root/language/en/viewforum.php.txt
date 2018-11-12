@@ -1,0 +1,19 @@
+#-----[ FIND ]-----------------------------------------------------
+#
+
+?>
+
+#
+#-----[ BEFORE ADD ]---------------------------------------------
+#
+
+$lang = array_merge($lang, array(
+    'GLOBAL_ANNOUNCEMENTS'  => 'Global Announcements',
+	'STICKY'                => 'Stickies',
+));
+
+// Topic short description and READ MORE / 4seven / 2010	
+$lang = array_merge($lang, array(
+	'READ_MORE'			    => 'Read More',
+));
+

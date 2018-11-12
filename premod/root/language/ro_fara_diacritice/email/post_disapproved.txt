@@ -1,0 +1,12 @@
+Subject: Mesaj dezaprobat — "{POST_SUBJECT}"
+
+Salut {USERNAME},
+
+Primiti aceasta notificare pentru ca mesajul dumneavoastra "{POST_SUBJECT}" la "{SITENAME}" a fost dezaprobat de un moderator sau administrator.
+
+A fost dezaprobat din urmatorul motiv:
+
+{REASON}
+
+
+{EMAIL_SIG}

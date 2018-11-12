@@ -1,0 +1,251 @@
+#-----[ FIND ]-----------------------------------------------------
+#
+
+?>
+
+#
+#-----[ BEFORE ADD ]---------------------------------------------
+#
+
+/*
+* Portal XL related language definitions
+*/
+
+// Portal
+$lang = array_merge($lang, array(
+	'PORTAL'								=> 'Portal',
+   	'ACP_CAT_PORTAL'           				=> 'Portal',
+   	'ACP_PORTAL'           					=> 'Portal',
+   	'ACP_PORTAL_ADMIN'           			=> 'General',
+   	'ACP_PORTAL_INFO'           			=> 'General',	
+    'ACP_PORTAL_ANNOUNCE_INFO'  			=> 'Announcements',
+    'ACP_PORTAL_NEWS_INFO'      			=> 'News',
+   	'ACP_PORTAL_RECENT_INFO'    			=> 'Recent Topics',	
+   	'ACP_PORTAL_WORDGRAPH_INFO'				=> 'Wordgraph',
+    'ACP_PORTAL_PAYPAL_INFO'        		=> 'Paypal',	
+    'ACP_PORTAL_ATTACHMENTS_NUMBER_INFO'    => 'Attachments',
+    'ACP_PORTAL_MEMBERS_INFO'               => 'Latest Members',
+    'ACP_PORTAL_POLLS_INFO'                 => 'Polls',	
+    'ACP_PORTAL_BOTS_INFO'                  => 'Visiting Bots',
+    'ACP_PORTAL_MOST_POSTER_INFO'           => 'Most Poster',
+    'ACP_PORTAL_RANDOM_INFO'                => 'Random Banners',
+    'ACP_PORTAL_WELCOME_INFO'               => 'Welcome',
+    'ACP_PORTAL_WEATHER_INFO'			    => 'Weather',
+    'ACP_PORTAL_SYNDICATE_INFO'			    => 'Syndication',
+    'ACP_PORTAL_SCROLL_MESSAGE_INFO'        => 'Scroll Message',
+	'ACP_MANAGE_PORTAL'						=> 'Manage Portal',
+
+	// Portal XL portal blocks //
+   	'ACP_PORTAL_CAT_BLOCKS'           		=> 'Portal Blocks',
+   	'ACP_PORTAL_ADMIN_BLOCKS'           	=> 'Portal Blocks',
+	'ACP_PORTAL_BLOCKS'						=> 'Portal Blocks',
+	'ACP_MANAGE_BLOCKS'						=> 'Manage Portal Blocks',
+
+	// Portal XL index/viewtopic blocks //
+   	'ACP_PORTAL_INDEX_CAT_BLOCKS'           => 'Index Blocks',
+   	'ACP_PORTAL_INDEX_ADMIN_BLOCKS'         => 'Index Blocks',
+	'ACP_PORTAL_INDEX_BLOCKS'				=> 'Index Blocks',
+	'ACP_PORTAL_BLOCKS_INDEX'				=> 'Index Blocks',
+	'ACP_MANAGE_INDEX_BLOCKS'				=> 'Manage Index Blocks',
+
+	// Portal XL portal menu //
+   	'ACP_PORTAL_CAT_MENUS'           		=> 'Menus',
+   	'ACP_PORTAL_ADMIN_MENUS'           		=> 'Menus',
+	'ACP_PORTAL_MENU'						=> 'Menus',
+	'ACP_MANAGE_MENUS'						=> 'Manage Menus',
+		
+	// Portal XL portal quotes //
+   	'ACP_PORTAL_CAT_QUOTES'           		=> 'Quotes',
+   	'ACP_PORTAL_ADMIN_QUOTES'           	=> 'Quotations',
+	'ACP_PORTAL_QUOTES'						=> 'Quotes',
+	'ACP_MANAGE_QUOTES'						=> 'Manage Quotes',
+		
+	// Portal XL portal partners //
+   	'ACP_PORTAL_CAT_BANNERS'          		=> 'Banners',
+   	'ACP_PORTAL_ADMIN_BANNERS'           	=> 'Banners 88x31',
+	'ACP_PORTAL_BANNERS'					=> 'Manage Banners',
+	'ACP_MANAGE_BANNERS'					=> 'Manage Banners 88x31',
+		
+	// Portal XL portal banners horizontal //
+   	'ACP_PORTAL_CAT_BANNERS_HO'          		=> 'Banners horizontal',
+   	'ACP_PORTAL_ADMIN_BANNERS_HO'           	=> 'Banners horizontal 400x60',
+	'ACP_PORTAL_BANNERS_HO'						=> 'Banners horizontal',
+	'ACP_MANAGE_BANNERS_HO'						=> 'Manage Banners 400x60',
+
+	// Portal XL portal banners vertical //
+   	'ACP_PORTAL_CAT_BANNERS_VE'          		=> 'Banners vertical',
+   	'ACP_PORTAL_ADMIN_BANNERS_VE'           	=> 'Banners vertical 130x600',
+	'ACP_PORTAL_BANNERS_VE'						=> 'Banners vertical',
+	'ACP_MANAGE_BANNERS_VE'						=> 'Manage Banners 130x600',
+
+	// Portal XL portal links //
+   	'ACP_PORTAL_CAT_LINKS'           			=> 'Links',
+   	'ACP_PORTAL_ADMIN_LINKS'           			=> 'Links',
+	'ACP_PORTAL_LINKS'							=> 'Links',
+	'ACP_MANAGE_LINKS'							=> 'Manage Links',
+		
+	// Portal XL portal mods //
+   	'ACP_PORTAL_CAT_MODS'           			=> 'Mod\'s',
+   	'ACP_PORTAL_ADMIN_MODS'         			=> 'Mod\'s',
+	'ACP_PORTAL_MODS'							=> 'Mod\'s',
+	'ACP_MANAGE_MODS'							=> 'Manage Mod\'s',
+		
+	// Portal XL portal adds //
+   	'ACP_PORTAL_CAT_ADDS'           			=> 'Forum Ad\'s',
+   	'ACP_PORTAL_ADMIN_ADDS'         			=> 'Forum Ad\'s',
+	'ACP_PORTAL_FORUMADDS'						=> 'Forum Ad\'s',
+	'ACP_MANAGE_ADDS'							=> 'Manage Forum Ad\'s',
+		
+	// Portal XL portal pages //
+   	'ACP_PORTAL_CAT_PAGES'           			=> 'Portal Pages',
+   	'ACP_PORTAL_ADMIN_PAGES'         			=> 'Portal Pages',
+	'ACP_PORTAL_PAGES'							=> 'Portal Pages',
+	'ACP_MANAGE_PAGES'							=> 'Manage Portal Pages',
+		
+	// Portal XL portal newsfeeds //
+   	'ACP_PORTAL_CAT_NEWSFEEDS'           		=> 'Portal News Feeds',
+   	'ACP_PORTAL_ADMIN_NEWSFEEDS'         		=> 'Portal News Feeds',
+	'ACP_PORTAL_NEWSFEEDS'						=> 'Portal News Feeds',
+	'ACP_MANAGE_NEWSFEEDS'						=> 'Manage News Feeds',
+		
+	// Portal XL portal acronyms //
+   	'ACP_PORTAL_CAT_ACRONYMS'           		=> 'Portal Acronyms',
+   	'ACP_PORTAL_ADMIN_ACRONYMS'         		=> 'Portal Acronyms',
+	'ACP_PORTAL_ACRONYMS'						=> 'Portal Acronyms',
+	'ACP_MANAGE_ACRONYMS'						=> 'Manage Acronyms',
+		
+	// Portal XL portal impressum //
+   	'ACP_PORTAL_CAT_IMPRESSUM'           		=> 'Portal Imprint',
+   	'ACP_PORTAL_ADMIN_IMPRESSUM'         		=> 'Portal Imprint',
+	'ACP_PORTAL_IMPRESSUM'						=> 'Portal Imprint',
+	'ACP_MANAGE_IMPRESSUM'						=> 'Manage Imprint',
+		
+	// Portal XL portal log entries
+	'LOG_CONFIG_PORTAL'				=> '<strong>Portal general saved</strong>',
+	'LOG_CONFIG_ANNOUNCEMENTS'		=> '<strong>Portal announcements saved</strong>',
+	'LOG_CONFIG_NEWS'				=> '<strong>Portal news saved</strong>',
+	'LOG_CONFIG_RECENT'				=> '<strong>Portal recent topics saved</strong>',
+	'LOG_CONFIG_WORDGRAPH'			=> '<strong>Portal wordgraph saved</strong>',
+	'LOG_CONFIG_COLLUMN'			=> '<strong>Portal column width saved</strong>',
+	'LOG_CONFIG_PAYPAL'				=> '<strong>Portal paypal saved</strong>',
+	'LOG_CONFIG_ATTACHMENTS'		=> '<strong>Portal attachments saved</strong>',
+	'LOG_CONFIG_MEMBERS'			=> '<strong>Portal members saved</strong>',
+	'LOG_CONFIG_POLLS'				=> '<strong>Portal poll saved</strong>',
+	'LOG_CONFIG_BOTS'				=> '<strong>Portal visiting bots saved</strong>',
+	'LOG_CONFIG_POSTER'				=> '<strong>Portal most poster saved</strong>',
+	'LOG_CONFIG_RANDOM'				=> '<strong>Portal random saved</strong>',
+	'LOG_CONFIG_WELCOME'			=> '<strong>Portal welcome saved</strong>',
+	'LOG_CONFIG_WEATHER'	    	=> '<strong>Portal weather saved</strong>',
+	'LOG_CONFIG_SYNDICATE'	    	=> '<strong>Portal sydication saved</strong>',
+	'LOG_CONFIG_PLUXLINDEX'	    	=> '<strong>Portal board/viewtopic index saved</strong>',
+  	'LOG_CONFIG_SCROLLMESSAGE'      => '<strong>Portal scroll message saved</strong>',
+	
+	// installation logging
+	'PORTAL_LOG_INSTALL_PORTAL'	=> '<strong>Portal XL installed</strong>',
+	'PORTAL_LOG_UNINSTALL_PORTAL'	=> '<strong>Portal XL uninstalled</strong>',
+	'PORTAL_LOG_UPDATE_PORTAL'	=> '<strong>Portal XL datase update</strong>',
+	
+));
+  
+// Animate Digits IP Tracking Counter
+$lang = array_merge($lang, array(
+	'ACP_COUNTER_SETTINGS'	=> 'Counter settings',
+	'COUNTER_STARTED'		=> 'Counter started',
+	'HITS_PER_DAY'			=> 'Hits per day',
+	'LOG_CONFIG_COUNTER'	=> '<strong>Altered counter settings</strong>',
+	'LOG_RESET_COUNTER'		=> '<strong>Reseted counter: started date time and hits value</strong>',
+	'NUMBER_HITS'			=> 'Number of hits',
+	'RESET_COUNTER'			=> 'Reset counter',
+	'RESET_COUNTER_CONFIRM'	=> 'Are you sure you wish to reset all data of the counter?',
+	'RESET_COUNTER_EXPLAIN'	=> 'Reset all data of the counter: started date time and total hits.',
+));
+
+// phpbb Calendar
+$lang = array_merge($lang, array(
+    'ACP_CALENDAR'				=> 'Calendar',
+    'ACP_CALENDAR_SETTINGS'				=> 'Calendar Settings',
+    'ACP_CALENDAR_DELETE_EVENT_TYPE'	=> 'Delete event type',
+    'ACP_CALENDAR_ETYPES'				=> 'Manage Calendar Event Types',
+));
+
+// Country Flags Version 3.0.6
+$lang = array_merge($lang, array(
+	'ACP_FLAG_SETTINGS'		=> 'Country flag settings',
+	'ACP_FLAGS'				=> 'Country flags',
+	'ACP_MANAGE_FLAGS'		=> 'Manage country flags',
+	'ACP_USER_FLAG'			=> 'Country flag',
+	'ACP_USER_COUNTRY_FLAG'	=> 'Country flag',
+	'LOG_CONFIG_FLAG'		=> '<strong>Altered country flag settings</strong>',
+	'LOG_FLAG_ADDED'		=> '<strong>Added new country flag</strong><br />» %1$s (%2$s)',
+	'LOG_FLAG_REMOVED'		=> '<strong>Removed country flag</strong><br />» %1$s (%2$s)',
+	'LOG_FLAG_UPDATED'		=> '<strong>Updated country flag</strong><br />» %1$s (%2$s)',
+));
+
+// Friend list on member view by DaMysterious
+$lang = array_merge($lang, array(
+	'ACP_FRIEND_SETTINGS' 	=> 'Profile friends',
+	'ACP_PROFILE_FRIENDS' 	=> 'Profile friends settings',
+));
+
+/**
+* A copy of Handyman` s MOD version check, to view it on the overview
+*/
+$lang = array_merge($lang, array(
+	'ANNOUNCEMENT_TOPIC'	=> 'Release Announcement',
+	'CURRENT_VERSION'		=> 'Current Version',
+	'DOWNLOAD_LATEST'		=> 'Download Latest Version',
+	'LATEST_VERSION'		=> 'Latest Version',
+	'NO_INFO'				=> 'Version server could not be contacted',
+	'NOT_UP_TO_DATE'		=> '%s is not up to date',
+	'RELEASE_ANNOUNCEMENT'	=> 'Annoucement Topic',
+	'UP_TO_DATE'			=> '%s is up to date',
+	'VERSION_CHECK'			=> 'MOD Version Check',
+));
+
+// AdvancedBlockMOD 1.0.6						
+$lang = array_merge($lang, array(
+	'ACP_BLOCK_LOGS'			=> 'Block log',
+	'ACP_BLOCK_LOGS_EXPLAIN'	=> 'This lists the actions carried out by timezone check and by DNS check e.g. while user registration. This log provides you with information you are able to use for controlling the DNSBL check function. If you have appropriate permissions you can also clear individual operations or the log as a whole.<br /><strong>The different logs have to be enabled under SECURITY SETTINGS!</strong>',
+	'ACP_DNSBL'					=> 'DNSBL settings',
+
+	'LOG_CLEAR_BLOCK'			=> '<strong>Cleared block log</strong>',
+	'LOG_DNSBL'					=> '<strong>User blocked by DNSBL check.</strong><br />For more information look at other entries for the same IP address.',
+	'LOG_DNSBL_ADD'				=> '<strong>Created new DNS Blacklist entry</strong><br />» %s',
+	'LOG_DNSBL_DELETE'			=> '<strong>Deleted DNS Blacklist entry</strong><br />» %s',
+	'LOG_DNSBL_EDIT'			=> '<strong>Edited DNS Blacklist entry details</strong><br />» %s',
+	'LOG_DNSBL_FOUND'			=> '<strong>IP address of spammer recognized by DNSBL check</strong><br />»Blacklist “<em>%s</em>”',
+	'LOG_DNSBL_MOVE_DOWN'		=> '<strong>Moved DNS Blacklist</strong> %1$s <strong>below</strong> %2$s',
+	'LOG_DNSBL_MOVE_UP'			=> '<strong>Moved DNS Blacklist</strong> %1$s <strong>above</strong> %2$s',
+	'LOG_DNSBL_REGISTER'		=> '<strong>User blocked while registration by DNSBL check.</strong><br />For more information look at other entries for the same IP address.',
+	'LOG_DNSMX'					=> '<strong>User e-mail address blocked by DNS MX check.</strong><br />»Domain “<em>%s</em>”',
+	'LOG_WRONG_TZ'				=> '<strong>User blocked by timezone check.</strong><br />»Timezone “<em>%s</em>”',
+));
+
+// Log Entry Email on Birthday version 1.0.1b
+$lang = array_merge($lang, array(
+	'LOG_BIRTHDAY_EMAIL_SENT'		=> '<strong>Birthday email sent to</strong><br />» %s',
+));
+
+// Log Entry Ajax Shoutbox
+$lang = array_merge($lang, array(
+	'LOG_AS_PURGED'		=> '<strong>Cleared shoutbox log</strong><br />» %s',
+));
+
+// Mod_Share_On by JesusADS module entry
+$lang = array_merge($lang, array(
+	'ACP_SHARE_ON'			=> 'Share On',
+	'ACP_SHARE_ON_SETTINGS'	=> 'Share On settings',
+
+));
+
+// Mod browser, os & screen
+$lang = array_merge($lang, array(
+	'ALLOW_BROWSER_OS'				=> 'Browsers, OS and screens posters',
+	'ALLOW_BROWSER_OS_EXPLAIN'		=> 'Enables/disables the display of browser, OS and screen posters in messages',
+	'ALLOW_BROWSER_POS'				=> 'Display position of browsers, OS and screens',
+	'ALLOW_BROWSER_POS_EXPLAIN'		=> 'Choose where you want to display information from browsers, OS and screens posters',
+	'BROWSER_OS_TOP'				=> 'On the Top of posts',
+	'BROWSER_OS_PROFILE'			=> 'In the profile posters',
+));
+
+

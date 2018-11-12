@@ -1,0 +1,20 @@
+Subject: Notificare de raspuns la subiectul - "{TOPIC_TITLE}"
+
+Salut {USERNAME},
+
+Primiti acest mesaj deoarece urmariti pentru raspunsuri subiectul "{TOPIC_TITLE}" la "{SITENAME}". Acest subiect a primit un raspuns de la ultima dumneavoastra vizita. Puteti sa vizualizati raspunsurile urmand legatura de mai jos. Nu va vom mai trimite notificari pana nu vizitati subiectul.
+
+Daca doriti sa vizualizati mesajele scrise de la ultima dumneavoastra vizita, urmati legatura de mai jos:
+{U_NEWEST_POST}
+
+Daca doriti sa vizualizati subiectul, urmati legatura de mai jos:
+{U_TOPIC}
+
+Daca doriti sa vizualizati forumul, urmati legatura de mai jos:
+{U_FORUM}
+
+Daca nu mai doriti sa urmariti acest subiect, puteti sa folositi legatura "Opreste urmarirea acestui subiect" care poate fi gasita in josul topicului de mai sus sau folositi urmatoarea legatura:
+
+{U_STOP_WATCHING_TOPIC}
+
+{EMAIL_SIG}

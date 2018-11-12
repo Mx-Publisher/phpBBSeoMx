@@ -1,0 +1,43 @@
+Subject: Bine ati venit la "{SITENAME}"
+
+{WELCOME_MSG}
+
+Conform actului COPPA, contul dumneavoastra este deocamdata inactiv.
+
+Va rugam sa tipariti acest mesaj si sa cereti parintelui sau tutorelui dumneavoastra sa-l semneze si sa-l dateze. Apoi trimiteti-l prin fax la:
+
+{FAX_INFO}
+
+Sau prin e-amil la:
+
+{MAIL_INFO}
+
+------------------------------ TAIE AICI ------------------------------
+Permisie pentru participare la "{SITENAME}" - {U_BOARD}
+
+Nume utilizator: {USERNAME}
+Parola: {PASSWORD}
+Email: {EMAIL_ADDRESS}
+
+AM REVĂZUT INFORMATIILE OFERITE DE COPILUL MEU SI PRIN ACEASTA II PERMIT "{SITENAME}" SĂ STOCHEZE ACEASTĂ INFORMATIE.
+SUNT DE ACORD CU FAPTUL CĂ ACEASTĂ INFORMATIE POATE FI SCHIMBATĂ ORICÂND PRIN INTRODUCEREA UNEI PAROLE.
+AM INTELES CĂ POT CERE CA ACEASTĂ INFORMATIE SĂ FIE STEARSĂ ORICÂND DIN BAZA DE DATE A "{SITENAME}".
+
+
+Parinte sau tutore 
+(numele): _____________________
+
+(semnatura): __________________ 
+
+Data: _______________
+
+------------------------------ TAIE AICI ------------------------------
+
+
+Indata ce administratorul va primi formularul de mai sus prin fax sau email, contul dumneavoastra va fi activat.
+
+Incercati sa nu va uitati parola, deoarece aceasta a fost stocata codat in baza noastra de date si nu o putem recupera pentru dumneavoastra. Daca totusi o uitati, veti putea cere o parola noua care va fi activata la fel cum a fost activat acest cont de utilizator.
+
+Va multumim pentru inregistrare.
+
+{EMAIL_SIG}

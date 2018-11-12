@@ -1,0 +1,7 @@
+Subject: Contul dumneavoastra a fost dezactivat
+
+Salut {USERNAME},
+
+Contul dumneavoastra de la "{SITENAME}" a fost dezactivat, cel mai probabil datorita unor modificari facute profilului dumneavoastra. Va fi nevoie ca administratorul forumului sa vi-l activeze inainte sa va puteti autentifica. Veti primi un alt mesaj cand se va intampla acest lucru.
+
+{EMAIL_SIG}

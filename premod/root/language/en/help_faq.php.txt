@@ -1,0 +1,76 @@
+#-----[ FIND ]-----------------------------------------------------
+#
+
+$help = array(    		
+	array(
+
+#
+#-----[ BEFORE ADD ]---------------------------------------------
+#
+
+/*
+* The following global is needed by Download MOD to display icons in the help texts
+*/
+global $user, $phpbb_root_path;
+
+#
+#-----[ FIND ]-----------------------------------------------------
+#
+
+	array(
+		0 => 'How do I find all my attachments?',
+		1 => 'To find your list of attachments that you have uploaded, go to your User Control Panel and follow the links to the attachments section.'
+	),
+
+#
+#-----[ AFTER ADD ]---------------------------------------------
+#
+
+	array(
+	0 => '--',
+	1 => 'Downloads'
+	),
+	array(
+	0 => 'Where I can find the Downloads?',
+	1 => 'Links to the Downloads are located in the board navigation. Directlink: [<a href="' . append_sid("{$phpbb_root_path}downloads.$phpEx") . '">Downloads</a>]'
+	),
+	array(
+	0 => 'What means ' . $user->img('dl_blue') . '?',
+	1 => 'No download possible. The overall traffic set by the administration for each download or the displayed category is used for this month.'
+	),
+	array(
+	0 => 'What means ' . $user->img('dl_red') . '?',
+	1 => 'No download possible. This can be:<br />- The download is blocked by an Administrator.<br />- The user is not logged in but the download is only allowed to registered users.<br />- The user have not enough traffic to download this file.<br />- The Administrator has entered a minimum number ob posts, the user doesn\'t have.<br />- The traffic limit for this file is completely used.'
+	),
+	array(
+	0 => 'What means ' . $user->img('dl_grey') . '?',
+	1 => 'External Source. The download will be started by an external server. This will be handled as ' . $user->img('dl_green') . '. The usertraffic and overall traffic will not be decreased.'
+	),
+	array(
+	0 => 'What means ' . $user->img('dl_white') . '?',
+	1 => 'Like ' . $user->img('Dl_green') . ' the user traffic will not be decrease. But only logged in users can download for free. The overall traffic will go down.'
+	),
+	array(
+	0 => 'What means ' . $user->img('dl_yellow') . '?',
+	1 => 'Download possible with restrictions. The download is just possible for registered users. The user must be logged in. The file size will be substrated from your traffic and also be substrated from the overall traffic.'
+	),
+	array(
+	0 => 'What means ' . $user->img('dl_green') . '?',
+	1 => 'Free Download. The download will be not restricted. This file can also be downloaded by guests. You are not needed to be logged in. Your traffic will not decreased but the overall traffic will be go down.'
+	),
+	array(
+	0 => 'Why can I not download any file?',
+	1 => 'This can have many reasons. Look under ' . $user->img('dl_blue') . ' and ' . $user->img('dl_red')
+	),
+	array(
+	0 => 'How and when I get new traffic for my account?',
+	1 => 'After the first login the user will get a timestamp. Each first day of a month the user will enter the downloads the traffic will be refreshed. Ask your administrator how much you will get.'
+	),
+	array(
+	0 => 'I wants to download still one more file, but I have not any traffic left?',
+	1 => 'In this cases ask the administrator. Only he can decide to increase the user traffic before the account will get automaticaly new traffic the next month.'
+	),
+	array(
+	0 => 'How I can rate Downloads?',
+	1 => 'Behind each download into a category or the detail view you will find a section for rating.<br />By click on "Rate" a registered user can rate the download from 1 point (very bad) to 10 points (very good). You can rate a download only one time.'
+	),

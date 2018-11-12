@@ -1,0 +1,19 @@
+Subject: Notificare de raspuns la mesaj in forumul - "{FORUM_NAME}"
+
+Salut {USERNAME},
+
+Primiti aceasta notificare deoarece urmariti forumul "{FORUM_NAME}" pe "{SITENAME}". Acest forum a primit un nou raspuns la topicul "{TOPIC_TITLE}" de la ultima vizita. Puteti sa folositi legatura de mai jos pentru a vedea ultimul raspuns necitit. Nu va vom mai anunta de raspunsuri noi pana nu vizitati topicul.
+
+{U_NEWEST_POST}
+
+Daca doriti sa vizualizati acest subiect, apasati pe urmatorul link:
+{U_TOPIC}
+
+Daca doriti sa vizualizati forumul, apasati pe urmatorul link:
+{U_FORUM}
+
+Daca nu mai doriti sa urmariti acest forum, puteti sa folositi legatura "Opreste urmarirea acestui forum" care poate fi gasita in forumul de mai sus sau folositi urmatoarea legatura:
+
+{U_STOP_WATCHING_FORUM}
+
+{EMAIL_SIG}

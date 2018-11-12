@@ -1,0 +1,12 @@
+#-----[ FIND ]-----------------------------------------------------
+#
+
+	'LOGVIEW_VIEWFORUM'			=> 'View forum',
+
+#
+#-----[ AFTER ADD ]---------------------------------------------
+#
+
+// AdvancedBlockMOD 1.0.6						
+	'LOGVIEW_DNSBLLOOKUP'		=> 'Lookup blacklist',
+// AdvancedBlockMOD 1.0.6						

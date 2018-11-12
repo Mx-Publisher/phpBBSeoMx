@@ -1,0 +1,22 @@
+#-----[ FIND ]-----------------------------------------------------
+#
+
+?>
+
+#
+#-----[ BEFORE ADD ]---------------------------------------------
+#
+
+// Extra bbcode definitions Portal XL
+$lang = array_merge($lang, array(
+	'BBCODE_TABLE_HELP'		  	=> 'Table maker',
+	'BBCODE_FONTCOLOR_HELP'		=> 'Font color',
+	'BBCODE_FONTSIZE_HELP'		=> 'Font size',
+	'BBCODE_FONTFAMILY_HELP'	=> 'Font family',
+));
+
+// uAttachment 1.0.1
+$lang = array_merge($lang, array(
+	'UPDATE_FILE'			=> 'Update file',
+));
+

@@ -1,0 +1,14 @@
+#-----[ FIND ]-----------------------------------------------------
+#
+
+?>
+
+#
+#-----[ BEFORE ADD ]---------------------------------------------
+#
+
+// Mod KB Begin
+$lang = array_merge($lang, array(
+	'ALLOW_IN_KB'						=> 'Allowed in the Knowledge Base',
+	'NOT_ALLOWED_IN_KB'					=> 'Not allowed in the Knowledge Base',
+));

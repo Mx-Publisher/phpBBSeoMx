@@ -1,0 +1,13 @@
+
+Salut {TO_USERNAME},
+
+Urmeaza un mesaj trimis de catre {FROM_USERNAME} prin intermediul contului dumneavoastra pe "{SITENAME}". Daca acest mesaj este spam, contine comentarii abuzive sau are vreun continut ofensator, va rugam sa contactati webmaster-ul forumului la urmatoarea adresa:
+
+{BOARD_CONTACT}
+
+Va rugam sa includeti tot mesajul. Adresa de expeditor a fost setata la contul de IM precizat in forum.
+
+Urmeaza mesajul care va este adresat
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+{MESSAGE}

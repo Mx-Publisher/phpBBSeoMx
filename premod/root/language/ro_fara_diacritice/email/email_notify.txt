@@ -1,0 +1,17 @@
+Subject: "{SITENAME}" — E-mail catre un prieten
+
+Salut {TO_USERNAME},
+
+Acest email a fost transmis de pe "{SITENAME}" de catre {FROM_USERNAME} care crede ca sunteti interesat de urmatorul topic:
+
+{TOPIC_NAME}
+
+Il gasiti la:
+
+{U_TOPIC}
+
+Un mesaj de la {FROM_USERNAME} poate fi inclus mai jos. Va rugam sa retineti ca acest mesaj nu a fost vazut sau acceptat de catre administratorul forumului. Daca vreti sa reclamati ceva in legatura cu acest e-mail, va rugam sa contactati administratorul forumului la {BOARD_CONTACT}. Va rugam sa includeti header-ul masajului cand contactati administratorul.
+
+----------
+
+{MESSAGE}
