@@ -1645,7 +1645,7 @@ function probe_smtp_mailbox($email, $hostname)
 	global $config, $user, $phpEx;
 	@set_time_limit(30);
 	
-	if ($connect = fsockopen($hostname, 25, $errno, $errstr, 15))
+	if ($connect = @fsockopen($hostname, 25, $errno, $errstr, 15))
 	{
 		usleep(888);
 		$out = fgetss($connect, 1024);
@@ -1668,8 +1668,8 @@ function probe_smtp_mailbox($email, $hostname)
 	      fputs($connect, "RCPT TO: <" . $email . ">\r\n");
 	      $to = fgetss($connect, 1024);
 
-	      fputs($connect, "QUIT\r\n");
-	      fclose($connect);
+	      @fputs($connect, "QUIT\r\n");
+	      @fclose($connect);
 		  //$user->lang['Email_unverified'] = "Unverified E-Mail Adress";
 		  //$user->lang['No_connection'] = "No Connection";
 		  
@@ -1686,7 +1686,15 @@ function probe_smtp_mailbox($email, $hostname)
 	}
 	else
 	{
-		$result = "No Connection";
+		// Have they authenticated (again) as an admin for this session?
+		if (!isset($user->data['session_admin']) || $user->data['session_admin'])
+		{
+			$result = false;
+		}
+		else
+		{
+			$result = "No Connection";
+		}
 	}
 	return $result;
 }
