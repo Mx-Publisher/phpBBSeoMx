@@ -1686,7 +1686,7 @@ function probe_smtp_mailbox($email, $hostname)
 	}
 	else
 	{
-		// Have they authenticated (again) as an admin for this session?
+		/* Have they authenticated (again) as an admin for this session?
 		if (!isset($user->data['session_admin']) || $user->data['session_admin'])
 		{
 			$result = false;
@@ -1695,6 +1695,8 @@ function probe_smtp_mailbox($email, $hostname)
 		{
 			$result = "No Connection";
 		}
+		*/
+		return false;
 	}
 	return $result;
 }
