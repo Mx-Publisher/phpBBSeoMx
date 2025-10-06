@@ -59,13 +59,17 @@ class ucp_activate
 		// Do not allow activating by non administrators when admin activation is on
 		// Only activation type the user should be able to do is INACTIVE_REMIND
 		// or activate a new password which is not an activation state :@
-		if (!$user_row['user_newpasswd'] && $user_row['user_inactive_reason'] != INACTIVE_REMIND && $config['require_activation'] == USER_ACTIVATION_ADMIN && !$auth->acl_get('a_user'))
+		if (!$user_row['user_newpasswd'] && $user_row['user_inactive_reason'] != INACTIVE_REMIND && $config['require_activation'] == USER_ACTIVATION_ADMIN)
 		{
-			if (!$user->data['is_registered'])
+			if (($user->data['user_id'] == "0") || !$user->data['is_registered'])
 			{
 				login_box('', $user->lang['NO_AUTH_OPERATION']);
 			}
-			trigger_error('NO_AUTH_OPERATION');
+			
+			if ($user->data['is_registered'] && !$auth->acl_get('a_user'))
+			{	
+				trigger_error('USER_ACTIVATION_ADMIN');
+			}
 		}
 
 		$update_password = ($user_row['user_newpasswd']) ? true : false;
